@@ -24,7 +24,7 @@ public class FullBright extends Module {
         if (this.isEnabled() && event.getType() == EventType.POST) {
             switch (this.mode.getValue()) {
                 case 0:
-                    mc.options.getGamma().setValue(1000.0);
+                    mc.options.getGamma().setValue(1.0);
                     break;
                 case 1:
                     mc.player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 25940, 0));

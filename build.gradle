@@ -6,7 +6,6 @@ plugins {
 loom {
 	runs {
 		client {
-			programArgs("--quickPlaySingleplayer", "New World")
 		}
 	}
 }
@@ -46,6 +45,11 @@ dependencies {
 	annotationProcessor "com.google.guava:guava:33.0.0-jre"
 	annotationProcessor "net.fabricmc:tiny-remapper:0.10.4"
 	annotationProcessor "net.fabricmc:tiny-mappings-parser:0.3.0+build.17"
+
+	implementation "org.lwjgl:lwjgl-nanovg:3.3.3"
+	implementation "org.lwjgl:lwjgl-nanovg:3.3.3:natives-windows"
+	include "org.lwjgl:lwjgl-nanovg:3.3.3"
+	include "org.lwjgl:lwjgl-nanovg:3.3.3:natives-windows"
 }
 
 processResources {

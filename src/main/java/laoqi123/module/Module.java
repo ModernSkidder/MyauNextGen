@@ -28,6 +28,10 @@ public abstract class Module {
         return this.name;
     }
 
+    public Category getCategory() {
+        return Category.fromPackage(this.getClass().getPackageName());
+    }
+
     public String formatModule() {
         return String.format(
                 "%s%s &r(%s&r)",

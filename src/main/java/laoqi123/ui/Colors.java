@@ -1,0 +1,43 @@
+package laoqi123.ui;
+
+public class Colors {
+    public static final int TRANSPARENT = 0x00000000;
+    public static final int BLACK = 0xFF000000;
+    public static final int GRAY_900 = 0xFF0D0E0F;
+    public static final int GRAY_900_80 = 0xCC0D0E0F;
+    public static final int GRAY_800 = 0xFF151617;
+    public static final int GRAY_800_95 = 0xF2151617;
+    public static final int GRAY_850 = 0xFF151719;
+    public static final int GRAY_700 = 0xFF222326;
+    public static final int GRAY_600 = 0xFF2A2C30;
+    public static final int GRAY_500 = 0xFF313338;
+    public static final int GRAY_500_80 = 0xCC313338;
+    public static final int GRAY_400 = 0xFF373B45;
+    public static final int GRAY_400_40 = 0x66373B45;
+    public static final int GRAY_400_60 = 0x99373B45;
+    public static final int GRAY_400_80 = 0xCC373B45;
+    public static final int GRAY_300 = 0xFF494F5C;
+    public static final int PRIMARY_800 = 0xFF0D3380;
+    public static final int PRIMARY_700 = 0xFF1247B2;
+    public static final int PRIMARY_700_80 = 0xCC1247B2;
+    public static final int PRIMARY_600 = 0xFF1452CC;
+    public static final int PRIMARY_500 = 0xFF1967FF;
+    public static final int PRIMARY_400 = 0xFF3081F2;
+    public static final int WHITE_50 = 0x7FFFFFFF;
+    public static final int WHITE_60 = 0x99FFFFFF;
+    public static final int WHITE_80 = 0xCCFFFFFF;
+    public static final int WHITE_90 = 0xE5FFFFFF;
+    public static final int WHITE_95 = 0xF2FFFFFF;
+    public static final int WHITE = 0xFFFFFFFF;
+    public static final int SUCCESS_600 = 0xFF039855;
+    public static final int SUCCESS_700 = 0xFF027948;
+    public static final int WARNING_500 = 0xFFF79009;
+    public static final int WARNING_600 = 0xFFDC6803;
+    public static final int ERROR_600_80 = 0xCCD92020;
+    public static final int ERROR_600 = 0xFFD92020;
+    public static final int ERROR_700 = 0xFFB41818;
+    public static final int ERROR_800 = 0xFF911818;
+    public static final int ERROR_800_80 = 0xCC911818;
+    public static final int ERROR_300 = 0xFFFD9B9B;
+    public static final int ERROR_300_80 = 0xCCFD9B9B;
+}
