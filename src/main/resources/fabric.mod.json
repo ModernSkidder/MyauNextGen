@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "${modid}",
+	"version": "${version}",
+	"name": "MyauNextGen",
+	"description": "Myau client ported to Fabric 1.21.4",
+	"authors": [
+		"Mornly"
+	],
+	"license": "MIT",
+	"environment": "client",
+	"icon": "assets/myaunextgen/icon.png",
+	"entrypoints": {
+		"main": [
+			"laoqi123.init.MyauMod"
+		],
+		"client": [
+			"laoqi123.init.MyauClient"
+		]
+	},
+	"mixins": [
+		"mixins.laoqi123.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.0",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

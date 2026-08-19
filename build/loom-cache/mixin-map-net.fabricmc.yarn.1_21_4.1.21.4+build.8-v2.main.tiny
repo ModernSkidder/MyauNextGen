@@ -1,0 +1,14 @@
+v1	named	intermediary
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	lastYaw	field_3941
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	lastPitch	field_3925
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	Lnet/minecraft/client/input/Input;	input	field_3913
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	renderYaw	field_3932
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	lastRenderYaw	field_3931
+FIELD	laoqi123/mixin/MixinEntityRenderer	Lnet/minecraft/client/render/BufferBuilderStorage;	buffers	field_20948
+FIELD	laoqi123/mixin/MixinEntityRenderer	Lnet/minecraft/client/MinecraftClient;	client	field_4015
+FIELD	laoqi123/mixin/MixinMinecraft	I	attackCooldown	field_1771
+FIELD	laoqi123/mixin/MixinMinecraft	Lnet/minecraft/client/network/ClientPlayerInteractionManager;	interactionManager	field_1761
+FIELD	laoqi123/mixin/MixinPacketCodecDispatcher	Ljava/util/function/Function;	packetIdGetter	field_48577
+FIELD	laoqi123/mixin/MixinPacketCodecDispatcher	Lit/unimi/dsi/fastutil/objects/Object2IntMap;	typeToIndex	field_48579
+METHOD	laoqi123/mixin/MixinItemRendererAnimations	(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/Arm;F)V	applySwingOffset	method_3217
+METHOD	laoqi123/mixin/MixinItemRendererAnimations	(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/Arm;F)V	applyEquipOffset	method_3224

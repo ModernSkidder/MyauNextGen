@@ -1,0 +1,83 @@
+plugins {
+	id 'fabric-loom' version "${loom_version}"
+	id 'maven-publish'
+}
+
+loom {
+	runs {
+		client {
+			programArgs("--quickPlaySingleplayer", "New World")
+		}
+	}
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	maven {
+		name = 'LocalLibs'
+		url = uri("${projectDir}/libs-repo")
+	}
+	mavenCentral()
+	maven {
+		name = 'SpongePowered'
+		url = 'https://repo.spongepowered.org/maven/'
+	}
+	maven {
+		name = 'Fabric'
+		url = 'https://maven.fabricmc.net/'
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	implementation "com.google.code.gson:gson:2.10.1"
+	implementation "commons-io:commons-io:2.15.1"
+	implementation "org.apache.commons:commons-lang3:3.17.0"
+	implementation "org.apache.httpcomponents:httpclient:4.5.14"
+	annotationProcessor "com.google.guava:guava:33.0.0-jre"
+	annotationProcessor "net.fabricmc:tiny-remapper:0.10.4"
+	annotationProcessor "net.fabricmc:tiny-mappings-parser:0.3.0+build.17"
+}
+
+processResources {
+	inputs.property "version", project.version
+	inputs.property "modid", project.modid
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version, "modid": project.modid
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 21
+	it.options.compilerArgs += ["-Xmaxerrs", "2000", "-Xmaxwarns", "2000", "-AdisableTargetValidator=true"]
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+	withSourcesJar()
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName.get()}" }
+	}
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}
