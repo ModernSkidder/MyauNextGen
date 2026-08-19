@@ -3,7 +3,7 @@ package laoqi123.mixin;
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
 import laoqi123.events.SafeWalkEvent;
-import laoqi123.module.modules.KeepSprint;
+import laoqi123.module.modules.movement.KeepSprint;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

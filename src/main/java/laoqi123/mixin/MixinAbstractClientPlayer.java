@@ -1,12 +1,11 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.Scaffold;
-import laoqi123.module.modules.Sprint;
+import laoqi123.module.modules.player.Scaffold;
+import laoqi123.module.modules.movement.Sprint;
 import laoqi123.util.player.PlayerUtils;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.registry.entry.RegistryEntry;

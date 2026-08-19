@@ -8,7 +8,7 @@ import laoqi123.events.LoadWorldEvent;
 import laoqi123.events.ResizeEvent;
 import laoqi123.events.RightClickMouseEvent;
 import laoqi123.events.SwapItemEvent;
-import laoqi123.module.modules.NoHitDelay;
+import laoqi123.module.modules.combat.NoHitDelay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
 import net.minecraft.client.network.ClientPlayerInteractionManager;

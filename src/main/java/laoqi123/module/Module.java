@@ -1,7 +1,7 @@
 package laoqi123.module;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.HUD;
+import laoqi123.module.modules.render.HUD;
 import laoqi123.util.KeyBindUtil;
 
 public abstract class Module {

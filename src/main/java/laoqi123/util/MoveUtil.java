@@ -2,7 +2,7 @@ package laoqi123.util;
 
 import laoqi123.Myau;
 import laoqi123.management.RotationState;
-import laoqi123.module.modules.TargetStrafe;
+import laoqi123.module.modules.combat.TargetStrafe;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.BlockPos;

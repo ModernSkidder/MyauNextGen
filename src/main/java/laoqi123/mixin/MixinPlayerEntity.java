@@ -1,7 +1,7 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.Jesus;
+import laoqi123.module.modules.movement.Jesus;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

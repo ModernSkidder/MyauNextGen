@@ -5,7 +5,7 @@ package laoqi123.mixin;
 import laoqi123.Myau;
 import laoqi123.config.AnimationConfig;
 import laoqi123.config.AnimationMode;
-import laoqi123.module.modules.OldHitting;
+import laoqi123.module.modules.combat.OldHitting;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;

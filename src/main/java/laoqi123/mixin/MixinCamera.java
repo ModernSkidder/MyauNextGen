@@ -1,7 +1,7 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.ViewClip;
+import laoqi123.module.modules.render.ViewClip;
 import net.minecraft.client.render.Camera;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;

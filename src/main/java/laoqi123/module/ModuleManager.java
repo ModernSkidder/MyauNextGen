@@ -5,9 +5,9 @@ import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.events.KeyEvent;
 import laoqi123.events.TickEvent;
-import laoqi123.module.modules.GuiModule;
-import laoqi123.module.modules.HUD;
-import laoqi123.module.modules.Notifications;
+import laoqi123.module.modules.render.GuiModule;
+import laoqi123.module.modules.render.HUD;
+import laoqi123.module.modules.render.Notifications;
 import laoqi123.util.ChatUtil;
 import laoqi123.util.SoundUtil;
 

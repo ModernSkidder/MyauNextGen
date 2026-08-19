@@ -1,7 +1,7 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.Xray;
+import laoqi123.module.modules.render.Xray;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;

@@ -6,7 +6,12 @@ import com.google.gson.JsonParser;
 import laoqi123.Myau;
 import laoqi123.font.UFontRenderer;
 import laoqi123.module.Module;
-import laoqi123.module.modules.*;
+import laoqi123.module.modules.combat.*;
+import laoqi123.module.modules.misc.*;
+import laoqi123.module.modules.movement.*;
+import laoqi123.module.modules.player.*;
+import laoqi123.module.modules.player.Timer;
+import laoqi123.module.modules.render.*;
 import laoqi123.ui.components.BindComponent;
 import laoqi123.ui.components.CategoryComponent;
 import laoqi123.util.RenderUtil;
@@ -124,7 +129,7 @@ public class ClickGui extends Screen {
         playerModules.add(Myau.moduleManager.getModule(GhostHand.class));
         playerModules.add(Myau.moduleManager.getModule(MCF.class));
         playerModules.add(Myau.moduleManager.getModule(AntiDebuff.class));
-        playerModules.add(Myau.moduleManager.getModule(laoqi123.module.modules.Timer.class));
+        playerModules.add(Myau.moduleManager.getModule(Timer.class));
 
         List<Module> miscModules = new ArrayList<>();
         miscModules.add(Myau.moduleManager.getModule(Spammer.class));

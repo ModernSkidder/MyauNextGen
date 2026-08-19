@@ -2,7 +2,7 @@ package laoqi123.mixin;
 
 import it.unimi.dsi.fastutil.floats.FloatUnaryOperator;
 import laoqi123.Myau;
-import laoqi123.module.modules.Timer;
+import laoqi123.module.modules.player.Timer;
 import net.minecraft.client.render.RenderTickCounter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

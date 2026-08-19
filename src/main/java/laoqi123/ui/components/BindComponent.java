@@ -1,10 +1,9 @@
 package laoqi123.ui.components;
 
-import laoqi123.module.modules.GuiModule;
+import laoqi123.module.modules.render.GuiModule;
 import laoqi123.ui.ClickGui;
 import laoqi123.ui.Component;
 import laoqi123.ui.Gnome;
-import laoqi123.ui.dataset.BindStage;
 import laoqi123.util.KeyBindUtil;
 import net.minecraft.client.gui.DrawContext;
 import org.lwjgl.glfw.GLFW;

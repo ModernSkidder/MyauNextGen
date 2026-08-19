@@ -1,8 +1,8 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.AntiObfuscate;
-import laoqi123.module.modules.NickHider;
+import laoqi123.module.modules.misc.AntiObfuscate;
+import laoqi123.module.modules.misc.NickHider;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Text;

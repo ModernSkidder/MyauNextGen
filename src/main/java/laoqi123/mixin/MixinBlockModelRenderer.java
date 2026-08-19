@@ -1,8 +1,8 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.BedESP;
-import laoqi123.module.modules.Xray;
+import laoqi123.module.modules.render.BedESP;
+import laoqi123.module.modules.render.Xray;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.BedPart;
