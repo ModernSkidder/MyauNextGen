@@ -2,11 +2,11 @@ package laoqi123.module.modules.combat;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.Priority;
-import laoqi123.events.AttackEvent;
-import laoqi123.events.MoveInputEvent;
+import laoqi123.event.impl.AttackEvent;
+import laoqi123.event.impl.MoveInputEvent;
 import laoqi123.module.Module;
 import laoqi123.util.TimerUtil;
-import laoqi123.property.properties.FloatProperty;
+import laoqi123.value.properties.FloatValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.effect.StatusEffects;
 
@@ -17,8 +17,8 @@ public class Wtap extends Module {
     private boolean stopForward = false;
     private long delayTicks = 0L;
     private long durationTicks = 0L;
-    public final FloatProperty delay = new FloatProperty("delay", 5.5F, 0.0F, 10.0F);
-    public final FloatProperty duration = new FloatProperty("duration", 1.5F, 1.0F, 5.0F);
+    public final FloatValue delay = new FloatValue("delay", 5.5F, 0.0F, 10.0F);
+    public final FloatValue duration = new FloatValue("duration", 1.5F, 1.0F, 5.0F);
 
     private boolean canTrigger() {
         return !(mc.player.input.movementForward < 0.8F)

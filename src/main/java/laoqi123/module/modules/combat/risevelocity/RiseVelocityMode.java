@@ -1,9 +1,9 @@
 package laoqi123.module.modules.combat.risevelocity;
 
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.PlayerUpdateEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.PlayerUpdateEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.modules.combat.RiseVelocity;
 import laoqi123.util.PacketUtil;
 import laoqi123.util.TeamUtil;

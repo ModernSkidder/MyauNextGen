@@ -2,12 +2,12 @@ package laoqi123.module.modules.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.module.Module;
 import laoqi123.util.TimerUtil;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.PercentValue;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.block.SkullBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.component.DataComponentTypes;
@@ -22,11 +22,11 @@ public class AutoHeal extends Module {
     private boolean shouldHeal = false;
     private int prevSlot = -1;
     private int hurtTick = 0;
-    public final PercentProperty health = new PercentProperty("health", 35);
-    public final IntProperty delay = new IntProperty("delay", 4000, 0, 5000);
-    public final BooleanProperty regenCheck = new BooleanProperty("regen-check", false);
-    public final BooleanProperty hurtCheck = new BooleanProperty("hurt-check", false);
-    public final IntProperty hurtTime = new IntProperty("hurt-time", 20, 1, 100, hurtCheck::getValue);
+    public final PercentValue health = new PercentValue("health", 35);
+    public final IntValue delay = new IntValue("delay", 4000, 0, 5000);
+    public final BooleanValue regenCheck = new BooleanValue("regen-check", false);
+    public final BooleanValue hurtCheck = new BooleanValue("hurt-check", false);
+    public final IntValue hurtTime = new IntValue("hurt-time", 20, 1, 100, hurtCheck::getValue);
 
     private int findHealingItem() {
         for (int i = 0; i < 9; i++) {

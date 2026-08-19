@@ -5,17 +5,14 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.management.RotationState;
 import laoqi123.mixin.EntityAccessor;
 import laoqi123.module.Module;
 import laoqi123.module.modules.player.Scaffold;
 import laoqi123.module.modules.combat.KillAura;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.MoveUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -24,13 +21,13 @@ import net.minecraft.util.PlayerInput;
 
 public class Speed extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    private final ModeProperty mode = new ModeProperty("Mode", 0, new String[]{"TimerBalance", "Normal"});
-    public final FloatProperty timerBoostMultiplier = new FloatProperty("TimerBoostMultiplier", 0.5f, 0.1f, 1f, () -> this.mode.getValue() == 0);
-    public final IntProperty lowTimerTicks = new IntProperty("LowTimerTicks", 6, 1, 10, () -> this.mode.getValue() == 0);
-    public final BooleanProperty rotation = new BooleanProperty("Rotation", false, () -> this.mode.getValue() == 0);
-    public final FloatProperty multiplier = new FloatProperty("Multiplier", 1.0F, 0.0F, 10.0F, () -> this.mode.getValue() == 1);
-    public final FloatProperty friction = new FloatProperty("Friction", 1.0F, 0.0F, 10.0F, () -> this.mode.getValue() == 1);
-    public final PercentProperty strafe = new PercentProperty("Strafe", 0, () -> this.mode.getValue() == 1);
+    private final ModeValue mode = new ModeValue("Mode", 0, new String[]{"TimerBalance", "Normal"});
+    public final FloatValue timerBoostMultiplier = new FloatValue("TimerBoostMultiplier", 0.5f, 0.1f, 1f, () -> this.mode.getValue() == 0);
+    public final IntValue lowTimerTicks = new IntValue("LowTimerTicks", 6, 1, 10, () -> this.mode.getValue() == 0);
+    public final BooleanValue rotation = new BooleanValue("Rotation", false, () -> this.mode.getValue() == 0);
+    public final FloatValue multiplier = new FloatValue("Multiplier", 1.0F, 0.0F, 10.0F, () -> this.mode.getValue() == 1);
+    public final FloatValue friction = new FloatValue("Friction", 1.0F, 0.0F, 10.0F, () -> this.mode.getValue() == 1);
+    public final PercentValue strafe = new PercentValue("Strafe", 0, () -> this.mode.getValue() == 1);
 
     public Speed() {
         super("Speed", false);

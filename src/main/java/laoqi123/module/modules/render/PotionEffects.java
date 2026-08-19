@@ -2,13 +2,13 @@ package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.font.UFontRenderer;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
+import laoqi123.value.properties.PercentValue;
 import laoqi123.util.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
@@ -26,11 +26,11 @@ import java.util.List;
 public class PotionEffects extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final PercentProperty background = new PercentProperty("Background", 50);
-    public final IntProperty offsetX = new IntProperty("OffsetX", 5, -1000, 1000);
-    public final IntProperty offsetY = new IntProperty("OffsetY", 80, -1000, 1000);
-    public final ModeProperty fontMode = new ModeProperty("font-mode", 0, new String[]{"Minecraft", "Modern"});
-    public final BooleanProperty text = new BooleanProperty("Text", true);
+    public final PercentValue background = new PercentValue("Background", 50);
+    public final IntValue offsetX = new IntValue("OffsetX", 5, -1000, 1000);
+    public final IntValue offsetY = new IntValue("OffsetY", 80, -1000, 1000);
+    public final ModeValue fontMode = new ModeValue("font-mode", 0, new String[]{"Minecraft", "Modern"});
+    public final BooleanValue text = new BooleanValue("Text", true);
 
     private float currentHeight = 0.0f;
     private UFontRenderer modernFont;

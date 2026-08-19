@@ -2,15 +2,15 @@ package laoqi123.module.modules.render.targethud.impl;
 
 import laoqi123.module.modules.render.TargetHud2;
 import laoqi123.module.modules.render.targethud.TargetHUDMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.PercentValue;
 import laoqi123.util.RenderUtil;
 
 import java.awt.Color;
 
 public class RavenModernTargetHUD extends TargetHUDMode {
-    public final PercentProperty background = new PercentProperty("Background", 25);
-    public final BooleanProperty indicator = new BooleanProperty("Indicator", true);
+    public final PercentValue background = new PercentValue("Background", 25);
+    public final BooleanValue indicator = new BooleanValue("Indicator", true);
 
     public RavenModernTargetHUD() {
         super("RavenModern");

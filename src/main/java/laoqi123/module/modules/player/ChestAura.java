@@ -3,15 +3,15 @@ package laoqi123.module.modules.player;
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.LoadWorldEvent;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.LoadWorldEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
 import laoqi123.module.modules.combat.KillAura;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.BlockUtil;
 import laoqi123.util.MoveUtil;
 import net.minecraft.block.Block;
@@ -42,9 +42,9 @@ public class ChestAura extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private static final DecimalFormat df = new DecimalFormat("0.0");
 
-    public final FloatProperty range = new FloatProperty("Range", 4.0f, 1.0f, 6.0f);
-    public final BooleanProperty throughWalls = new BooleanProperty("Through Walls", true);
-    public final ModeProperty moveFix = new ModeProperty("Move Fix", 1, new String[]{"None", "Silent", "Strict"});
+    public final FloatValue range = new FloatValue("Range", 4.0f, 1.0f, 6.0f);
+    public final BooleanValue throughWalls = new BooleanValue("Through Walls", true);
+    public final ModeValue moveFix = new ModeValue("Move Fix", 1, new String[]{"None", "Silent", "Strict"});
 
     private final List<BlockPos> openedChests = new ArrayList<>();
     private ChestBlockEntity targetChest;

@@ -1,6 +1,6 @@
 package laoqi123.ui.elements.config;
 
-import laoqi123.property.properties.TextProperty;
+import laoqi123.value.properties.TextValue;
 import laoqi123.ui.InputHandler;
 import laoqi123.ui.elements.IFocusable;
 import laoqi123.ui.elements.text.TextInputField;
@@ -9,7 +9,7 @@ import laoqi123.ui.renderer.NanoVGRenderUtil;
 public class ConfigTextBox extends ConfigOption implements IFocusable {
     public final TextInputField textField;
 
-    public ConfigTextBox(TextProperty property, int size) {
+    public ConfigTextBox(TextValue property, int size) {
         super(property, size);
         this.textField = new TextInputField(size == 1 ? 256 : 640, 32, "Enter text...", false, false, 0, 8f);
     }
@@ -19,7 +19,7 @@ public class ConfigTextBox extends ConfigOption implements IFocusable {
         if (!enabled) NanoVGRenderUtil.setAlpha(vg, 0.5f);
         textField.disable(!enabled);
         NanoVGRenderUtil.drawText(vg, name, x, y + 16, nameColor, 14f);
-        String value = (String) property.getValue();
+        String value = (String) this.value.getValue();
         if (!textField.isToggled()) textField.setInput(value == null ? "" : value);
         textField.draw(vg, x + (size == 1 ? 224 : 352), y, inputHandler);
         NanoVGRenderUtil.setAlpha(vg, 1f);
@@ -29,7 +29,7 @@ public class ConfigTextBox extends ConfigOption implements IFocusable {
     public void keyTyped(char key, int keyCode) {
         if (!enabled) return;
         textField.keyTyped(key, keyCode);
-        property.setValue(textField.getInput());
+        value.setValue(textField.getInput());
     }
 
     @Override

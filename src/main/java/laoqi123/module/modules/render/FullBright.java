@@ -2,9 +2,9 @@ package laoqi123.module.modules.render;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -13,7 +13,7 @@ public class FullBright extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private float prevGamma = Float.NaN;
     private boolean appliedNightVision = false;
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"GAMMA", "EFFECT"});
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"GAMMA", "EFFECT"});
 
     public FullBright() {
         super("Fullbright", true, true);

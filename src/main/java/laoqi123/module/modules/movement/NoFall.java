@@ -6,17 +6,17 @@ import laoqi123.enums.BlinkModules;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.TickEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.TickEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.management.RotationState;
 import laoqi123.mixin.PlayerMoveC2SPacketAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
@@ -37,14 +37,14 @@ public class NoFall extends Module {
     private boolean slowFalling = false;
     private boolean lastOnGround = false;
 
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"Packet", "Blink", "No_Ground", "Spoof", "MLG"});
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"Packet", "Blink", "No_Ground", "Spoof", "MLG"});
 
-    public final FloatProperty distance = new FloatProperty("distance", 3.0F, 0.0F, 20.0F);
-    public final IntProperty delay = new IntProperty("delay", 0, 0, 10000);
+    public final FloatValue distance = new FloatValue("distance", 3.0F, 0.0F, 20.0F);
+    public final IntValue delay = new IntValue("delay", 0, 0, 10000);
 
-    public final BooleanProperty autoSwitch = new BooleanProperty("Auto Switch", true, () -> mode.getValue() == 4);
-    public final ModeProperty moveFix = new ModeProperty("Move Fix", 1, new String[]{"NONE", "SILENT"}, () -> mode.getValue() == 4);
-    public final IntProperty priority = new IntProperty("Priority", 2, 1, 10, () -> mode.getValue() == 4);
+    public final BooleanValue autoSwitch = new BooleanValue("Auto Switch", true, () -> mode.getValue() == 4);
+    public final ModeValue moveFix = new ModeValue("Move Fix", 1, new String[]{"NONE", "SILENT"}, () -> mode.getValue() == 4);
+    public final IntValue priority = new IntValue("Priority", 2, 1, 10, () -> mode.getValue() == 4);
 
     private boolean active = false;
     private boolean onDistance = false;

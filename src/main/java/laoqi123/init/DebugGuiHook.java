@@ -1,10 +1,9 @@
 package laoqi123.init;
 
-import laoqi123.Myau;
 import laoqi123.event.EventManager;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.ui.ClickGui;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.texture.NativeImage;

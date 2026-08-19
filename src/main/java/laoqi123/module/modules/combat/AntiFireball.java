@@ -4,14 +4,14 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.management.RotationState;
 import laoqi123.module.Module;
 import laoqi123.module.modules.render.HUD;
 import laoqi123.util.*;
-import laoqi123.property.properties.*;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
@@ -29,12 +29,12 @@ public class AntiFireball extends Module {
     private final ArrayList<AbstractFireballEntity> farList = new ArrayList<>();
     private final ArrayList<AbstractFireballEntity> nearList = new ArrayList<>();
     private AbstractFireballEntity target = null;
-    public final FloatProperty range = new FloatProperty("range", 5.0F, 3.0F, 8.0F);
-    public final IntProperty fov = new IntProperty("fov", 360, 1, 360);
-    public final BooleanProperty rotations = new BooleanProperty("rotations", true);
-    public final BooleanProperty swing = new BooleanProperty("swing", true);
-    public final ModeProperty moveFix = new ModeProperty("move-fix", 1, new String[]{"NONE", "SILENT", "STRICT"});
-    public final ModeProperty showTarget = new ModeProperty("show-target", 0, new String[]{"NONE", "DEFAULT", "HUD"});
+    public final FloatValue range = new FloatValue("range", 5.0F, 3.0F, 8.0F);
+    public final IntValue fov = new IntValue("fov", 360, 1, 360);
+    public final BooleanValue rotations = new BooleanValue("rotations", true);
+    public final BooleanValue swing = new BooleanValue("swing", true);
+    public final ModeValue moveFix = new ModeValue("move-fix", 1, new String[]{"NONE", "SILENT", "STRICT"});
+    public final ModeValue showTarget = new ModeValue("show-target", 0, new String[]{"NONE", "DEFAULT", "HUD"});
 
     private boolean isValidTarget(AbstractFireballEntity entityFireball) {
         return !entityFireball.getBoundingBox().isNaN() && RotationUtil.distanceToEntity(entityFireball) <= (double) this.range.getValue() + 3.0

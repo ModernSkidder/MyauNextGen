@@ -2,13 +2,13 @@ package laoqi123.module.modules.render.targethud.impl;
 
 import laoqi123.module.modules.render.TargetHud2;
 import laoqi123.module.modules.render.targethud.TargetHUDMode;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.util.RenderUtil;
 
 import java.awt.Color;
 
 public class RavenLegacyTargetHUD extends TargetHUDMode {
-    public final BooleanProperty indicator = new BooleanProperty("Indicator", true);
+    public final BooleanValue indicator = new BooleanValue("Indicator", true);
 
     public RavenLegacyTargetHUD() {
         super("RavenLegacy");

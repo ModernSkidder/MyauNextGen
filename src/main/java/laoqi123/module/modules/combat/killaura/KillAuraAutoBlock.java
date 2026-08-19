@@ -3,7 +3,7 @@ package laoqi123.module.modules.combat.killaura;
 import laoqi123.Myau;
 import laoqi123.enums.BlinkModules;
 import laoqi123.module.modules.combat.KillAura;
-import laoqi123.property.properties.*;
+import laoqi123.value.properties.*;
 import laoqi123.util.PacketUtil;
 import laoqi123.util.PlayerUtil;
 import laoqi123.util.RotationUtil;
@@ -29,22 +29,22 @@ import java.util.Random;
 public class KillAuraAutoBlock extends ToggleableConfigurable {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final ModeProperty mode;
-    private final BooleanProperty noSwap;
-    private final BooleanProperty test;
-    private final IntProperty moreAttackDelay;
-    private final IntProperty maxTick;
-    private final IntProperty startBlinkTick;
-    private final IntProperty stopBlinkTick;
-    private final IntProperty swapTick;
-    private final IntProperty switchBackTick;
-    private final IntProperty stopBlockTick;
-    public final IntProperty attackTick;
-    private final IntProperty startBlockTick;
-    private final BooleanProperty postStartBlock;
-    public final BooleanProperty requirePress;
-    public final IntProperty aps;
-    public final FloatProperty range;
+    public final ModeValue mode;
+    private final BooleanValue noSwap;
+    private final BooleanValue test;
+    private final IntValue moreAttackDelay;
+    private final IntValue maxTick;
+    private final IntValue startBlinkTick;
+    private final IntValue stopBlinkTick;
+    private final IntValue swapTick;
+    private final IntValue switchBackTick;
+    private final IntValue stopBlockTick;
+    public final IntValue attackTick;
+    private final IntValue startBlockTick;
+    private final BooleanValue postStartBlock;
+    public final BooleanValue requirePress;
+    public final IntValue aps;
+    public final FloatValue range;
 
     private boolean blockingState = false;
     private boolean isBlocking = false;
@@ -57,22 +57,22 @@ public class KillAuraAutoBlock extends ToggleableConfigurable {
 
     public KillAuraAutoBlock(KillAura module) {
         super("AutoBlock", true);
-        this.mode = this.register(new ModeProperty("AutoBlock", 0, new String[]{"None", "Vanilla", "Hypixel", "Legit", "Fake", "Hypixel Test", "Hypixel Custom"}));
-        this.noSwap = this.register(new BooleanProperty("NoSwap", true, () -> this.mode.getValue() == 2));
-        this.test = this.register(new BooleanProperty("MoreAttack", false, () -> this.mode.getValue() == 2));
-        this.moreAttackDelay = this.register(new IntProperty("MoreAttackDelay", 1, 0, 3, () -> this.mode.getValue() == 2 && this.test.getValue()));
-        this.maxTick = this.register(new IntProperty("MaxTick", 3, 1, 5, () -> this.mode.getValue() == 6));
-        this.startBlinkTick = this.register(new IntProperty("StartBlinkTick", 0, 1, 5, () -> this.mode.getValue() == 6));
-        this.stopBlinkTick = this.register(new IntProperty("StopBlinkTick", 2, 1, 5, () -> this.mode.getValue() == 6));
-        this.swapTick = this.register(new IntProperty("SwapTick", 2, 1, 5, () -> this.mode.getValue() == 6));
-        this.switchBackTick = this.register(new IntProperty("SwitchBackTick", 2, 1, 5, () -> this.mode.getValue() == 6));
-        this.stopBlockTick = this.register(new IntProperty("StopBlockTick", 2, 1, 5, () -> this.mode.getValue() == 6));
-        this.attackTick = this.register(new IntProperty("AttackTick", 0, 1, 5, () -> this.mode.getValue() == 6));
-        this.startBlockTick = this.register(new IntProperty("StartBlockTick", 0, 1, 5, () -> this.mode.getValue() == 6));
-        this.postStartBlock = this.register(new BooleanProperty("PostBlock", false, () -> this.mode.getValue() == 6));
-        this.requirePress = this.register(new BooleanProperty("AutoBlock Require Press", false));
-        this.aps = this.register(new IntProperty("AutoBlock Aps", 10, 1, 20));
-        this.range = this.register(new FloatProperty("AutoBlock Range", 6.0F, 3.0F, 8.0F));
+        this.mode = this.register(new ModeValue("AutoBlock", 0, new String[]{"None", "Vanilla", "Hypixel", "Legit", "Fake", "Hypixel Test", "Hypixel Custom"}));
+        this.noSwap = this.register(new BooleanValue("NoSwap", true, () -> this.mode.getValue() == 2));
+        this.test = this.register(new BooleanValue("MoreAttack", false, () -> this.mode.getValue() == 2));
+        this.moreAttackDelay = this.register(new IntValue("MoreAttackDelay", 1, 0, 3, () -> this.mode.getValue() == 2 && this.test.getValue()));
+        this.maxTick = this.register(new IntValue("MaxTick", 3, 1, 5, () -> this.mode.getValue() == 6));
+        this.startBlinkTick = this.register(new IntValue("StartBlinkTick", 0, 1, 5, () -> this.mode.getValue() == 6));
+        this.stopBlinkTick = this.register(new IntValue("StopBlinkTick", 2, 1, 5, () -> this.mode.getValue() == 6));
+        this.swapTick = this.register(new IntValue("SwapTick", 2, 1, 5, () -> this.mode.getValue() == 6));
+        this.switchBackTick = this.register(new IntValue("SwitchBackTick", 2, 1, 5, () -> this.mode.getValue() == 6));
+        this.stopBlockTick = this.register(new IntValue("StopBlockTick", 2, 1, 5, () -> this.mode.getValue() == 6));
+        this.attackTick = this.register(new IntValue("AttackTick", 0, 1, 5, () -> this.mode.getValue() == 6));
+        this.startBlockTick = this.register(new IntValue("StartBlockTick", 0, 1, 5, () -> this.mode.getValue() == 6));
+        this.postStartBlock = this.register(new BooleanValue("PostBlock", false, () -> this.mode.getValue() == 6));
+        this.requirePress = this.register(new BooleanValue("AutoBlock Require Press", false));
+        this.aps = this.register(new IntValue("AutoBlock Aps", 10, 1, 20));
+        this.range = this.register(new FloatValue("AutoBlock Range", 6.0F, 3.0F, 8.0F));
     }
 
     public boolean isBlocking() {

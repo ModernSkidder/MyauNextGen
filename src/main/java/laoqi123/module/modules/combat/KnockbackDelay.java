@@ -4,12 +4,12 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.LoadWorldEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.LoadWorldEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.ItemUtil;
 import laoqi123.util.PacketUtil;
 import laoqi123.util.RandomUtil;
@@ -37,12 +37,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class KnockbackDelay extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    private final IntProperty airDelay = new IntProperty("AirDelay", 90, 0, 1000);
-    private final IntProperty groundDelay = new IntProperty("GroundDelay", 0, 0, 1000);
-    private final IntProperty chance = new IntProperty("Chance", 100, 0, 100);
-    private final BooleanProperty realtimeDamage = new BooleanProperty("RealtimeDamage", true);
-    private final BooleanProperty requireTarget = new BooleanProperty("RequireTarget", false);
-    private final BooleanProperty onlySwords = new BooleanProperty("OnlySwords", false);
+    private final IntValue airDelay = new IntValue("AirDelay", 90, 0, 1000);
+    private final IntValue groundDelay = new IntValue("GroundDelay", 0, 0, 1000);
+    private final IntValue chance = new IntValue("Chance", 100, 0, 100);
+    private final BooleanValue realtimeDamage = new BooleanValue("RealtimeDamage", true);
+    private final BooleanValue requireTarget = new BooleanValue("RequireTarget", false);
+    private final BooleanValue onlySwords = new BooleanValue("OnlySwords", false);
 
     private final Queue<TimedPacket> packets = new ConcurrentLinkedQueue<>();
     private boolean blink;

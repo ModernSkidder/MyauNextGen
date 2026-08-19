@@ -1,9 +1,9 @@
 package laoqi123.mixin;
 
 import laoqi123.event.EventManager;
-import laoqi123.events.AttackEvent;
-import laoqi123.events.CancelUseEvent;
-import laoqi123.events.WindowClickEvent;
+import laoqi123.event.impl.AttackEvent;
+import laoqi123.event.impl.CancelUseEvent;
+import laoqi123.event.impl.WindowClickEvent;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;

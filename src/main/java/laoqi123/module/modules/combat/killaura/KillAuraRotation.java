@@ -1,8 +1,8 @@
 package laoqi123.module.modules.combat.killaura;
 
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.config.ChoiceConfigurable;
 import laoqi123.util.config.Configurable;
 import laoqi123.util.rotation.AccelerationAngleSmooth;
@@ -35,10 +35,10 @@ public class KillAuraRotation extends Configurable {
     public final ChoiceConfigurable angleSmooth;
     public final ShortStopRotationProcessor shortStop;
     public final FailRotationProcessor fail;
-    public final ModeProperty movementCorrection;
-    public final FloatProperty resetThreshold;
-    public final IntProperty ticksUntilReset;
-    public final ModeProperty rotationTiming;
+    public final ModeValue movementCorrection;
+    public final FloatValue resetThreshold;
+    public final IntValue ticksUntilReset;
+    public final ModeValue rotationTiming;
 
     private Rotation currentRotation;
     private Rotation previousRotation;
@@ -62,11 +62,11 @@ public class KillAuraRotation extends Configurable {
         this.fail = new FailRotationProcessor(this::getPreviousRotation);
         this.addChild(this.fail);
 
-        this.movementCorrection = this.register(new ModeProperty("MovementCorrection", 2,
+        this.movementCorrection = this.register(new ModeValue("MovementCorrection", 2,
                 new String[]{"Off", "Strict", "Silent", "ChangeLook"}));
-        this.resetThreshold = this.register(new FloatProperty("ResetThreshold", 2.0f, 1.0f, 180.0f));
-        this.ticksUntilReset = this.register(new IntProperty("TicksUntilReset", 5, 1, 30));
-        this.rotationTiming = this.register(new ModeProperty("RotationTiming", 0,
+        this.resetThreshold = this.register(new FloatValue("ResetThreshold", 2.0f, 1.0f, 180.0f));
+        this.ticksUntilReset = this.register(new IntValue("TicksUntilReset", 5, 1, 30));
+        this.rotationTiming = this.register(new ModeValue("RotationTiming", 0,
                 new String[]{"Normal", "Snap", "OnTick"}));
     }
 

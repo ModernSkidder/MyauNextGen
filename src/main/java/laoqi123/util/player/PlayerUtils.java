@@ -2,7 +2,7 @@ package laoqi123.util.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.UpdateEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.BlockPos;

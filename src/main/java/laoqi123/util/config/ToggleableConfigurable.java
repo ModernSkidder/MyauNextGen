@@ -1,13 +1,13 @@
 package laoqi123.util.config;
 
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 
 public class ToggleableConfigurable extends Configurable {
-    private final BooleanProperty enabledProperty;
+    private final BooleanValue enabledProperty;
 
     public ToggleableConfigurable(String name, boolean enabledByDefault) {
         super(name);
-        this.enabledProperty = this.register(new BooleanProperty("Enabled", enabledByDefault));
+        this.enabledProperty = this.register(new BooleanValue("Enabled", enabledByDefault));
     }
 
     public boolean isEnabled() {
@@ -18,7 +18,7 @@ public class ToggleableConfigurable extends Configurable {
         this.enabledProperty.setValue(enabled);
     }
 
-    public BooleanProperty getEnabledProperty() {
+    public BooleanValue getEnabledProperty() {
         return this.enabledProperty;
     }
 

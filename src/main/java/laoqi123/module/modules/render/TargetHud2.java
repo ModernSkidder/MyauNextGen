@@ -4,8 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.module.Module;
 import laoqi123.module.modules.combat.KillAura;
 import laoqi123.module.modules.render.targethud.TargetHUDMode;
@@ -16,10 +16,10 @@ import laoqi123.module.modules.render.targethud.impl.RavenLegacyTargetHUD;
 import laoqi123.module.modules.render.targethud.impl.RavenModernTargetHUD;
 import laoqi123.module.modules.render.targethud.impl.UnfairTargetHUD;
 import laoqi123.mixin.PlayerInteractEntityC2SPacketAccessor;
-import laoqi123.property.Property;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.Value;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.TeamUtil;
 import laoqi123.util.TimerUtil;
@@ -64,15 +64,15 @@ public class TargetHud2 extends Module implements PropertyProvider {
     private static final float FADE_DURATION_MS = 400.0F;
     private static final float FOLLOW_PLAYER_X_PADDING = 2.0F;
 
-    public final ModeProperty mode = new ModeProperty("Mode", 0, new String[]{"Myau", "RavenModern", "RavenLegacy", "Unfair", "Novoline", "Exhibition"});
-    public final ModeProperty health = new ModeProperty("Health", 0, new String[]{"Entity", "Tab"});
-    public final BooleanProperty kaOnly = new BooleanProperty("Ka Only", true);
-    public final BooleanProperty chatPreview = new BooleanProperty("Chat Preview", false);
-    public final BooleanProperty followPlayer = new BooleanProperty("Follow Player", false);
-    public final ModeProperty posX = new ModeProperty("position-x", 0, new String[]{"LEFT", "MIDDLE", "RIGHT"});
-    public final ModeProperty posY = new ModeProperty("position-y", 0, new String[]{"TOP", "MIDDLE", "BOTTOM"});
-    public final IntProperty offX = new IntProperty("offset-x", 0, -500, 500);
-    public final IntProperty offY = new IntProperty("offset-y", 30, -500, 500);
+    public final ModeValue mode = new ModeValue("Mode", 0, new String[]{"Myau", "RavenModern", "RavenLegacy", "Unfair", "Novoline", "Exhibition"});
+    public final ModeValue health = new ModeValue("Health", 0, new String[]{"Entity", "Tab"});
+    public final BooleanValue kaOnly = new BooleanValue("Ka Only", true);
+    public final BooleanValue chatPreview = new BooleanValue("Chat Preview", false);
+    public final BooleanValue followPlayer = new BooleanValue("Follow Player", false);
+    public final ModeValue posX = new ModeValue("position-x", 0, new String[]{"LEFT", "MIDDLE", "RIGHT"});
+    public final ModeValue posY = new ModeValue("position-y", 0, new String[]{"TOP", "MIDDLE", "BOTTOM"});
+    public final IntValue offX = new IntValue("offset-x", 0, -500, 500);
+    public final IntValue offY = new IntValue("offset-y", 30, -500, 500);
 
     private final TimerUtil lastAttackTimer = new TimerUtil();
     public final TimerUtil animTimer = new TimerUtil();
@@ -110,7 +110,7 @@ public class TargetHud2 extends Module implements PropertyProvider {
     }
 
     @Override
-    public List<Property<?>> getAdditionalProperties() {
+    public List<Value<?>> getAdditionalProperties() {
         return this.collectModeProperties();
     }
 
@@ -125,26 +125,26 @@ public class TargetHud2 extends Module implements PropertyProvider {
     }
 
     private void rebuildSettings() {
-        if (Myau.propertyManager == null) {
+        if (Myau.valueManager == null) {
             return;
         }
-        ArrayList<Property<?>> list = new ArrayList<>();
+        ArrayList<Value<?>> list = new ArrayList<>();
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             try {
                 Object object = field.get(this);
-                if (object instanceof Property<?>) {
-                    list.add((Property<?>) object);
+                if (object instanceof Value<?>) {
+                    list.add((Value<?>) object);
                 }
             } catch (IllegalAccessException ignored) {
             }
         }
         list.addAll(this.collectModeProperties());
-        Myau.propertyManager.properties.put(TargetHud2.class, list);
+        Myau.valueManager.properties.put(TargetHud2.class, list);
     }
 
-    private List<Property<?>> collectModeProperties() {
-        List<Property<?>> properties = new ArrayList<>();
+    private List<Value<?>> collectModeProperties() {
+        List<Value<?>> properties = new ArrayList<>();
         TargetHUDMode current = this.getCurrentMode();
         if (current == null) {
             return properties;
@@ -153,10 +153,10 @@ public class TargetHud2 extends Module implements PropertyProvider {
             field.setAccessible(true);
             try {
                 Object object = field.get(current);
-                if (object instanceof Property<?>) {
-                    Property<?> property = (Property<?>) object;
-                    property.setOwner(this);
-                    properties.add(property);
+                if (object instanceof Value<?>) {
+                    Value<?> value = (Value<?>) object;
+                    value.setOwner(this);
+                    properties.add(value);
                 }
             } catch (IllegalAccessException ignored) {
             }

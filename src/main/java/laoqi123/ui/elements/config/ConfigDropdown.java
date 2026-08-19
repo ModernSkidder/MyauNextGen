@@ -1,9 +1,8 @@
 package laoqi123.ui.elements.config;
 
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.ui.ColorPalette;
 import laoqi123.ui.Colors;
-import laoqi123.ui.GuiUtils;
 import laoqi123.ui.InputHandler;
 import laoqi123.ui.animations.Animation;
 import laoqi123.ui.animations.ColorAnimation;
@@ -12,7 +11,7 @@ import laoqi123.ui.renderer.Icons;
 import laoqi123.ui.renderer.NanoVGRenderUtil;
 
 public class ConfigDropdown extends ConfigOption {
-    private final ModeProperty modeProperty;
+    private final ModeValue modeProperty;
     private final ColorAnimation backgroundColor = new ColorAnimation(ColorPalette.SECONDARY);
     private final ColorAnimation atomColor = new ColorAnimation(new ColorPalette(Colors.PRIMARY_600, Colors.PRIMARY_500, Colors.PRIMARY_500));
     private boolean opened = false;
@@ -23,7 +22,7 @@ public class ConfigDropdown extends ConfigOption {
     private float x;
     private float y;
 
-    public ConfigDropdown(ModeProperty property, int size) {
+    public ConfigDropdown(ModeValue property, int size) {
         super(property, size);
         this.modeProperty = property;
     }

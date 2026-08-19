@@ -2,9 +2,9 @@ package laoqi123.module.modules.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -19,12 +19,12 @@ public class AutoSwap extends Module {
     private Item lastItem;
     private int lastSlot = -1;
 
-    public final BooleanProperty blocks = new BooleanProperty("blocks", true);
-    public final BooleanProperty projectiles = new BooleanProperty("projectiles", true);
-    public final BooleanProperty pearls = new BooleanProperty("pearls", true);
-    public final BooleanProperty swords = new BooleanProperty("swords", true);
-    public final BooleanProperty tools = new BooleanProperty("tools", true);
-    public final BooleanProperty resources = new BooleanProperty("resources", true);
+    public final BooleanValue blocks = new BooleanValue("blocks", true);
+    public final BooleanValue projectiles = new BooleanValue("projectiles", true);
+    public final BooleanValue pearls = new BooleanValue("pearls", true);
+    public final BooleanValue swords = new BooleanValue("swords", true);
+    public final BooleanValue tools = new BooleanValue("tools", true);
+    public final BooleanValue resources = new BooleanValue("resources", true);
 
     private final List<String> ALLOWED_BLOCKS = Arrays.asList("stone", "grass", "dirt", "planks", "wool", "wood", "glass", "leaves", "clay", "cloth", "cobblestone", "sand", "gravel", "netherrack");
     private final List<String> PROJECTILES = Arrays.asList("egg", "snowball", "ender_pearl", "fireball");

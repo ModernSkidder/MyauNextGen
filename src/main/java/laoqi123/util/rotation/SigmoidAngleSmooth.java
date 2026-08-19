@@ -1,20 +1,20 @@
 package laoqi123.util.rotation;
 
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.FloatRangeProperty;
+import laoqi123.value.properties.FloatRangeValue;
+import laoqi123.value.properties.FloatValue;
 
 public class SigmoidAngleSmooth extends FactorAngleSmooth {
-    private final FloatRangeProperty horizontalTurnSpeed;
-    private final FloatRangeProperty verticalTurnSpeed;
-    private final FloatProperty steepness;
-    private final FloatProperty midpoint;
+    private final FloatRangeValue horizontalTurnSpeed;
+    private final FloatRangeValue verticalTurnSpeed;
+    private final FloatValue steepness;
+    private final FloatValue midpoint;
 
     public SigmoidAngleSmooth() {
         super("Sigmoid");
-        this.horizontalTurnSpeed = this.register(new FloatRangeProperty("HorizontalTurnSpeed", 180.0f, 180.0f, 0.0f, 180.0f));
-        this.verticalTurnSpeed = this.register(new FloatRangeProperty("VerticalTurnSpeed", 180.0f, 180.0f, 0.0f, 180.0f));
-        this.steepness = this.register(new FloatProperty("Steepness", 10.0f, 0.0f, 20.0f));
-        this.midpoint = this.register(new FloatProperty("Midpoint", 0.3f, 0.0f, 1.0f));
+        this.horizontalTurnSpeed = this.register(new FloatRangeValue("HorizontalTurnSpeed", 180.0f, 180.0f, 0.0f, 180.0f));
+        this.verticalTurnSpeed = this.register(new FloatRangeValue("VerticalTurnSpeed", 180.0f, 180.0f, 0.0f, 180.0f));
+        this.steepness = this.register(new FloatValue("Steepness", 10.0f, 0.0f, 20.0f));
+        this.midpoint = this.register(new FloatValue("Midpoint", 0.3f, 0.0f, 1.0f));
     }
 
     @Override

@@ -3,15 +3,15 @@ package laoqi123.module.modules.movement;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.mixin.LivingEntityAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.client.MinecraftClient;
 
 public class NoJumpDelay extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final IntProperty delay = new IntProperty("delay", 3, 0, 8);
+    public final IntValue delay = new IntValue("delay", 3, 0, 8);
 
     public NoJumpDelay() {
         super("NoJumpDelay", false);

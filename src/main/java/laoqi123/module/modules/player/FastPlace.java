@@ -2,13 +2,13 @@ package laoqi123.module.modules.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.mixin.MinecraftClientAccessor;
 import laoqi123.module.Module;
 import laoqi123.util.BlockUtil;
 import laoqi123.util.RotationUtil;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,11 +30,11 @@ public class FastPlace extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private static final DecimalFormat df = new DecimalFormat("0.0#", new DecimalFormatSymbols(Locale.US));
     private long delayMS = 0L;
-    public final FloatProperty delay = new FloatProperty("delay", 1.0F, 1.0F, 3.0F);
-    public final BooleanProperty blocksOnly = new BooleanProperty("blocks-only", true);
-    public final BooleanProperty placeFix = new BooleanProperty("place-fix", true);
-    public final BooleanProperty skipObsidian = new BooleanProperty("skip-obsidian", true);
-    public final BooleanProperty skipInteractable = new BooleanProperty("skip-interactable", true);
+    public final FloatValue delay = new FloatValue("delay", 1.0F, 1.0F, 3.0F);
+    public final BooleanValue blocksOnly = new BooleanValue("blocks-only", true);
+    public final BooleanValue placeFix = new BooleanValue("place-fix", true);
+    public final BooleanValue skipObsidian = new BooleanValue("skip-obsidian", true);
+    public final BooleanValue skipInteractable = new BooleanValue("skip-interactable", true);
 
     private boolean canPlace() {
         ItemStack stack = mc.player.getMainHandStack();

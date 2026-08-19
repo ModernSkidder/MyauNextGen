@@ -1,10 +1,10 @@
 package laoqi123.module.modules.movement;
 
 import laoqi123.event.EventTarget;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.mixin.LivingEntityAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.util.KeyBindUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
@@ -14,7 +14,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 public class Sprint extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private boolean wasSprinting = false;
-    public final BooleanProperty foxFix = new BooleanProperty("fov-fix", true);
+    public final BooleanValue foxFix = new BooleanValue("fov-fix", true);
 
     public Sprint() {
         super("Sprint", true, true);

@@ -4,7 +4,7 @@ import io.netty.channel.ChannelHandlerContext;
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
+import laoqi123.event.impl.PacketEvent;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.network.PacketCallbacks;
 import net.minecraft.network.packet.Packet;

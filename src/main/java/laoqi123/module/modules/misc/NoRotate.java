@@ -2,8 +2,8 @@ package laoqi123.module.modules.misc;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.LoadWorldEvent;
-import laoqi123.events.PacketEvent;
+import laoqi123.event.impl.LoadWorldEvent;
+import laoqi123.event.impl.PacketEvent;
 import laoqi123.module.Module;
 import laoqi123.util.PacketUtil;
 import laoqi123.util.RandomUtil;

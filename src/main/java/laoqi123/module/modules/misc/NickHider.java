@@ -2,17 +2,17 @@ package laoqi123.module.modules.misc;
 
 import laoqi123.enums.ChatColors;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.TextProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.TextValue;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.regex.Matcher;
 
 public class NickHider extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final TextProperty protectName = new TextProperty("name", "You");
-    public final BooleanProperty scoreboard = new BooleanProperty("scoreboard", true);
-    public final BooleanProperty level = new BooleanProperty("level", true);
+    public final TextValue protectName = new TextValue("name", "You");
+    public final BooleanValue scoreboard = new BooleanValue("scoreboard", true);
+    public final BooleanValue level = new BooleanValue("level", true);
 
     public NickHider() {
         super("NickHider", false, true);

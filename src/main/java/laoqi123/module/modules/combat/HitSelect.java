@@ -4,12 +4,12 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
 import laoqi123.mixin.PlayerInteractEntityC2SPacketAccessor;
 import laoqi123.module.modules.movement.KeepSprint;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -22,7 +22,7 @@ import net.minecraft.util.math.Vec3d;
 public class HitSelect extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"Second", "Criticals", "W_Tap"});
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"Second", "Criticals", "W_Tap"});
     
     private boolean sprintState = false;
     private boolean set = false;

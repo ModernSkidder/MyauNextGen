@@ -2,7 +2,7 @@ package laoqi123.mixin;
 
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.module.modules.player.AutoBlockIn;
 import laoqi123.module.modules.misc.NickHider;
 import laoqi123.module.modules.player.Scaffold;

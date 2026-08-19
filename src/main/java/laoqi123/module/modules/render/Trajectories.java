@@ -2,11 +2,11 @@ package laoqi123.module.modules.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render3DEvent;
+import laoqi123.event.impl.Render3DEvent;
 import laoqi123.mixin.EntityRenderDispatcherAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.PercentValue;
 import laoqi123.util.RenderUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgramKeys;
@@ -40,10 +40,10 @@ import java.util.Optional;
 
 public class Trajectories extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final PercentProperty opacity = new PercentProperty("opacity", 100);
-    public final BooleanProperty bow = new BooleanProperty("bow", true);
-    public final BooleanProperty projectiles = new BooleanProperty("projectiles", false);
-    public final BooleanProperty pearls = new BooleanProperty("pearls", true);
+    public final PercentValue opacity = new PercentValue("opacity", 100);
+    public final BooleanValue bow = new BooleanValue("bow", true);
+    public final BooleanValue projectiles = new BooleanValue("projectiles", false);
+    public final BooleanValue pearls = new BooleanValue("pearls", true);
 
     public Trajectories() {
         super("Trajectories", false, true);

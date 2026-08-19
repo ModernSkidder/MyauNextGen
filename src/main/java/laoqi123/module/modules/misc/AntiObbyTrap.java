@@ -1,7 +1,7 @@
 package laoqi123.module.modules.misc;
 
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.client.MinecraftClient;
@@ -11,7 +11,7 @@ import net.minecraft.world.BlockView;
 
 public class AntiObbyTrap extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final BooleanProperty setAir = new BooleanProperty("set-air", true);
+    public final BooleanValue setAir = new BooleanValue("set-air", true);
 
     public AntiObbyTrap() {
         super("AntiObbyTrap", false);

@@ -2,12 +2,12 @@ package laoqi123.module.modules.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.PacketUtil;
 import laoqi123.util.RotationUtil;
 import net.minecraft.client.MinecraftClient;
@@ -25,11 +25,11 @@ public class FakeLag extends Module {
 
 
 
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"Normal", "Dynamic"});
-    public final IntProperty delay = new IntProperty("delay-ms", 200, 50, 5000, () -> mode.getValue() == 0);
-    public final FloatProperty range = new FloatProperty("range", 4.0F, 1.0F, 10.0F, () -> mode.getValue() == 1);
-    public final IntProperty minDelay = new IntProperty("min-delay-ms", 100, 50, 3000, () -> mode.getValue() == 1);
-    public final IntProperty maxDelay = new IntProperty("max-delay-ms", 400, 100, 5000, () -> mode.getValue() == 1);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"Normal", "Dynamic"});
+    public final IntValue delay = new IntValue("delay-ms", 200, 50, 5000, () -> mode.getValue() == 0);
+    public final FloatValue range = new FloatValue("range", 4.0F, 1.0F, 10.0F, () -> mode.getValue() == 1);
+    public final IntValue minDelay = new IntValue("min-delay-ms", 100, 50, 3000, () -> mode.getValue() == 1);
+    public final IntValue maxDelay = new IntValue("max-delay-ms", 400, 100, 5000, () -> mode.getValue() == 1);
 
     private final ConcurrentLinkedQueue<PacketData> packetQueue = new ConcurrentLinkedQueue<>();
     private boolean isDispatching = false;

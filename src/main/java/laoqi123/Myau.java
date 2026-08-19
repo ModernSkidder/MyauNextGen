@@ -2,6 +2,7 @@ package laoqi123;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import laoqi123.value.Value;
 import me.ksyz.accountmanager.AccountManager;
 import laoqi123.command.CommandManager;
 import laoqi123.command.commands.*;
@@ -10,8 +11,7 @@ import laoqi123.event.EventManager;
 import laoqi123.management.*;
 import laoqi123.module.Module;
 import laoqi123.module.ModuleManager;
-import laoqi123.property.Property;
-import laoqi123.property.PropertyManager;
+import laoqi123.value.ValueManager;
 import laoqi123.util.player.PlayerUtils;
 
 import java.io.InputStreamReader;
@@ -31,7 +31,7 @@ public class Myau {
     public static PlayerStateManager playerStateManager;
     public static FriendManager friendManager;
     public static TargetManager targetManager;
-    public static PropertyManager propertyManager;
+    public static ValueManager valueManager;
     public static ModuleManager moduleManager;
     public static PlayerUtils playerUtils;
     public static CommandManager commandManager;
@@ -49,7 +49,7 @@ public class Myau {
         playerStateManager = new PlayerStateManager();
         friendManager = new FriendManager();
         targetManager = new TargetManager();
-        propertyManager = new PropertyManager();
+        valueManager = new ValueManager();
         moduleManager = new ModuleManager();
         commandManager = new CommandManager();
         playerUtils = new PlayerUtils();
@@ -77,7 +77,7 @@ public class Myau {
         commandManager.commands.add(new ToggleCommand());
         commandManager.commands.add(new VclipCommand());
         for (Module module : moduleManager.modules.values()) {
-            ArrayList<Property<?>> properties = new ArrayList<>();
+            ArrayList<Value<?>> properties = new ArrayList<>();
             for (final Field field : module.getClass().getDeclaredFields()) {
                 field.setAccessible(true);
                 final Object obj;
@@ -86,18 +86,18 @@ public class Myau {
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
-                if (obj instanceof Property<?>) {
-                    ((Property<?>) obj).setOwner(module);
-                    properties.add((Property<?>) obj);
+                if (obj instanceof Value<?>) {
+                    ((Value<?>) obj).setOwner(module);
+                    properties.add((Value<?>) obj);
                 }
             }
             if (module instanceof laoqi123.util.config.PropertyProvider) {
-                for (laoqi123.property.Property<?> property : ((laoqi123.util.config.PropertyProvider) module).getAdditionalProperties()) {
-                    property.setOwner(module);
-                    properties.add(property);
+                for (Value<?> value : ((laoqi123.util.config.PropertyProvider) module).getAdditionalProperties()) {
+                    value.setOwner(module);
+                    properties.add(value);
                 }
             }
-            propertyManager.properties.put(module.getClass(), properties);
+            valueManager.properties.put(module.getClass(), properties);
             EventManager.register(module);
         }
         Config config = new Config("default", true);

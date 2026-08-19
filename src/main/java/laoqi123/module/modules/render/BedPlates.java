@@ -2,10 +2,10 @@ package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
-import laoqi123.events.Render3DEvent;
+import laoqi123.event.impl.Render2DEvent;
+import laoqi123.event.impl.Render3DEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.RenderUtil;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class BedPlates extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final IntProperty range = new IntProperty("Range", 1, 1, 7);
+    public final IntValue range = new IntValue("Range", 1, 1, 7);
 
     private final List<BedRenderData> renderDataList = new ArrayList<>();
 

@@ -5,14 +5,14 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.management.RotationState;
 import laoqi123.mixin.ClientPlayerInteractionManagerAccessor;
 import laoqi123.module.Module;
 import laoqi123.util.*;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.PercentProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.ModeValue;
+import laoqi123.value.properties.PercentValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.FireChargeItem;
@@ -30,10 +30,10 @@ public class LongJump extends Module {
     private boolean readyToUseFireball = false;
     private boolean fireballLaunched = false;
     private int savedHotbarSlot = -1;
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"FIREBALL", "FIREBALL_MANUAL", "FIREBALL_HIGH", "FIREBALL_FLAT"});
-    public final FloatProperty motion = new FloatProperty("motion", 1.0F, 1.0F, 20.0F);
-    public final FloatProperty speedMotion = new FloatProperty("speed-motion", 1.0F, 1.0F, 20.0F);
-    public final PercentProperty strafe = new PercentProperty("strafe", 0);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"FIREBALL", "FIREBALL_MANUAL", "FIREBALL_HIGH", "FIREBALL_FLAT"});
+    public final FloatValue motion = new FloatValue("motion", 1.0F, 1.0F, 20.0F);
+    public final FloatValue speedMotion = new FloatValue("speed-motion", 1.0F, 1.0F, 20.0F);
+    public final PercentValue strafe = new PercentValue("strafe", 0);
 
     private int findFireballInHotbar() {
         if (mc.player == null) {

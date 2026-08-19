@@ -1,6 +1,6 @@
 package laoqi123.ui.elements.config;
 
-import laoqi123.property.Property;
+import laoqi123.value.Value;
 import laoqi123.ui.Colors;
 import laoqi123.ui.GuiUtils;
 import laoqi123.ui.InputHandler;
@@ -37,8 +37,8 @@ public class ConfigSlider extends ConfigOption implements IFocusable {
     private boolean animReset;
     private float lastX = -1;
 
-    public ConfigSlider(Property<?> property, Slider slider, int size) {
-        super(property, size);
+    public ConfigSlider(Value<?> value, Slider slider, int size) {
+        super(value, size);
         this.slider = slider;
         this.min = (float) slider.getMin();
         this.max = (float) slider.getMax();

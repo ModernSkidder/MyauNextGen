@@ -5,15 +5,15 @@ import laoqi123.enums.BlinkModules;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.LoadWorldEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.LoadWorldEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 
 public class Blink extends Module {
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"DEFAULT", "PULSE"});
-    public final IntProperty ticks = new IntProperty("ticks", 20, 0, 1200);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"DEFAULT", "PULSE"});
+    public final IntValue ticks = new IntValue("ticks", 20, 0, 1200);
 
     public Blink() {
         super("Blink", false);

@@ -3,8 +3,8 @@ package laoqi123.management;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.Render3DEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.Render3DEvent;
+import laoqi123.event.impl.TickEvent;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.math.MathHelper;
 

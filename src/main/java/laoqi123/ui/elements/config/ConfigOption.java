@@ -1,25 +1,25 @@
 package laoqi123.ui.elements.config;
 
 import laoqi123.module.Module;
-import laoqi123.property.Property;
+import laoqi123.value.Value;
 import laoqi123.ui.Colors;
 import laoqi123.ui.InputHandler;
 
 public abstract class ConfigOption {
     protected final String name;
-    public final Property<?> property;
+    public final Value<?> value;
     protected final Module module;
     protected final int size;
     protected boolean enabled = true;
     protected int nameColor = Colors.WHITE_80;
 
-    public ConfigOption(Property<?> property, int size) {
-        this(property, null, size);
+    public ConfigOption(Value<?> value, int size) {
+        this(value, null, size);
     }
 
-    public ConfigOption(Property<?> property, Module module, int size) {
-        this.name = property == null ? "" : property.getName().replace("-", " ");
-        this.property = property;
+    public ConfigOption(Value<?> value, Module module, int size) {
+        this.name = value == null ? "" : value.getName().replace("-", " ");
+        this.value = value;
         this.module = module;
         this.size = size;
     }

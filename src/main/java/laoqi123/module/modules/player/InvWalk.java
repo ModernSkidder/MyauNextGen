@@ -5,15 +5,15 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.TickEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.TickEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.mixin.CloseHandledScreenC2SPacketAccessor;
 import laoqi123.module.Module;
 import laoqi123.module.modules.movement.Sprint;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.KeyBindUtil;
 import laoqi123.util.PacketUtil;
 import net.minecraft.client.MinecraftClient;
@@ -58,11 +58,11 @@ public class InvWalk extends Module {
         return movementKeys;
     }
 
-    public final ModeProperty mode = new ModeProperty("mode", 1, new String[]{"VANILLA", "LEGIT", "HYPIXEL", "LEGIT+"});
-    public final BooleanProperty guiEnabled = new BooleanProperty("click-gui", true);
-    public final IntProperty openDelay = new IntProperty("open-delay", 0, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty closeDelay = new IntProperty("close-delay", 4, 0, 20, () -> mode.getValue() == 3);
-    public final BooleanProperty lockMoveKey = new BooleanProperty("lock-move-dey", false);
+    public final ModeValue mode = new ModeValue("mode", 1, new String[]{"VANILLA", "LEGIT", "HYPIXEL", "LEGIT+"});
+    public final BooleanValue guiEnabled = new BooleanValue("click-gui", true);
+    public final IntValue openDelay = new IntValue("open-delay", 0, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue closeDelay = new IntValue("close-delay", 4, 0, 20, () -> mode.getValue() == 3);
+    public final BooleanValue lockMoveKey = new BooleanValue("lock-move-dey", false);
 
     public InvWalk() {
         super("InvWalk", false);

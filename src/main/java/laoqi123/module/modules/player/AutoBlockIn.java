@@ -3,13 +3,12 @@ package laoqi123.module.modules.player;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.management.RotationState;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.MoveUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -38,13 +37,13 @@ public class AutoBlockIn extends Module {
     private final Map<String, Integer> BLOCK_SCORE = new HashMap<>();
     private long lastPlaceTime = 0;
 
-    public final FloatProperty range = new FloatProperty("range", 4.5f, 3.0f, 6.0f);
-    public final IntProperty speed = new IntProperty("speed", 20, 5, 100);
-    public final IntProperty placeDelay = new IntProperty("place-delay", 50, 0, 200);
-    public final IntProperty rotationTolerance = new IntProperty("rotation-tolerance", 25, 5, 100);
-    public final BooleanProperty itemSpoof = new BooleanProperty("item-spoof", true);
-    public final BooleanProperty showProgress = new BooleanProperty("show-progress", true);
-    public final ModeProperty moveFix = new ModeProperty("move-fix", 1, new String[]{"NONE", "SILENT", "STRICT"});
+    public final FloatValue range = new FloatValue("range", 4.5f, 3.0f, 6.0f);
+    public final IntValue speed = new IntValue("speed", 20, 5, 100);
+    public final IntValue placeDelay = new IntValue("place-delay", 50, 0, 200);
+    public final IntValue rotationTolerance = new IntValue("rotation-tolerance", 25, 5, 100);
+    public final BooleanValue itemSpoof = new BooleanValue("item-spoof", true);
+    public final BooleanValue showProgress = new BooleanValue("show-progress", true);
+    public final ModeValue moveFix = new ModeValue("move-fix", 1, new String[]{"NONE", "SILENT", "STRICT"});
 
     private float serverYaw;
     private float serverPitch;

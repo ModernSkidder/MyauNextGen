@@ -2,10 +2,10 @@ package laoqi123.module.modules.movement;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.StrafeEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.StrafeEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.FloatProperty;
+import laoqi123.value.properties.FloatValue;
 import laoqi123.util.KeyBindUtil;
 import laoqi123.util.MoveUtil;
 import net.minecraft.client.MinecraftClient;
@@ -13,8 +13,8 @@ import net.minecraft.client.MinecraftClient;
 public class Fly extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private double verticalMotion = 0.0;
-    public final FloatProperty hSpeed = new FloatProperty("horizontal-speed", 1.0F, 0.0F, 100.0F);
-    public final FloatProperty vSpeed = new FloatProperty("vertical-speed", 1.0F, 0.0F, 100.0F);
+    public final FloatValue hSpeed = new FloatValue("horizontal-speed", 1.0F, 0.0F, 100.0F);
+    public final FloatValue vSpeed = new FloatValue("vertical-speed", 1.0F, 0.0F, 100.0F);
 
     public Fly() {
         super("Fly", false);

@@ -2,16 +2,16 @@ package laoqi123.module.modules.misc;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.KeyBindUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 
 public class InventoryClicker extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final IntProperty triggerTicks = new IntProperty("ticks", 2, 0, 20);
+    public final IntValue triggerTicks = new IntValue("ticks", 2, 0, 20);
     public int ticks;
 
     public InventoryClicker() {

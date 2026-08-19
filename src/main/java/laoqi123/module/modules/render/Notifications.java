@@ -2,7 +2,7 @@ package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.module.Module;
 import laoqi123.util.RenderUtil;
 import net.minecraft.client.MinecraftClient;

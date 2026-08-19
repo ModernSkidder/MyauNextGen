@@ -1,13 +1,12 @@
 package laoqi123.ui.elements.config;
 
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.ui.ColorPalette;
 import laoqi123.ui.Colors;
 import laoqi123.ui.InputHandler;
 import laoqi123.ui.animations.Animation;
 import laoqi123.ui.animations.ColorAnimation;
 import laoqi123.ui.animations.DummyAnimation;
-import laoqi123.ui.animations.EaseInOutQuad;
 import laoqi123.ui.animations.EaseOutBump;
 import laoqi123.ui.renderer.NanoVGRenderUtil;
 
@@ -15,13 +14,13 @@ public class ConfigSwitch extends ConfigOption {
     private ColorAnimation color;
     private Animation animation;
 
-    public ConfigSwitch(BooleanProperty property, int size) {
+    public ConfigSwitch(BooleanValue property, int size) {
         super(property, size);
     }
 
     @Override
     public void draw(long vg, int x, int y, InputHandler inputHandler) {
-        boolean toggled = (Boolean) property.getValue();
+        boolean toggled = (Boolean) value.getValue();
         if (animation == null) {
             animation = new DummyAnimation(toggled ? 1 : 0);
             color = new ColorAnimation(toggled ? ColorPalette.PRIMARY : ColorPalette.SECONDARY);
@@ -36,7 +35,7 @@ public class ConfigSwitch extends ConfigOption {
 
         if (inputHandler.isAreaClicked(x, y, 42, 32) && enabled) {
             toggled = !toggled;
-            property.setValue(toggled);
+            value.setValue(toggled);
         }
         if (toggled == animation.isReversed()) {
             animation = new EaseOutBump(200, 0, 1, !toggled);

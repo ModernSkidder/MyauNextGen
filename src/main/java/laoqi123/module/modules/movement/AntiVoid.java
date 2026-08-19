@@ -5,13 +5,13 @@ import laoqi123.Myau;
 import laoqi123.enums.BlinkModules;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.Priority;
-import laoqi123.events.KeyEvent;
-import laoqi123.events.PlayerUpdateEvent;
+import laoqi123.event.impl.KeyEvent;
+import laoqi123.event.impl.PlayerUpdateEvent;
 import laoqi123.module.Module;
 import laoqi123.util.PlayerUtil;
 import laoqi123.util.RandomUtil;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.item.EnderPearlItem;
@@ -24,8 +24,8 @@ public class AntiVoid extends Module {
     private boolean isInVoid = false;
     private boolean wasInVoid = false;
     private double[] lastSafePosition = null;
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"BLINK"});
-    public final FloatProperty distance = new FloatProperty("distance", 5.0F, 0.0F, 16.0F);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"BLINK"});
+    public final FloatValue distance = new FloatValue("distance", 5.0F, 0.0F, 16.0F);
 
     private void resetBlink() {
         Myau.blinkManager.setBlinkState(false, BlinkModules.ANTI_VOID);

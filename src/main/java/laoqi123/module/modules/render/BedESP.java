@@ -2,12 +2,12 @@ package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render3DEvent;
+import laoqi123.event.impl.Render3DEvent;
 import laoqi123.mixin.EntityRenderDispatcherAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.*;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.RenderUtil;
 import net.minecraft.block.BedBlock;
 import net.minecraft.block.BlockState;
@@ -25,12 +25,12 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class BedESP extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     public final CopyOnWriteArraySet<BlockPos> beds = new CopyOnWriteArraySet<>();
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"DEFAULT", "FULL"});
-    public final ModeProperty color = new ModeProperty("color", 0, new String[]{"CUSTOM", "HUD"});
-    public final ColorProperty customColor;
-    public final PercentProperty opacity;
-    public final BooleanProperty outline;
-    public final BooleanProperty obsidian;
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"DEFAULT", "FULL"});
+    public final ModeValue color = new ModeValue("color", 0, new String[]{"CUSTOM", "HUD"});
+    public final ColorValue customColor;
+    public final PercentValue opacity;
+    public final BooleanValue outline;
+    public final BooleanValue obsidian;
 
     private Color getColor() {
         switch (this.color.getValue()) {
@@ -61,10 +61,10 @@ public class BedESP extends Module {
 
     public BedESP() {
         super("BedESP", false);
-        this.customColor = new ColorProperty("custom-color", (int) 8085714755840333141L, () -> this.color.getValue() == 0);
-        this.opacity = new PercentProperty("opacity", 25);
-        this.outline = new BooleanProperty("outline", false);
-        this.obsidian = new BooleanProperty("obsidian", true);
+        this.customColor = new ColorValue("custom-color", (int) 8085714755840333141L, () -> this.color.getValue() == 0);
+        this.opacity = new PercentValue("opacity", 25);
+        this.outline = new BooleanValue("outline", false);
+        this.obsidian = new BooleanValue("obsidian", true);
     }
 
     public double getHeight() {

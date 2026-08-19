@@ -1,11 +1,11 @@
 package laoqi123.module.modules.combat.risevelocity.impl;
 
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.modules.combat.risevelocity.RiseVelocityMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DelayVelocity extends RiseVelocityMode {
-    public final IntProperty delayTicks = new IntProperty("Delay Ticks", 5, 0, 20);
-    public final BooleanProperty limitDelay = new BooleanProperty("Limit Delay", true);
-    public final BooleanProperty onDrop = new BooleanProperty("On Drop", false);
+    public final IntValue delayTicks = new IntValue("Delay Ticks", 5, 0, 20);
+    public final BooleanValue limitDelay = new BooleanValue("Limit Delay", true);
+    public final BooleanValue onDrop = new BooleanValue("On Drop", false);
 
     private final List<Packet<ClientPlayPacketListener>> delayedPackets = new ArrayList<>();
     private int ticks;

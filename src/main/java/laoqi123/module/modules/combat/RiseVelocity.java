@@ -3,11 +3,11 @@ package laoqi123.module.modules.combat;
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.AttackEvent;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.PlayerUpdateEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.AttackEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.PlayerUpdateEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
 import laoqi123.module.modules.combat.risevelocity.RiseVelocityMode;
 import laoqi123.module.modules.combat.risevelocity.impl.BounceVelocity;
@@ -19,8 +19,8 @@ import laoqi123.module.modules.combat.risevelocity.impl.IntaveVelocity;
 import laoqi123.module.modules.combat.risevelocity.impl.LegitVelocity;
 import laoqi123.module.modules.combat.risevelocity.impl.StandardVelocity;
 import laoqi123.module.modules.combat.risevelocity.impl.TickVelocity;
-import laoqi123.property.Property;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.Value;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.config.PropertyProvider;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
@@ -32,7 +32,7 @@ import java.util.List;
 public class RiseVelocity extends Module implements PropertyProvider {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final ModeProperty mode = new ModeProperty("Mode", 0, new String[]{
+    public final ModeValue mode = new ModeValue("Mode", 0, new String[]{
             "Standard", "Delay", "Legit", "Ground", "Tick", "Bounce", "Intave", "Grim Reduce", "Grim"
     });
 
@@ -60,7 +60,7 @@ public class RiseVelocity extends Module implements PropertyProvider {
     }
 
     @Override
-    public List<Property<?>> getAdditionalProperties() {
+    public List<Value<?>> getAdditionalProperties() {
         return this.collectModeProperties();
     }
 
@@ -87,26 +87,26 @@ public class RiseVelocity extends Module implements PropertyProvider {
     }
 
     private void rebuildSettings() {
-        if (Myau.propertyManager == null) {
+        if (Myau.valueManager == null) {
             return;
         }
-        ArrayList<Property<?>> list = new ArrayList<>();
+        ArrayList<Value<?>> list = new ArrayList<>();
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             try {
                 Object object = field.get(this);
-                if (object instanceof Property<?>) {
-                    list.add((Property<?>) object);
+                if (object instanceof Value<?>) {
+                    list.add((Value<?>) object);
                 }
             } catch (IllegalAccessException ignored) {
             }
         }
         list.addAll(this.collectModeProperties());
-        Myau.propertyManager.properties.put(RiseVelocity.class, list);
+        Myau.valueManager.properties.put(RiseVelocity.class, list);
     }
 
-    private List<Property<?>> collectModeProperties() {
-        List<Property<?>> properties = new ArrayList<>();
+    private List<Value<?>> collectModeProperties() {
+        List<Value<?>> properties = new ArrayList<>();
         RiseVelocityMode current = this.getCurrentMode();
         if (current == null) {
             return properties;
@@ -115,10 +115,10 @@ public class RiseVelocity extends Module implements PropertyProvider {
             field.setAccessible(true);
             try {
                 Object object = field.get(current);
-                if (object instanceof Property<?>) {
-                    Property<?> property = (Property<?>) object;
-                    property.setOwner(this);
-                    properties.add(property);
+                if (object instanceof Value<?>) {
+                    Value<?> value = (Value<?>) object;
+                    value.setOwner(this);
+                    properties.add(value);
                 }
             } catch (IllegalAccessException ignored) {
             }

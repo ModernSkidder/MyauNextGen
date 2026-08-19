@@ -1,7 +1,7 @@
 package laoqi123.module.modules.combat.risevelocity.impl;
 
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
+import laoqi123.event.impl.PacketEvent;
 import laoqi123.module.modules.combat.risevelocity.RiseVelocityMode;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 

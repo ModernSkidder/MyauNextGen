@@ -2,10 +2,10 @@ package laoqi123.module.modules.misc;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
+import laoqi123.event.impl.PacketEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.TextProperty;
+import laoqi123.value.properties.ModeValue;
+import laoqi123.value.properties.TextValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.BrandCustomPayload;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
@@ -25,8 +25,8 @@ public class ClientSpoofer extends Module {
     };
     private boolean spoofing = false;
 
-    public final ModeProperty mode = new ModeProperty("mode", 0, MODES);
-    public final TextProperty customBrand = new TextProperty("custom-brand", "OpenMyau+", this::isCustomMode);
+    public final ModeValue mode = new ModeValue("mode", 0, MODES);
+    public final TextValue customBrand = new TextValue("custom-brand", "OpenMyau+", this::isCustomMode);
 
     public ClientSpoofer() {
         super("ClientSpoofer", false);

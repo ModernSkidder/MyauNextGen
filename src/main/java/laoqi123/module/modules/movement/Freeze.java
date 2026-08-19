@@ -2,11 +2,11 @@ package laoqi123.module.modules.movement;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.ChatUtil;
 import laoqi123.util.PacketUtil;
 import net.minecraft.client.MinecraftClient;
@@ -21,9 +21,9 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class Freeze extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"Queue", "Cancel", "Stationary"});
-    public final BooleanProperty disableOnFlag = new BooleanProperty("disable-on-flag", true);
-    public final BooleanProperty notification = new BooleanProperty("notification", false);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"Queue", "Cancel", "Stationary"});
+    public final BooleanValue disableOnFlag = new BooleanValue("disable-on-flag", true);
+    public final BooleanValue notification = new BooleanValue("notification", false);
 
     private final ConcurrentLinkedDeque<Packet<?>> packetQueue = new ConcurrentLinkedDeque<>();
     private boolean dispatching = false;

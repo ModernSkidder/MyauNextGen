@@ -9,7 +9,7 @@ import laoqi123.event.EventManager;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.management.RotationState;
 import laoqi123.mixin.ClientPlayerInteractionManagerAccessor;
 import laoqi123.mixin.EntityRenderDispatcherAccessor;
@@ -23,8 +23,8 @@ import laoqi123.module.modules.player.AutoBlockIn;
 import laoqi123.module.modules.player.AutoHeal;
 import laoqi123.module.modules.player.Scaffold;
 import laoqi123.module.modules.render.HUD;
-import laoqi123.property.Property;
-import laoqi123.property.properties.*;
+import laoqi123.value.Value;
+import laoqi123.value.properties.*;
 import laoqi123.util.*;
 import laoqi123.util.clicking.Clicker;
 import laoqi123.util.config.Configurable;
@@ -74,32 +74,32 @@ public class KillAura extends Module implements PropertyProvider {
     public final KillAuraFailSwing failSwing;
     private final Configurable rootConfig = new Configurable("KillAura");
 
-    public final FloatProperty swingRange;
-    public final FloatProperty attackRange;
-    public final IntProperty fov;
-    public final IntProperty minCPS;
-    public final IntProperty maxCPS;
-    public final IntProperty switchDelay;
-    public final BooleanProperty keepSprint;
+    public final FloatValue swingRange;
+    public final FloatValue attackRange;
+    public final IntValue fov;
+    public final IntValue minCPS;
+    public final IntValue maxCPS;
+    public final IntValue switchDelay;
+    public final BooleanValue keepSprint;
     public final Clicker clicker;
     public final KillAuraRotation rotations;
-    public final BooleanProperty throughWalls;
-    public final BooleanProperty requirePress;
-    public final BooleanProperty allowMining;
-    public final BooleanProperty weaponsOnly;
-    public final BooleanProperty allowTools;
-    public final BooleanProperty inventoryCheck;
-    public final BooleanProperty lowTimerCheck;
-    public final BooleanProperty botCheck;
-    public final BooleanProperty players;
-    public final BooleanProperty bosses;
-    public final BooleanProperty mobs;
-    public final BooleanProperty animals;
-    public final BooleanProperty golems;
-    public final BooleanProperty silverfish;
-    public final BooleanProperty teams;
-    public final BooleanProperty shark;
-    public ModeProperty showTarget;
+    public final BooleanValue throughWalls;
+    public final BooleanValue requirePress;
+    public final BooleanValue allowMining;
+    public final BooleanValue weaponsOnly;
+    public final BooleanValue allowTools;
+    public final BooleanValue inventoryCheck;
+    public final BooleanValue lowTimerCheck;
+    public final BooleanValue botCheck;
+    public final BooleanValue players;
+    public final BooleanValue bosses;
+    public final BooleanValue mobs;
+    public final BooleanValue animals;
+    public final BooleanValue golems;
+    public final BooleanValue silverfish;
+    public final BooleanValue teams;
+    public final BooleanValue shark;
+    public ModeValue showTarget;
 
     private final TimerUtil timer = new TimerUtil();
     public AttackData target = null;
@@ -116,37 +116,37 @@ public class KillAura extends Module implements PropertyProvider {
         this.rootConfig.addChild(this.autoBlock);
         this.rootConfig.addChild(this.failSwing);
 
-        this.swingRange = new FloatProperty("Swing Range", 3.5F, 3.0F, 6.0F);
-        this.attackRange = new FloatProperty("Attack Range", 3.0F, 3.0F, 6.0F);
-        this.fov = new IntProperty("Fov", 360, 30, 360);
-        this.minCPS = new IntProperty("Min Aps", 14, 1, 20);
-        this.maxCPS = new IntProperty("Max Aps", 14, 1, 20);
-        this.keepSprint = new BooleanProperty("KeepSprint", true);
+        this.swingRange = new FloatValue("Swing Range", 3.5F, 3.0F, 6.0F);
+        this.attackRange = new FloatValue("Attack Range", 3.0F, 3.0F, 6.0F);
+        this.fov = new IntValue("Fov", 360, 30, 360);
+        this.minCPS = new IntValue("Min Aps", 14, 1, 20);
+        this.maxCPS = new IntValue("Max Aps", 14, 1, 20);
+        this.keepSprint = new BooleanValue("KeepSprint", true);
         this.clicker = new Clicker("KillAuraClicker", this.minCPS, this.maxCPS);
         this.rootConfig.addChild(this.clicker);
-        this.switchDelay = new IntProperty("Switch Delay", 150, 0, 1000);
+        this.switchDelay = new IntValue("Switch Delay", 150, 0, 1000);
         this.rotations = new KillAuraRotation();
         this.rootConfig.addChild(this.rotations);
-        this.throughWalls = new BooleanProperty("Through Walls", true);
-        this.requirePress = new BooleanProperty("Require Press", false);
-        this.allowMining = new BooleanProperty("Allow Mining", false);
-        this.weaponsOnly = new BooleanProperty("Weapons Only", false);
-        this.allowTools = new BooleanProperty("Allow Tools", false, this.weaponsOnly::getValue);
-        this.inventoryCheck = new BooleanProperty("Inventory Check", true);
-        this.lowTimerCheck = new BooleanProperty("Low Timer Check", true);
-        this.botCheck = new BooleanProperty("Bot Check", true);
-        this.players = new BooleanProperty("Players", true);
-        this.bosses = new BooleanProperty("Bosses", false);
-        this.mobs = new BooleanProperty("Mobs", false);
-        this.animals = new BooleanProperty("Animals", false);
-        this.golems = new BooleanProperty("Golems", false);
-        this.silverfish = new BooleanProperty("Silverfish", false);
-        this.teams = new BooleanProperty("Teams", true);
-        this.shark = new BooleanProperty("Shark", false);
-        this.showTarget = new ModeProperty("Show Target", 0, new String[]{"None", "Default", "Hud", "Scan"});
+        this.throughWalls = new BooleanValue("Through Walls", true);
+        this.requirePress = new BooleanValue("Require Press", false);
+        this.allowMining = new BooleanValue("Allow Mining", false);
+        this.weaponsOnly = new BooleanValue("Weapons Only", false);
+        this.allowTools = new BooleanValue("Allow Tools", false, this.weaponsOnly::getValue);
+        this.inventoryCheck = new BooleanValue("Inventory Check", true);
+        this.lowTimerCheck = new BooleanValue("Low Timer Check", true);
+        this.botCheck = new BooleanValue("Bot Check", true);
+        this.players = new BooleanValue("Players", true);
+        this.bosses = new BooleanValue("Bosses", false);
+        this.mobs = new BooleanValue("Mobs", false);
+        this.animals = new BooleanValue("Animals", false);
+        this.golems = new BooleanValue("Golems", false);
+        this.silverfish = new BooleanValue("Silverfish", false);
+        this.teams = new BooleanValue("Teams", true);
+        this.shark = new BooleanValue("Shark", false);
+        this.showTarget = new ModeValue("Show Target", 0, new String[]{"None", "Default", "Hud", "Scan"});
     }
 
-    public FloatProperty scanThickness = new FloatProperty("ScanThickness", 0.6F, 0.1F, 2.5F, () -> showTarget.getValue() == 3);
+    public FloatValue scanThickness = new FloatValue("ScanThickness", 0.6F, 0.1F, 2.5F, () -> showTarget.getValue() == 3);
 
     public long getAttackDelayMS() {
         float remainingTicks = (1.0F - mc.player.getAttackCooldownProgress(0.0F)) / mc.player.getAttackCooldownProgressPerTick();
@@ -727,7 +727,7 @@ public class KillAura extends Module implements PropertyProvider {
     }
 
     @Override
-    public java.util.List<Property<?>> getAdditionalProperties() {
+    public java.util.List<Value<?>> getAdditionalProperties() {
         return this.rootConfig.collectProperties();
     }
 

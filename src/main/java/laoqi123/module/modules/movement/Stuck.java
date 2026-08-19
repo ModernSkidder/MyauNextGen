@@ -5,15 +5,15 @@ import laoqi123.enums.BlinkModules;
 import laoqi123.enums.DelayModules;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.LivingUpdateEvent;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.StrafeEvent;
-import laoqi123.events.TickEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.LivingUpdateEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.StrafeEvent;
+import laoqi123.event.impl.TickEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.ItemUtil;
 import laoqi123.util.PacketUtil;
 import net.minecraft.client.MinecraftClient;
@@ -38,9 +38,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Stuck extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final ModeProperty mode = new ModeProperty("Mode", 0, new String[]{"Vanilla", "Heypixel"});
+    public final ModeValue mode = new ModeValue("Mode", 0, new String[]{"Vanilla", "Heypixel"});
 
-    public final IntProperty stuckTicks = new IntProperty("Stuck Ticks", 10, 1, 100);
+    public final IntValue stuckTicks = new IntValue("Stuck Ticks", 10, 1, 100);
 
     private double savedMotionX;
     private double savedMotionY;

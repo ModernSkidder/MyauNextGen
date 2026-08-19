@@ -6,9 +6,9 @@ import laoqi123.event.EventManager;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.module.Module;
-import laoqi123.property.properties.FloatProperty;
+import laoqi123.value.properties.FloatValue;
 import laoqi123.util.KeyBindUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.PlayerInput;
@@ -19,7 +19,7 @@ public class Timer extends Module {
     private static final long cooldown = 100;
     private static long lastTime = 0;
 
-    public final FloatProperty speed = new FloatProperty("Speed", 1.0F, 0.0F, 10.0F);
+    public final FloatValue speed = new FloatValue("Speed", 1.0F, 0.0F, 10.0F);
 
     private boolean lastTimerKeyPressed = false;
     private double savedMotionX;

@@ -1,21 +1,21 @@
 package laoqi123.module.modules.misc;
 
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.module.Module;
 import laoqi123.util.TimerUtil;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.TextProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.TextValue;
 import net.minecraft.client.MinecraftClient;
 
 public class Spammer extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private final TimerUtil timer = new TimerUtil();
     private int charOffset = 19968;
-    public final TextProperty text = new TextProperty("text", "meow");
-    public final FloatProperty delay = new FloatProperty("delay", 3.5F, 0.0F, 3600.0F);
-    public final IntProperty random = new IntProperty("random", 0, 0, 10);
+    public final TextValue text = new TextValue("text", "meow");
+    public final FloatValue delay = new FloatValue("delay", 3.5F, 0.0F, 3600.0F);
+    public final IntValue random = new IntValue("random", 0, 0, 10);
 
     public Spammer() {
         super("Spammer", false);

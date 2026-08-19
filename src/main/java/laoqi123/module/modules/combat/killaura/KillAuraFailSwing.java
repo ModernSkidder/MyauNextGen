@@ -1,10 +1,7 @@
 package laoqi123.module.modules.combat.killaura;
 
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ColorProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.FloatRangeProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.config.Choice;
 import laoqi123.util.config.ChoiceConfigurable;
@@ -27,7 +24,7 @@ import java.util.List;
 public class KillAuraFailSwing extends ToggleableConfigurable {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final FloatRangeProperty additionalRange;
+    public final FloatRangeValue additionalRange;
     public final ChoiceConfigurable notifyWhenFail;
     public final BoxChoice box;
     public final SoundChoice sound;
@@ -37,7 +34,7 @@ public class KillAuraFailSwing extends ToggleableConfigurable {
 
     public KillAuraFailSwing() {
         super("FailSwing", true);
-        this.additionalRange = this.register(new FloatRangeProperty("AdditionalRange", 2.5f, 3.0f, 0.0f, 10.0f));
+        this.additionalRange = this.register(new FloatRangeValue("AdditionalRange", 2.5f, 3.0f, 0.0f, 10.0f));
         this.additionalRange.setChangeListener(range -> this.currentAdditionalRange = this.additionalRange.random());
         this.currentAdditionalRange = this.additionalRange.random();
 
@@ -113,26 +110,26 @@ public class KillAuraFailSwing extends ToggleableConfigurable {
     }
 
     public static class BoxChoice extends Choice {
-        public final IntProperty fade;
-        public final ColorProperty color;
-        public final BooleanProperty rainbow;
+        public final IntValue fade;
+        public final ColorValue color;
+        public final BooleanValue rainbow;
 
         BoxChoice() {
             super("Box");
-            this.fade = this.register(new IntProperty("Fade", 4, 1, 10));
-            this.color = this.register(new ColorProperty("Color", new Color(255, 179, 72).getRGB()));
-            this.rainbow = this.register(new BooleanProperty("Rainbow", false));
+            this.fade = this.register(new IntValue("Fade", 4, 1, 10));
+            this.color = this.register(new ColorValue("Color", new Color(255, 179, 72).getRGB()));
+            this.rainbow = this.register(new BooleanValue("Rainbow", false));
         }
     }
 
     public static class SoundChoice extends Choice {
-        public final FloatProperty volume;
-        public final FloatProperty pitch;
+        public final FloatValue volume;
+        public final FloatValue pitch;
 
         SoundChoice() {
             super("Sound");
-            this.volume = this.register(new FloatProperty("Volume", 50.0f, 0.0f, 100.0f));
-            this.pitch = this.register(new FloatProperty("Pitch", 0.8f, 0.0f, 2.0f));
+            this.volume = this.register(new FloatValue("Volume", 50.0f, 0.0f, 100.0f));
+            this.pitch = this.register(new FloatValue("Pitch", 0.8f, 0.0f, 2.0f));
         }
     }
 

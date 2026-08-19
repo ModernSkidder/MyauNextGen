@@ -6,10 +6,9 @@ import laoqi123.enums.ChatColors;
 import laoqi123.module.modules.render.HUD;
 import laoqi123.module.modules.render.TargetHud2;
 import laoqi123.module.modules.render.targethud.TargetHUDMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.ColorUtil;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.TeamUtil;
@@ -19,14 +18,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.awt.Color;
 
 public class MyauTargetHUD extends TargetHUDMode {
-    public final ModeProperty color = new ModeProperty("Color", 0, new String[]{"Default", "Hud"});
-    public final FloatProperty scale = new FloatProperty("Scale", 1.0F, 0.5F, 1.5F);
-    public final PercentProperty background = new PercentProperty("Background", 25);
-    public final BooleanProperty head = new BooleanProperty("Head", true);
-    public final BooleanProperty indicator = new BooleanProperty("Indicator", true);
-    public final BooleanProperty outline = new BooleanProperty("Outline", false);
-    public final BooleanProperty animations = new BooleanProperty("Animations", true);
-    public final BooleanProperty shadow = new BooleanProperty("Shadow", true);
+    public final ModeValue color = new ModeValue("Color", 0, new String[]{"Default", "Hud"});
+    public final FloatValue scale = new FloatValue("Scale", 1.0F, 0.5F, 1.5F);
+    public final PercentValue background = new PercentValue("Background", 25);
+    public final BooleanValue head = new BooleanValue("Head", true);
+    public final BooleanValue indicator = new BooleanValue("Indicator", true);
+    public final BooleanValue outline = new BooleanValue("Outline", false);
+    public final BooleanValue animations = new BooleanValue("Animations", true);
+    public final BooleanValue shadow = new BooleanValue("Shadow", true);
 
     public MyauTargetHUD() {
         super("Myau");

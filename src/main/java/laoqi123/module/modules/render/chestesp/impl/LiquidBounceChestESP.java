@@ -2,13 +2,12 @@ package laoqi123.module.modules.render.chestesp.impl;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import laoqi123.Myau;
-import laoqi123.events.Render3DEvent;
+import laoqi123.event.impl.Render3DEvent;
 import laoqi123.module.modules.player.ChestStealer;
 import laoqi123.module.modules.render.chestesp.ChestESPMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ColorProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.BlockUtil;
 import laoqi123.util.RenderUtil;
 import net.minecraft.block.BlockRenderType;
@@ -47,42 +46,42 @@ import net.minecraft.util.math.Vec3d;
 public class LiquidBounceChestESP extends ChestESPMode {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final ModeProperty mode = new ModeProperty("Mode", 0, new String[]{"Box", "Glow"});
-    public final BooleanProperty requiresChestStealer = new BooleanProperty("Requires Chest Stealer", false);
-    public final FloatProperty maximumDistance = new FloatProperty("Maximum Distance", 128.0F, 1.0F, 512.0F);
-    public final BooleanProperty outline = new BooleanProperty("Outline", true);
+    public final ModeValue mode = new ModeValue("Mode", 0, new String[]{"Box", "Glow"});
+    public final BooleanValue requiresChestStealer = new BooleanValue("Requires Chest Stealer", false);
+    public final FloatValue maximumDistance = new FloatValue("Maximum Distance", 128.0F, 1.0F, 512.0F);
+    public final BooleanValue outline = new BooleanValue("Outline", true);
 
-    public final BooleanProperty chest = new BooleanProperty("Chest", true);
-    public final ColorProperty chestColor = new ColorProperty("Chest Color", 0xFF0064FF);
-    public final BooleanProperty chestTracers = new BooleanProperty("Chest Tracers", false);
+    public final BooleanValue chest = new BooleanValue("Chest", true);
+    public final ColorValue chestColor = new ColorValue("Chest Color", 0xFF0064FF);
+    public final BooleanValue chestTracers = new BooleanValue("Chest Tracers", false);
 
-    public final BooleanProperty enderChest = new BooleanProperty("EnderChest", true);
-    public final ColorProperty enderChestColor = new ColorProperty("EnderChest Color", 0xFFFF00FF);
-    public final BooleanProperty enderChestTracers = new BooleanProperty("EnderChest Tracers", false);
+    public final BooleanValue enderChest = new BooleanValue("EnderChest", true);
+    public final ColorValue enderChestColor = new ColorValue("EnderChest Color", 0xFFFF00FF);
+    public final BooleanValue enderChestTracers = new BooleanValue("EnderChest Tracers", false);
 
-    public final BooleanProperty furnace = new BooleanProperty("Furnace", true);
-    public final ColorProperty furnaceColor = new ColorProperty("Furnace Color", 0xFF4F4F4F);
-    public final BooleanProperty furnaceTracers = new BooleanProperty("Furnace Tracers", false);
+    public final BooleanValue furnace = new BooleanValue("Furnace", true);
+    public final ColorValue furnaceColor = new ColorValue("Furnace Color", 0xFF4F4F4F);
+    public final BooleanValue furnaceTracers = new BooleanValue("Furnace Tracers", false);
 
-    public final BooleanProperty brewingStand = new BooleanProperty("BrewingStand", true);
-    public final ColorProperty brewingStandColor = new ColorProperty("BrewingStand Color", 0xFF8B4513);
-    public final BooleanProperty brewingStandTracers = new BooleanProperty("BrewingStand Tracers", false);
+    public final BooleanValue brewingStand = new BooleanValue("BrewingStand", true);
+    public final ColorValue brewingStandColor = new ColorValue("BrewingStand Color", 0xFF8B4513);
+    public final BooleanValue brewingStandTracers = new BooleanValue("BrewingStand Tracers", false);
 
-    public final BooleanProperty dispenser = new BooleanProperty("Dispenser", true);
-    public final ColorProperty dispenserColor = new ColorProperty("Dispenser Color", 0xFFD3D3D3);
-    public final BooleanProperty dispenserTracers = new BooleanProperty("Dispenser Tracers", false);
+    public final BooleanValue dispenser = new BooleanValue("Dispenser", true);
+    public final ColorValue dispenserColor = new ColorValue("Dispenser Color", 0xFFD3D3D3);
+    public final BooleanValue dispenserTracers = new BooleanValue("Dispenser Tracers", false);
 
-    public final BooleanProperty hopper = new BooleanProperty("Hopper", true);
-    public final ColorProperty hopperColor = new ColorProperty("Hopper Color", 0xFF808080);
-    public final BooleanProperty hopperTracers = new BooleanProperty("Hopper Tracers", false);
+    public final BooleanValue hopper = new BooleanValue("Hopper", true);
+    public final ColorValue hopperColor = new ColorValue("Hopper Color", 0xFF808080);
+    public final BooleanValue hopperTracers = new BooleanValue("Hopper Tracers", false);
 
-    public final BooleanProperty shulkerBox = new BooleanProperty("ShulkerBox", true);
-    public final ColorProperty shulkerBoxColor = new ColorProperty("ShulkerBox Color", 0xFF9D6E9D);
-    public final BooleanProperty shulkerBoxTracers = new BooleanProperty("ShulkerBox Tracers", false);
+    public final BooleanValue shulkerBox = new BooleanValue("ShulkerBox", true);
+    public final ColorValue shulkerBoxColor = new ColorValue("ShulkerBox Color", 0xFF9D6E9D);
+    public final BooleanValue shulkerBoxTracers = new BooleanValue("ShulkerBox Tracers", false);
 
-    public final BooleanProperty pot = new BooleanProperty("Pot", true);
-    public final ColorProperty potColor = new ColorProperty("Pot Color", 0xFFD18600);
-    public final BooleanProperty potTracers = new BooleanProperty("Pot Tracers", false);
+    public final BooleanValue pot = new BooleanValue("Pot", true);
+    public final ColorValue potColor = new ColorValue("Pot Color", 0xFFD18600);
+    public final BooleanValue potTracers = new BooleanValue("Pot Tracers", false);
 
     private enum StorageType {
         CHEST,

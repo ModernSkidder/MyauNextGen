@@ -1,10 +1,7 @@
 package laoqi123.util.rotation;
 
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.FloatRangeProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.IntRangeProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.util.config.ToggleableConfigurable;
 import net.minecraft.client.MinecraftClient;
 
@@ -14,12 +11,12 @@ import java.util.function.Supplier;
 public class FailRotationProcessor extends ToggleableConfigurable implements RotationProcessor {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    private final IntProperty rate;
-    private final FloatProperty failFactor;
-    private final FloatRangeProperty strengthHorizontal;
-    private final FloatRangeProperty strengthVertical;
-    private final IntRangeProperty transitionInDuration;
-    private final BooleanProperty restrictToSneak;
+    private final IntValue rate;
+    private final FloatValue failFactor;
+    private final FloatRangeValue strengthHorizontal;
+    private final FloatRangeValue strengthVertical;
+    private final IntRangeValue transitionInDuration;
+    private final BooleanValue restrictToSneak;
     private final Supplier<Rotation> previousRotationSupplier;
 
     private int ticksElapsed;
@@ -29,12 +26,12 @@ public class FailRotationProcessor extends ToggleableConfigurable implements Rot
     public FailRotationProcessor(Supplier<Rotation> previousRotationSupplier) {
         super("Fail", false);
         this.previousRotationSupplier = previousRotationSupplier;
-        this.rate = this.register(new IntProperty("Rate", 3, 1, 100));
-        this.failFactor = this.register(new FloatProperty("Factor", 0.04f, 0.01f, 0.99f));
-        this.strengthHorizontal = this.register(new FloatRangeProperty("StrengthHorizontal", 5.0f, 10.0f, 1.0f, 90.0f));
-        this.strengthVertical = this.register(new FloatRangeProperty("StrengthVertical", 0.0f, 2.0f, 0.0f, 90.0f));
-        this.transitionInDuration = this.register(new IntRangeProperty("TransitionInDuration", 1, 4, 0, 20));
-        this.restrictToSneak = this.register(new BooleanProperty("RestrictToSneak", false));
+        this.rate = this.register(new IntValue("Rate", 3, 1, 100));
+        this.failFactor = this.register(new FloatValue("Factor", 0.04f, 0.01f, 0.99f));
+        this.strengthHorizontal = this.register(new FloatRangeValue("StrengthHorizontal", 5.0f, 10.0f, 1.0f, 90.0f));
+        this.strengthVertical = this.register(new FloatRangeValue("StrengthVertical", 0.0f, 2.0f, 0.0f, 90.0f));
+        this.transitionInDuration = this.register(new IntRangeValue("TransitionInDuration", 1, 4, 0, 20));
+        this.restrictToSneak = this.register(new BooleanValue("RestrictToSneak", false));
     }
 
     public void tick() {

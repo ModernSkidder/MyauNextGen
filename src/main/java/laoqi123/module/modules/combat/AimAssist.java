@@ -3,14 +3,13 @@ package laoqi123.module.modules.combat;
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.KeyEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.KeyEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
 import laoqi123.util.*;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.PercentProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,15 +24,15 @@ import java.util.stream.StreamSupport;
 public class AimAssist extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private final TimerUtil timer = new TimerUtil();
-    public final FloatProperty hSpeed = new FloatProperty("horizontal-speed", 3.0F, 0.0F, 10.0F);
-    public final FloatProperty vSpeed = new FloatProperty("vertical-speed", 0.0F, 0.0F, 10.0F);
-    public final PercentProperty smoothing = new PercentProperty("smoothing", 50);
-    public final FloatProperty range = new FloatProperty("range", 4.5F, 3.0F, 8.0F);
-    public final IntProperty fov = new IntProperty("fov", 90, 30, 360);
-    public final BooleanProperty weaponOnly = new BooleanProperty("weapons-only", true);
-    public final BooleanProperty allowTools = new BooleanProperty("allow-tools", false, this.weaponOnly::getValue);
-    public final BooleanProperty botChecks = new BooleanProperty("bot-check", true);
-    public final BooleanProperty team = new BooleanProperty("teams", true);
+    public final FloatValue hSpeed = new FloatValue("horizontal-speed", 3.0F, 0.0F, 10.0F);
+    public final FloatValue vSpeed = new FloatValue("vertical-speed", 0.0F, 0.0F, 10.0F);
+    public final PercentValue smoothing = new PercentValue("smoothing", 50);
+    public final FloatValue range = new FloatValue("range", 4.5F, 3.0F, 8.0F);
+    public final IntValue fov = new IntValue("fov", 90, 30, 360);
+    public final BooleanValue weaponOnly = new BooleanValue("weapons-only", true);
+    public final BooleanValue allowTools = new BooleanValue("allow-tools", false, this.weaponOnly::getValue);
+    public final BooleanValue botChecks = new BooleanValue("bot-check", true);
+    public final BooleanValue team = new BooleanValue("teams", true);
 
     private boolean isValidTarget(PlayerEntity entityPlayer) {
         if (entityPlayer != mc.player && entityPlayer != mc.player.getVehicle()) {

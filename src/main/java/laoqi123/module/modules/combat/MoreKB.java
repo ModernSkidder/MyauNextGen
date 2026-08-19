@@ -1,11 +1,11 @@
 package laoqi123.module.modules.combat;
 
 import laoqi123.event.EventTarget;
-import laoqi123.events.AttackEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.AttackEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.PacketUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
@@ -17,9 +17,9 @@ import net.minecraft.util.math.MathHelper;
 
 public class MoreKB extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"Legit", "Legit_Fast", "Less_Packet", "Packet", "Double_Packet"});
-    public final BooleanProperty intelligent = new BooleanProperty("intelligent", false);
-    public final BooleanProperty onlyGround = new BooleanProperty("only-ground", true);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"Legit", "Legit_Fast", "Less_Packet", "Packet", "Double_Packet"});
+    public final BooleanValue intelligent = new BooleanValue("intelligent", false);
+    public final BooleanValue onlyGround = new BooleanValue("only-ground", true);
     private boolean shouldSprintReset;
     private LivingEntity target;
 

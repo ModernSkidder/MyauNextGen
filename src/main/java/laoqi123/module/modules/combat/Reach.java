@@ -2,12 +2,12 @@ package laoqi123.module.modules.combat;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.PickEvent;
-import laoqi123.events.RaytraceEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.PickEvent;
+import laoqi123.event.impl.RaytraceEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.PercentValue;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -18,8 +18,8 @@ public class Reach extends Module {
     private static final DecimalFormat df = new DecimalFormat("0.0#", new DecimalFormatSymbols(Locale.US));
     private final Random theRandom = new Random();
     private boolean expanding = true;
-    public final FloatProperty range = new FloatProperty("range", 3.1F, 3.0F, 6.0F);
-    public final PercentProperty chance = new PercentProperty("chance", 100);
+    public final FloatValue range = new FloatValue("range", 3.1F, 3.0F, 6.0F);
+    public final PercentValue chance = new PercentValue("chance", 100);
 
     public Reach() {
         super("Reach", false);

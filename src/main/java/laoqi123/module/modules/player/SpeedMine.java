@@ -2,18 +2,18 @@ package laoqi123.module.modules.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.mixin.ClientPlayerInteractionManagerAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.PercentValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.hit.HitResult;
 
 public class SpeedMine extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final PercentProperty speed = new PercentProperty("speed", 15);
-    public final IntProperty delay = new IntProperty("delay", 0, 0, 4);
+    public final PercentValue speed = new PercentValue("speed", 15);
+    public final IntValue delay = new IntValue("delay", 0, 0, 4);
 
     public SpeedMine() {
         super("SpeedMine", false);

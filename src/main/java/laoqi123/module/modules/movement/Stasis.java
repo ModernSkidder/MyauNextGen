@@ -2,11 +2,11 @@ package laoqi123.module.modules.movement;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.LivingUpdateEvent;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.StrafeEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.LivingUpdateEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.StrafeEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;

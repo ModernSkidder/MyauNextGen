@@ -2,8 +2,8 @@ package laoqi123.module.modules.combat;
 
 import laoqi123.Myau;
 import laoqi123.module.Module;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.MathHelper;
@@ -11,10 +11,10 @@ import net.minecraft.util.math.RotationAxis;
 import org.joml.Vector3f;
 
 public class OldHitting extends Module {
-    public final ModeProperty animation = new ModeProperty("Animation", 1, new String[]{"Vanilla", "Leaked", "Slide"});
-    public final FloatProperty size = new FloatProperty("Size", 1.0F, 0.1F, 3.0F);
-    public final FloatProperty speed = new FloatProperty("Speed", 1.0F, 0.1F, 5.0F);
-    public final FloatProperty yOffset = new FloatProperty("Y-Offset", 0.0F, -1.0F, 1.0F);
+    public final ModeValue animation = new ModeValue("Animation", 1, new String[]{"Vanilla", "Leaked", "Slide"});
+    public final FloatValue size = new FloatValue("Size", 1.0F, 0.1F, 3.0F);
+    public final FloatValue speed = new FloatValue("Speed", 1.0F, 0.1F, 5.0F);
+    public final FloatValue yOffset = new FloatValue("Y-Offset", 0.0F, -1.0F, 1.0F);
 
     public OldHitting() {
         super("OldHitting", true);

@@ -1,14 +1,13 @@
 package laoqi123.ui.dataset.impl;
 
 import laoqi123.enums.ChatColors;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.PercentValue;
 import laoqi123.ui.dataset.Slider;
 
 public class PercentageSlider extends Slider {
-    private final PercentProperty property;
+    private final PercentValue property;
 
-    public PercentageSlider(PercentProperty property) {
+    public PercentageSlider(PercentValue property) {
         this.property = property;
     }
 

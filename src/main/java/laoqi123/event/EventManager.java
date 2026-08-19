@@ -1,7 +1,7 @@
 package laoqi123.event;
 
-import laoqi123.event.events.Event;
-import laoqi123.event.events.EventStoppable;
+import laoqi123.event.impl.Event;
+import laoqi123.event.impl.EventStoppable;
 import laoqi123.event.types.Priority;
 
 import java.lang.reflect.InvocationTargetException;

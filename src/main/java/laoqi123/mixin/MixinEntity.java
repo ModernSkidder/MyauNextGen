@@ -2,7 +2,7 @@ package laoqi123.mixin;
 
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
-import laoqi123.events.KnockbackEvent;
+import laoqi123.event.impl.KnockbackEvent;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;

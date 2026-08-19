@@ -2,7 +2,7 @@ package laoqi123.management;
 
 import laoqi123.enums.FloatModules;
 import laoqi123.event.EventTarget;
-import laoqi123.events.PlayerUpdateEvent;
+import laoqi123.event.impl.PlayerUpdateEvent;
 import net.minecraft.client.MinecraftClient;
 
 import java.util.LinkedHashMap;

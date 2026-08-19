@@ -3,16 +3,15 @@ package laoqi123.module.modules.render;
 import laoqi123.Myau;
 import laoqi123.enums.ChatColors;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
-import laoqi123.events.Render3DEvent;
+import laoqi123.event.impl.Render2DEvent;
+import laoqi123.event.impl.Render3DEvent;
 import laoqi123.module.Module;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.RotationUtil;
 import laoqi123.util.TeamUtil;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,15 +23,15 @@ import java.util.stream.Collectors;
 
 public class Tracers extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final ModeProperty colorMode = new ModeProperty("color", 0, new String[]{"DEFAULT", "TEAMS", "HUD"});
-    public final BooleanProperty drawLines = new BooleanProperty("lines", true);
-    public final BooleanProperty drawArrows = new BooleanProperty("arrows", false);
-    public final PercentProperty opacity = new PercentProperty("opacity", 100);
-    public final IntProperty distance = new IntProperty("distance", 512, 0, 512);
-    public final BooleanProperty showPlayers = new BooleanProperty("players", true);
-    public final BooleanProperty showFriends = new BooleanProperty("friends", true);
-    public final BooleanProperty showEnemies = new BooleanProperty("enemies", true);
-    public final BooleanProperty showBots = new BooleanProperty("bots", false);
+    public final ModeValue colorMode = new ModeValue("color", 0, new String[]{"DEFAULT", "TEAMS", "HUD"});
+    public final BooleanValue drawLines = new BooleanValue("lines", true);
+    public final BooleanValue drawArrows = new BooleanValue("arrows", false);
+    public final PercentValue opacity = new PercentValue("opacity", 100);
+    public final IntValue distance = new IntValue("distance", 512, 0, 512);
+    public final BooleanValue showPlayers = new BooleanValue("players", true);
+    public final BooleanValue showFriends = new BooleanValue("friends", true);
+    public final BooleanValue showEnemies = new BooleanValue("enemies", true);
+    public final BooleanValue showBots = new BooleanValue("bots", false);
 
     private boolean shouldRender(PlayerEntity entityPlayer) {
         if (entityPlayer.deathTime > 0) {

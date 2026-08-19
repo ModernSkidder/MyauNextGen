@@ -2,13 +2,13 @@ package laoqi123.module.modules.combat;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
 import laoqi123.util.PacketUtil;
 import laoqi123.util.RenderUtil;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,13 +32,13 @@ public class BackTrack extends Module {
 
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    private final IntProperty trackMs = new IntProperty("TrackMS", 200, 1, 1000);
-    private final FloatProperty maxDistance = new FloatProperty("MaxTrackRange", 6.0F, 3.1F, 6.0F);
-    private final IntProperty maxTick = new IntProperty("MaxTick", 10, 0, 30);
-    private final BooleanProperty renderRealPos = new BooleanProperty("RenderRealPos", true);
-    private final BooleanProperty smart = new BooleanProperty("Smart", true);
-    private final BooleanProperty onlyHighSpeed = new BooleanProperty("Only On Target High Speed", false);
-    private final FloatProperty highSpeedThreshold = new FloatProperty("HighSpeed Threshold", 0.2F, 0.01F, 1.0F, onlyHighSpeed::getValue);
+    private final IntValue trackMs = new IntValue("TrackMS", 200, 1, 1000);
+    private final FloatValue maxDistance = new FloatValue("MaxTrackRange", 6.0F, 3.1F, 6.0F);
+    private final IntValue maxTick = new IntValue("MaxTick", 10, 0, 30);
+    private final BooleanValue renderRealPos = new BooleanValue("RenderRealPos", true);
+    private final BooleanValue smart = new BooleanValue("Smart", true);
+    private final BooleanValue onlyHighSpeed = new BooleanValue("Only On Target High Speed", false);
+    private final FloatValue highSpeedThreshold = new FloatValue("HighSpeed Threshold", 0.2F, 0.01F, 1.0F, onlyHighSpeed::getValue);
 
     private final Queue<TimedPacket> packetQueue = new ConcurrentLinkedQueue<>();
     private final List<Packet<?>> skipPackets = new ArrayList<>();

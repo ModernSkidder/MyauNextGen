@@ -3,13 +3,13 @@ package laoqi123.module.modules.player;
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
 import laoqi123.module.modules.combat.KillAura;
 import laoqi123.util.ItemUtil;
 import laoqi123.util.KeyBindUtil;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.TeamUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.util.hit.BlockHitResult;
@@ -20,9 +20,9 @@ public class AutoTool extends Module {
     private int currentToolSlot = -1;
     private int previousSlot = -1;
     private int tickDelayCounter = 0;
-    public final IntProperty switchDelay = new IntProperty("delay", 0, 0, 5);
-    public final BooleanProperty switchBack = new BooleanProperty("switch-back", true);
-    public final BooleanProperty sneakOnly = new BooleanProperty("sneak-only", true);
+    public final IntValue switchDelay = new IntValue("delay", 0, 0, 5);
+    public final BooleanValue switchBack = new BooleanValue("switch-back", true);
+    public final BooleanValue sneakOnly = new BooleanValue("sneak-only", true);
 
     public AutoTool() {
         super("AutoTool", false);

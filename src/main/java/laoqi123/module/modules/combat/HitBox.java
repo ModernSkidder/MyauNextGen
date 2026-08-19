@@ -4,14 +4,13 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.LeftClickMouseEvent;
-import laoqi123.events.Render3DEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.LeftClickMouseEvent;
+import laoqi123.event.impl.Render3DEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ColorProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.TeamUtil;
 import net.minecraft.client.MinecraftClient;
@@ -45,11 +44,11 @@ public class HitBox extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private Entity targetEntity = null;
     private Vec3d targetHitVec = null;
-    public final FloatProperty multiplier = new FloatProperty("multiplier", 1.2F, 1.0F, 5.0F);
-    public final ModeProperty showHitbox = new ModeProperty("show-hitbox", 0, new String[]{"NONE", "PLAYERS", "MOBS", "ANIMALS", "ALL"});
-    public final ColorProperty color = new ColorProperty("color", new Color(255, 255, 255).getRGB(), () -> this.showHitbox.getValue() != 0);
-    public final BooleanProperty teams = new BooleanProperty("teams", true, () -> this.showHitbox.getValue() == 1 || this.showHitbox.getValue() == 4);
-    public final BooleanProperty botCheck = new BooleanProperty("bot-check", true, () -> this.showHitbox.getValue() == 1 || this.showHitbox.getValue() == 4);
+    public final FloatValue multiplier = new FloatValue("multiplier", 1.2F, 1.0F, 5.0F);
+    public final ModeValue showHitbox = new ModeValue("show-hitbox", 0, new String[]{"NONE", "PLAYERS", "MOBS", "ANIMALS", "ALL"});
+    public final ColorValue color = new ColorValue("color", new Color(255, 255, 255).getRGB(), () -> this.showHitbox.getValue() != 0);
+    public final BooleanValue teams = new BooleanValue("teams", true, () -> this.showHitbox.getValue() == 1 || this.showHitbox.getValue() == 4);
+    public final BooleanValue botCheck = new BooleanValue("bot-check", true, () -> this.showHitbox.getValue() == 1 || this.showHitbox.getValue() == 4);
 
     public HitBox() {
         super("HitBox", false);

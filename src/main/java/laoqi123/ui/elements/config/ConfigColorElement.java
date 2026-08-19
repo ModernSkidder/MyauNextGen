@@ -1,6 +1,6 @@
 package laoqi123.ui.elements.config;
 
-import laoqi123.property.properties.ColorProperty;
+import laoqi123.value.properties.ColorValue;
 import laoqi123.ui.Colors;
 import laoqi123.ui.GuiUtils;
 import laoqi123.ui.InputHandler;
@@ -16,14 +16,14 @@ public class ConfigColorElement extends ConfigOption {
     private static final float POPUP_W = 216;
     private static final float POPUP_H = 148;
 
-    public ConfigColorElement(ColorProperty property, int size) {
+    public ConfigColorElement(ColorValue property, int size) {
         super(property, size);
     }
 
     @Override
     public void draw(long vg, int x, int y, InputHandler inputHandler) {
         int x1 = size == 1 ? x : x + 512;
-        int color = (Integer) property.getValue();
+        int color = (Integer) value.getValue();
         NanoVGRenderUtil.drawText(vg, name, x, y + 16, nameColor, 14f);
 
         element.disable(!enabled);
@@ -49,7 +49,7 @@ public class ConfigColorElement extends ConfigOption {
         NanoVGRenderUtil.drawRoundedRect(vg, popupX, popupY, POPUP_W, POPUP_H, Colors.GRAY_700, 12);
         NanoVGRenderUtil.drawHollowRoundRect(vg, popupX, popupY, POPUP_W, POPUP_H, NanoVGRenderUtil.alpha(Colors.WHITE, 30), 12, 1);
 
-        int color = (Integer) property.getValue();
+        int color = (Integer) value.getValue();
         int r = color >> 16 & 0xFF;
         int g = color >> 8 & 0xFF;
         int b = color & 0xFF;
@@ -86,7 +86,7 @@ public class ConfigColorElement extends ConfigOption {
 
         int newColor = (channels[3] & 0xFF) << 24 | (channels[0] & 0xFF) << 16 | (channels[1] & 0xFF) << 8 | (channels[2] & 0xFF);
         if (newColor != color) {
-            property.setValue(newColor);
+            value.setValue(newColor);
         }
     }
 

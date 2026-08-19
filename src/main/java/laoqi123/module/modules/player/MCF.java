@@ -2,7 +2,7 @@ package laoqi123.module.modules.player;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.KeyEvent;
+import laoqi123.event.impl.KeyEvent;
 import laoqi123.module.Module;
 import laoqi123.util.ChatUtil;
 import net.minecraft.client.MinecraftClient;

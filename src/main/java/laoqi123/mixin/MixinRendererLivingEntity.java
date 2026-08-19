@@ -3,7 +3,7 @@ package laoqi123.mixin;
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
 import laoqi123.event.types.EventType;
-import laoqi123.events.RenderLivingEvent;
+import laoqi123.event.impl.RenderLivingEvent;
 import laoqi123.module.modules.render.ESP;
 import laoqi123.module.modules.render.NameTags;
 import net.minecraft.client.render.VertexConsumerProvider;

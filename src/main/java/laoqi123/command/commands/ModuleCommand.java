@@ -4,8 +4,8 @@ import laoqi123.Myau;
 import laoqi123.command.Command;
 import laoqi123.module.Module;
 import laoqi123.util.ChatUtil;
-import laoqi123.property.Property;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.Value;
+import laoqi123.value.properties.BooleanValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,43 +20,43 @@ public class ModuleCommand extends Command {
     public void runCommand(ArrayList<String> args) {
         Module module = Myau.moduleManager.getModule(args.get(0));
         if (args.size() >= 2) {
-            Property<?> property = Myau.propertyManager.getProperty(module, args.get(1));
-            if (property == null) {
-                ChatUtil.sendFormatted(String.format("%s%s has no property &o%s&r", Myau.clientName, module.getName(), args.get(1)));
-            } else if (args.size() < 3 && !(property instanceof BooleanProperty)) {
+            Value<?> value = Myau.valueManager.getProperty(module, args.get(1));
+            if (value == null) {
+                ChatUtil.sendFormatted(String.format("%s%s has no value &o%s&r", Myau.clientName, module.getName(), args.get(1)));
+            } else if (args.size() < 3 && !(value instanceof BooleanValue)) {
                 ChatUtil.sendFormatted(
                         String.format(
                                 "%s%s: &o%s&r is set to %s&r (%s)&r",
                                 Myau.clientName,
                                 module.getName(),
-                                property.getName(),
-                                property.formatValue(),
-                                property.getValuePrompt()
+                                value.getName(),
+                                value.formatValue(),
+                                value.getValuePrompt()
                         )
                 );
             } else {
                 String newValue = args.size() < 3 ? null : String.join(" ", args.subList(2, args.size()));
                 try {
-                    if (property.parseString(newValue)) {
+                    if (value.parseString(newValue)) {
                         ChatUtil.sendFormatted(
-                                String.format("%s%s: &o%s&r has been set to %s&r", Myau.clientName, module.getName(), property.getName(), property.formatValue())
+                                String.format("%s%s: &o%s&r has been set to %s&r", Myau.clientName, module.getName(), value.getName(), value.formatValue())
                         );
                         return;
                     }
                 } catch (Exception e) {
                 }
                 ChatUtil.sendFormatted(
-                        String.format("%sInvalid value for property &o%s&r (%s)&r", Myau.clientName, property.getName(), property.getValuePrompt())
+                        String.format("%sInvalid value for value &o%s&r (%s)&r", Myau.clientName, value.getName(), value.getValuePrompt())
                 );
             }
         } else {
-            List<Property<?>> properties = Myau.propertyManager.properties.get(module.getClass());
+            List<Value<?>> properties = Myau.valueManager.properties.get(module.getClass());
             if (properties != null) {
-                List<Property<?>> visible = properties.stream().filter(Property::isVisible).collect(Collectors.toList());
+                List<Value<?>> visible = properties.stream().filter(Value::isVisible).collect(Collectors.toList());
                 if (!visible.isEmpty()) {
                     ChatUtil.sendFormatted(String.format("%s%s:&r", Myau.clientName, module.formatModule()));
-                    for (Property<?> property : visible) {
-                        ChatUtil.sendFormatted(String.format("&7»&r %s: %s&r", property.getName(), property.formatValue()));
+                    for (Value<?> value : visible) {
+                        ChatUtil.sendFormatted(String.format("&7»&r %s: %s&r", value.getName(), value.formatValue()));
                     }
                     return;
                 }

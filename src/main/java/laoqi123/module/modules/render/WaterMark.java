@@ -2,17 +2,17 @@ package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.font.UFontRenderer;
 import laoqi123.module.Module;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 
 public class WaterMark extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
-    public final ModeProperty fontMode = new ModeProperty("FontMode", 0, new String[]{"Minecraft", "Modern"});
+    public final ModeValue fontMode = new ModeValue("FontMode", 0, new String[]{"Minecraft", "Modern"});
 
     private UFontRenderer modernFont;
     private boolean modernFontLoaded = false;

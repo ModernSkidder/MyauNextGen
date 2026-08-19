@@ -11,23 +11,23 @@ import laoqi123.Myau;
 import laoqi123.enums.ChatColors;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.HitBlockEvent;
-import laoqi123.events.LeftClickMouseEvent;
-import laoqi123.events.LivingUpdateEvent;
-import laoqi123.events.LoadWorldEvent;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.Render2DEvent;
-import laoqi123.events.Render3DEvent;
-import laoqi123.events.RightClickMouseEvent;
-import laoqi123.events.SafeWalkEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.HitBlockEvent;
+import laoqi123.event.impl.LeftClickMouseEvent;
+import laoqi123.event.impl.LivingUpdateEvent;
+import laoqi123.event.impl.LoadWorldEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.Render2DEvent;
+import laoqi123.event.impl.Render3DEvent;
+import laoqi123.event.impl.RightClickMouseEvent;
+import laoqi123.event.impl.SafeWalkEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.mixin.KeyBindingAccessor;
 import laoqi123.mixin.PlayerInteractEntityC2SPacketAccessor;
 import laoqi123.module.Module;
 import laoqi123.module.modules.movement.Eagle;
-import laoqi123.property.Property;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.Value;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.util.BlockUtil;
 import laoqi123.util.ChatUtil;
 import laoqi123.util.ItemUtil;
@@ -75,10 +75,10 @@ extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     private DrawContext renderContext;
     private final String scriptName = "Telly";
-    public final BooleanProperty autoSwap = new BooleanProperty("auto-swap", true);
-    public final BooleanProperty disableSafeWalk = new BooleanProperty("disable-safewalk", true);
-    public final BooleanProperty showActivationHitbox = new BooleanProperty("show-activation-hitbox", false);
-    public final BooleanProperty print = new BooleanProperty("print", false);
+    public final BooleanValue autoSwap = new BooleanValue("auto-swap", true);
+    public final BooleanValue disableSafeWalk = new BooleanValue("disable-safewalk", true);
+    public final BooleanValue showActivationHitbox = new BooleanValue("show-activation-hitbox", false);
+    public final BooleanValue print = new BooleanValue("print", false);
     private final ClientApi client = new ClientApi();
     private final ModulesApi modules = new ModulesApi();
     private final KeybindsApi keybinds = new KeybindsApi();
@@ -4585,11 +4585,11 @@ extends Module {
                     return (Boolean)Telly.this.print.getValue();
                 }
             }
-            if ((module = this.getModule(moduleName)) == null || Myau.propertyManager == null) {
+            if ((module = this.getModule(moduleName)) == null || Myau.valueManager == null) {
                 return false;
             }
             try {
-                Property<?> property = Myau.propertyManager.getProperty(module, name);
+                Value<?> property = Myau.valueManager.getProperty(module, name);
                 Object value = property == null ? null : property.getValue();
                 return value instanceof Boolean && (Boolean)value != false;
             }

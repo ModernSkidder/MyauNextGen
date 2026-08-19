@@ -2,13 +2,13 @@ package laoqi123.module.modules.render;
 
 import laoqi123.enums.ChatColors;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.module.Module;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.RotationUtil;
 import laoqi123.util.TeamUtil;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.Perspective;
 import net.minecraft.entity.Entity;
@@ -26,14 +26,14 @@ import java.util.stream.Collectors;
 
 public class Indicators extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final FloatProperty scale = new FloatProperty("scale", 1.0f, 0.5f, 1.5f);
-    public final FloatProperty offset = new FloatProperty("offset", 50.0f, 0.0f, 255.0f);
-    public final BooleanProperty directionCheck = new BooleanProperty("direction-check", true);
-    public final BooleanProperty fireballs = new BooleanProperty("fireballs", true);
-    public final BooleanProperty pearls = new BooleanProperty("pearls", true);
-    public final BooleanProperty arrows = new BooleanProperty("arrows", true);
-    public final BooleanProperty egg = new BooleanProperty("egg", true);
-    public final BooleanProperty snowball = new BooleanProperty("snowball", true);
+    public final FloatValue scale = new FloatValue("scale", 1.0f, 0.5f, 1.5f);
+    public final FloatValue offset = new FloatValue("offset", 50.0f, 0.0f, 255.0f);
+    public final BooleanValue directionCheck = new BooleanValue("direction-check", true);
+    public final BooleanValue fireballs = new BooleanValue("fireballs", true);
+    public final BooleanValue pearls = new BooleanValue("pearls", true);
+    public final BooleanValue arrows = new BooleanValue("arrows", true);
+    public final BooleanValue egg = new BooleanValue("egg", true);
+    public final BooleanValue snowball = new BooleanValue("snowball", true);
 
     private boolean shouldRender(Entity entity) {
         double d = (entity.getX() - entity.prevX) * (mc.player.getX() - entity.getX()) + (entity.getY() - entity.prevY) * (mc.player.getY() + mc.player.getEyeHeight(mc.player.getPose()) - entity.getY() - entity.getHeight() / 2.0) + (entity.getZ() - entity.prevZ) * (mc.player.getZ() - entity.getZ());

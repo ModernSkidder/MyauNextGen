@@ -2,12 +2,12 @@ package laoqi123.mixin;
 
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
-import laoqi123.events.HitBlockEvent;
-import laoqi123.events.LeftClickMouseEvent;
-import laoqi123.events.LoadWorldEvent;
-import laoqi123.events.ResizeEvent;
-import laoqi123.events.RightClickMouseEvent;
-import laoqi123.events.SwapItemEvent;
+import laoqi123.event.impl.HitBlockEvent;
+import laoqi123.event.impl.LeftClickMouseEvent;
+import laoqi123.event.impl.LoadWorldEvent;
+import laoqi123.event.impl.ResizeEvent;
+import laoqi123.event.impl.RightClickMouseEvent;
+import laoqi123.event.impl.SwapItemEvent;
 import laoqi123.module.modules.combat.NoHitDelay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;

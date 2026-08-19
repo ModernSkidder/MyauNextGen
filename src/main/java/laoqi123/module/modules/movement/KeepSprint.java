@@ -1,17 +1,17 @@
 package laoqi123.module.modules.movement;
 
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.PercentValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.HitResult;
 
 public class KeepSprint extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final PercentProperty slowdown = new PercentProperty("slowdown", 0);
-    public final BooleanProperty groundOnly = new BooleanProperty("ground-only", false);
-    public final BooleanProperty reachOnly = new BooleanProperty("reach-only", false);
+    public final PercentValue slowdown = new PercentValue("slowdown", 0);
+    public final BooleanValue groundOnly = new BooleanValue("ground-only", false);
+    public final BooleanValue reachOnly = new BooleanValue("reach-only", false);
 
     public KeepSprint() {
         super("KeepSprint", false);

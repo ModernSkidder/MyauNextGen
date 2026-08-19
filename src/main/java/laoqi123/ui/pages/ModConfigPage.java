@@ -2,14 +2,9 @@ package laoqi123.ui.pages;
 
 import laoqi123.Myau;
 import laoqi123.module.Module;
-import laoqi123.property.Property;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ColorProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.PercentProperty;
-import laoqi123.property.properties.TextProperty;
+import laoqi123.value.Value;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.ui.ClickGui;
 import laoqi123.ui.Colors;
 import laoqi123.ui.InputHandler;
@@ -37,17 +32,17 @@ public class ModConfigPage extends Page {
         super(module.getName());
         this.module = module;
         options.add(new ConfigKeyBind(module, 2));
-        List<Property<?>> props = Myau.propertyManager.properties.get(module.getClass());
+        List<Value<?>> props = Myau.valueManager.properties.get(module.getClass());
         if (props != null) {
-            for (Property<?> property : props) {
+            for (Value<?> value : props) {
                 ConfigOption option = null;
-                if (property instanceof BooleanProperty) option = new ConfigSwitch((BooleanProperty) property, 2);
-                else if (property instanceof FloatProperty) option = new ConfigSlider(property, new FloatSlider((FloatProperty) property), 2);
-                else if (property instanceof IntProperty) option = new ConfigSlider(property, new IntSlider((IntProperty) property), 2);
-                else if (property instanceof PercentProperty) option = new ConfigSlider(property, new PercentageSlider((PercentProperty) property), 2);
-                else if (property instanceof ModeProperty) option = new ConfigDropdown((ModeProperty) property, 2);
-                else if (property instanceof ColorProperty) option = new ConfigColorElement((ColorProperty) property, 2);
-                else if (property instanceof TextProperty) option = new ConfigTextBox((TextProperty) property, 2);
+                if (value instanceof BooleanValue) option = new ConfigSwitch((BooleanValue) value, 2);
+                else if (value instanceof FloatValue) option = new ConfigSlider(value, new FloatSlider((FloatValue) value), 2);
+                else if (value instanceof IntValue) option = new ConfigSlider(value, new IntSlider((IntValue) value), 2);
+                else if (value instanceof PercentValue) option = new ConfigSlider(value, new PercentageSlider((PercentValue) value), 2);
+                else if (value instanceof ModeValue) option = new ConfigDropdown((ModeValue) value, 2);
+                else if (value instanceof ColorValue) option = new ConfigColorElement((ColorValue) value, 2);
+                else if (value instanceof TextValue) option = new ConfigTextBox((TextValue) value, 2);
                 if (option != null) options.add(option);
             }
         }
@@ -58,7 +53,7 @@ public class ModConfigPage extends Page {
         String search = ClickGui.INSTANCE == null ? "" : ClickGui.INSTANCE.getSearchValue().toLowerCase().trim();
         List<ConfigOption> visible = new ArrayList<>();
         for (ConfigOption option : options) {
-            option.setEnabled(option.property == null || option.property.isVisible());
+            option.setEnabled(option.value == null || option.value.isVisible());
             if (option.isEnabled() && option.matches(search)) visible.add(option);
         }
         int optionY = y + 16;

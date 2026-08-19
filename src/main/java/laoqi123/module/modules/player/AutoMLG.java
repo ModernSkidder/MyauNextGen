@@ -2,14 +2,14 @@ package laoqi123.module.modules.player;
 
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
 import laoqi123.util.RandomUtil;
 import laoqi123.util.RotationUtil;
 import laoqi123.util.rotation.Rotation;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
@@ -25,10 +25,10 @@ import net.minecraft.world.RaycastContext;
 
 public class AutoMLG extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    private final FloatProperty triggerDistanceSetting = new FloatProperty("Fall distance", 3.0F, 1.0F, 10.0F);
-    private final IntProperty predictTicksSetting = new IntProperty("Predict Ticks", 2, 1, 5);
-    private final BooleanProperty solidCheckSetting = new BooleanProperty("Solid check", true);
-    private final BooleanProperty recoverySetting = new BooleanProperty("Recorvey", true);
+    private final FloatValue triggerDistanceSetting = new FloatValue("Fall distance", 3.0F, 1.0F, 10.0F);
+    private final IntValue predictTicksSetting = new IntValue("Predict Ticks", 2, 1, 5);
+    private final BooleanValue solidCheckSetting = new BooleanValue("Solid check", true);
+    private final BooleanValue recoverySetting = new BooleanValue("Recorvey", true);
     public Rotation targetRotation = null;
     private float accumulatedFall;
     private double lastY;

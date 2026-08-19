@@ -3,8 +3,8 @@ package laoqi123.module.modules.render.targethud.impl;
 import laoqi123.module.modules.render.TargetHud2;
 import laoqi123.module.modules.render.targethud.Fonts;
 import laoqi123.module.modules.render.targethud.TargetHUDMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.PercentValue;
 import laoqi123.util.RenderUtil;
 
 import java.awt.Color;
@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class UnfairTargetHUD extends TargetHUDMode {
-    public final PercentProperty background = new PercentProperty("Background", 65);
-    public final BooleanProperty animations = new BooleanProperty("Animations", true);
+    public final PercentValue background = new PercentValue("Background", 65);
+    public final BooleanValue animations = new BooleanValue("Animations", true);
 
     public UnfairTargetHUD() {
         super("Unfair");

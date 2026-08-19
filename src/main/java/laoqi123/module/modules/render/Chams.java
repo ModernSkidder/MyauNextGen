@@ -3,9 +3,9 @@ package laoqi123.module.modules.render;
 import com.mojang.blaze3d.systems.RenderSystem;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.RenderLivingEvent;
+import laoqi123.event.impl.RenderLivingEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
+import laoqi123.value.properties.BooleanValue;
 import laoqi123.util.TeamUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
@@ -24,17 +24,17 @@ import net.minecraft.entity.player.PlayerEntity;
 
 public class Chams extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final BooleanProperty players = new BooleanProperty("players", true);
-    public final BooleanProperty friends = new BooleanProperty("friends", true);
-    public final BooleanProperty enemiess = new BooleanProperty("enemies", true);
-    public final BooleanProperty bosses = new BooleanProperty("bosses", false);
-    public final BooleanProperty mobs = new BooleanProperty("mobs", false);
-    public final BooleanProperty creepers = new BooleanProperty("creepers", false);
-    public final BooleanProperty enderman = new BooleanProperty("endermen", false);
-    public final BooleanProperty blaze = new BooleanProperty("blazes", false);
-    public final BooleanProperty animals = new BooleanProperty("animals", false);
-    public final BooleanProperty self = new BooleanProperty("self", false);
-    public final BooleanProperty bots = new BooleanProperty("bots", false);
+    public final BooleanValue players = new BooleanValue("players", true);
+    public final BooleanValue friends = new BooleanValue("friends", true);
+    public final BooleanValue enemiess = new BooleanValue("enemies", true);
+    public final BooleanValue bosses = new BooleanValue("bosses", false);
+    public final BooleanValue mobs = new BooleanValue("mobs", false);
+    public final BooleanValue creepers = new BooleanValue("creepers", false);
+    public final BooleanValue enderman = new BooleanValue("endermen", false);
+    public final BooleanValue blaze = new BooleanValue("blazes", false);
+    public final BooleanValue animals = new BooleanValue("animals", false);
+    public final BooleanValue self = new BooleanValue("self", false);
+    public final BooleanValue bots = new BooleanValue("bots", false);
 
     private boolean shouldRenderChams(LivingEntity entityLivingBase) {
         if (entityLivingBase.deathTime > 0) {

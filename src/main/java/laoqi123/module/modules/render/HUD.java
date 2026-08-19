@@ -7,12 +7,12 @@ import laoqi123.enums.BlinkModules;
 import laoqi123.enums.ChatColors;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
-import laoqi123.events.Render2DEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.Render2DEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.font.UFontRenderer;
 import laoqi123.mixin.ChatScreenAccessor;
 import laoqi123.module.Module;
-import laoqi123.property.properties.*;
+import laoqi123.value.properties.*;
 import laoqi123.util.ColorUtil;
 import laoqi123.util.RenderUtil;
 import net.minecraft.client.MinecraftClient;
@@ -35,41 +35,41 @@ public class HUD extends Module {
     private List<Module> activeModules = new ArrayList<>();
     private final Map<Module, Float> animationMap = new HashMap<>();
 
-    public final ModeProperty colorMode = new ModeProperty(
+    public final ModeValue colorMode = new ModeValue(
             "color", 3, new String[]{"RAINBOW", "CHROMA", "ASTOLFO", "CUSTOM1", "CUSTOM12", "CUSTOM123"}
     );
-    public final FloatProperty colorSpeed = new FloatProperty("color-speed", 1.0F, 0.5F, 1.5F);
-    public final PercentProperty colorSaturation = new PercentProperty("color-saturation", 50);
-    public final PercentProperty colorBrightness = new PercentProperty("color-brightness", 100);
-    public final ColorProperty custom1 = new ColorProperty("custom-color-1", Color.WHITE.getRGB(), () -> this.colorMode.getValue() == 3 || this.colorMode.getValue() == 4 || this.colorMode.getValue() == 5);
-    public final ColorProperty custom2 = new ColorProperty("custom-color-2", Color.WHITE.getRGB(), () -> this.colorMode.getValue() == 4 || this.colorMode.getValue() == 5);
-    public final ColorProperty custom3 = new ColorProperty("custom-color-3", Color.WHITE.getRGB(), () -> this.colorMode.getValue() == 5);
-    public final ModeProperty fontMode = new ModeProperty("font-mode", 0, new String[]{"Minecraft", "Modern"});
-    public final ModeProperty posX = new ModeProperty("position-x", 0, new String[]{"LEFT", "RIGHT"});
-    public final ModeProperty posY = new ModeProperty("position-y", 0, new String[]{"TOP", "BOTTOM"});
+    public final FloatValue colorSpeed = new FloatValue("color-speed", 1.0F, 0.5F, 1.5F);
+    public final PercentValue colorSaturation = new PercentValue("color-saturation", 50);
+    public final PercentValue colorBrightness = new PercentValue("color-brightness", 100);
+    public final ColorValue custom1 = new ColorValue("custom-color-1", Color.WHITE.getRGB(), () -> this.colorMode.getValue() == 3 || this.colorMode.getValue() == 4 || this.colorMode.getValue() == 5);
+    public final ColorValue custom2 = new ColorValue("custom-color-2", Color.WHITE.getRGB(), () -> this.colorMode.getValue() == 4 || this.colorMode.getValue() == 5);
+    public final ColorValue custom3 = new ColorValue("custom-color-3", Color.WHITE.getRGB(), () -> this.colorMode.getValue() == 5);
+    public final ModeValue fontMode = new ModeValue("font-mode", 0, new String[]{"Minecraft", "Modern"});
+    public final ModeValue posX = new ModeValue("position-x", 0, new String[]{"LEFT", "RIGHT"});
+    public final ModeValue posY = new ModeValue("position-y", 0, new String[]{"TOP", "BOTTOM"});
 
-    public final BooleanProperty showBar = new BooleanProperty("bar", true);
-    public final ModeProperty sidebarMode = new ModeProperty("sidebar-mode", 0, new String[]{"RIGHT", "LEFT", "TOP", "OUTLINE", "NONE"}, this.showBar::getValue);
-    public final FloatProperty barWidth = new FloatProperty("bar-width", 1.0F, 0.1F, 1.5F,
+    public final BooleanValue showBar = new BooleanValue("bar", true);
+    public final ModeValue sidebarMode = new ModeValue("sidebar-mode", 0, new String[]{"RIGHT", "LEFT", "TOP", "OUTLINE", "NONE"}, this.showBar::getValue);
+    public final FloatValue barWidth = new FloatValue("bar-width", 1.0F, 0.1F, 1.5F,
             () -> this.showBar.getValue() && this.sidebarMode.getValue() != 4 && this.sidebarMode.getValue() != 3);
-    public final BooleanProperty animation = new BooleanProperty("animation", false);
+    public final BooleanValue animation = new BooleanValue("animation", false);
 
-    public final IntProperty offsetX = new IntProperty("offset-x", 2, -3, 255,
+    public final IntValue offsetX = new IntValue("offset-x", 2, -3, 255,
             () -> !(showBar.getValue() && sidebarMode.getValue() == 3 && animation.getValue()));
-    public final IntProperty offsetY = new IntProperty("offset-y", 2, -3, 255,
+    public final IntValue offsetY = new IntValue("offset-y", 2, -3, 255,
             () -> !(showBar.getValue() && sidebarMode.getValue() == 3 && animation.getValue()));
 
-    public final FloatProperty scale = new FloatProperty("scale", 1.0F, 0.5F, 1.5F);
-    public final PercentProperty background = new PercentProperty("background", 25);
-    public final BooleanProperty shadow = new BooleanProperty("shadow", true);
-    public final BooleanProperty suffixes = new BooleanProperty("suffixes", true);
-    public final BooleanProperty interval = new BooleanProperty("interval", false);
-    public final BooleanProperty lowerCase = new BooleanProperty("lower-case", false);
-    public final BooleanProperty chatOutline = new BooleanProperty("chat-outline", true);
-    public final BooleanProperty scoreboardAvoid = new BooleanProperty("scoreboard-avoid", true);
-    public final BooleanProperty blinkTimer = new BooleanProperty("blink-timer", true);
-    public final BooleanProperty toggleSound = new BooleanProperty("toggle-sounds", true);
-    public final BooleanProperty toggleAlerts = new BooleanProperty("toggle-alerts", false);
+    public final FloatValue scale = new FloatValue("scale", 1.0F, 0.5F, 1.5F);
+    public final PercentValue background = new PercentValue("background", 25);
+    public final BooleanValue shadow = new BooleanValue("shadow", true);
+    public final BooleanValue suffixes = new BooleanValue("suffixes", true);
+    public final BooleanValue interval = new BooleanValue("interval", false);
+    public final BooleanValue lowerCase = new BooleanValue("lower-case", false);
+    public final BooleanValue chatOutline = new BooleanValue("chat-outline", true);
+    public final BooleanValue scoreboardAvoid = new BooleanValue("scoreboard-avoid", true);
+    public final BooleanValue blinkTimer = new BooleanValue("blink-timer", true);
+    public final BooleanValue toggleSound = new BooleanValue("toggle-sounds", true);
+    public final BooleanValue toggleAlerts = new BooleanValue("toggle-alerts", false);
 
     private UFontRenderer modernFontRenderer;
     private int savedOffsetX = 2;

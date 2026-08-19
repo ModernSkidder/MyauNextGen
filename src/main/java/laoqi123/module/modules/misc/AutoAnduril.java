@@ -4,11 +4,11 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
 import laoqi123.module.modules.player.InvWalk;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.ItemUtil;
 import laoqi123.util.KeyBindUtil;
 import net.minecraft.client.MinecraftClient;
@@ -25,10 +25,10 @@ public class AutoAnduril extends Module {
     private int currentSlot = -1;
     private int intervalTick = -1;
     private int holdTick = -1;
-    public final IntProperty interval = new IntProperty("interval", 40, 0, 100);
-    public final IntProperty hold = new IntProperty("hold", 1, 0, 20);
-    public final BooleanProperty speedCheck = new BooleanProperty("speed-check", false);
-    public final IntProperty debug = new IntProperty("debug", 0, 0, 9);
+    public final IntValue interval = new IntValue("interval", 40, 0, 100);
+    public final IntValue hold = new IntValue("hold", 1, 0, 20);
+    public final BooleanValue speedCheck = new BooleanValue("speed-check", false);
+    public final IntValue debug = new IntValue("debug", 0, 0, 9);
 
     public AutoAnduril() {
         super("AutoAnduril", false);

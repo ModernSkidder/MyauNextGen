@@ -1,7 +1,7 @@
 package laoqi123.module.modules.combat;
 
 import laoqi123.module.Module;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.ModeValue;
 import laoqi123.util.TeamUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Teams extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     public static Teams INSTANCE;
-    public final ModeProperty mode = new ModeProperty("Mode", 1, new String[]{"Color", "Scoreboard"});
+    public final ModeValue mode = new ModeValue("Mode", 1, new String[]{"Color", "Scoreboard"});
 
     public Teams() {
         super("Teams", false);

@@ -1,11 +1,11 @@
 package laoqi123.module.modules.combat.risevelocity.impl;
 
 import laoqi123.event.types.EventType;
-import laoqi123.events.MoveInputEvent;
-import laoqi123.events.PacketEvent;
+import laoqi123.event.impl.MoveInputEvent;
+import laoqi123.event.impl.PacketEvent;
 import laoqi123.module.modules.combat.risevelocity.RiseVelocityMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.PacketUtil;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IntaveVelocity extends RiseVelocityMode {
-    public final IntProperty startTicks = new IntProperty("Start Ticks", 2, 0, 4);
-    public final BooleanProperty alwaysDrain = new BooleanProperty("Always Drain", false);
-    public final BooleanProperty waitForLowTicks = new BooleanProperty("Wait For Low Ticks", false);
+    public final IntValue startTicks = new IntValue("Start Ticks", 2, 0, 4);
+    public final BooleanValue alwaysDrain = new BooleanValue("Always Drain", false);
+    public final BooleanValue waitForLowTicks = new BooleanValue("Wait For Low Ticks", false);
 
     private final List<Packet<ClientPlayPacketListener>> delayedPackets = new ArrayList<>();
     private int currentTicks;

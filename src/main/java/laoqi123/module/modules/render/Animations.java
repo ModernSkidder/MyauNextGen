@@ -3,9 +3,9 @@ package laoqi123.module.modules.render;
 import laoqi123.config.AnimationConfig;
 import laoqi123.config.AnimationMode;
 import laoqi123.module.Module;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.FloatValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 
 /**
  * Animations Module
@@ -23,15 +23,15 @@ public class Animations extends Module {
             "MoonPush", "Smooth", "Tap1", "Tap2", "Sigma3", "Sigma4",
             "1.8", "Slide", "Swank", "Swang", "Avatar", "Jigsaw"};
 
-    public final ModeProperty mode = new ModeProperty("Mode", 0, MODES);
-    public final ModeProperty render = new ModeProperty("Render", 1, new String[]{"BLOCKING", "ALWAYS"});
+    public final ModeValue mode = new ModeValue("Mode", 0, MODES);
+    public final ModeValue render = new ModeValue("Render", 1, new String[]{"BLOCKING", "ALWAYS"});
 
-    public final IntProperty scale = new IntProperty("Scale", 100, 50, 150);
-    public final FloatProperty itemSize = new FloatProperty("Item-Size", 0.0F, -0.5F, 0.5F);
-    public final FloatProperty blockPosX = new FloatProperty("BlockPos-X", 0.0F, -1.0F, 1.0F);
-    public final FloatProperty blockPosY = new FloatProperty("BlockPos-Y", 0.0F, -1.0F, 1.0F);
-    public final FloatProperty blockPosZ = new FloatProperty("BlockPos-Z", 0.0F, -1.0F, 1.0F);
-    public final IntProperty swingSpeed = new IntProperty("SwingSpeed", 0, 0, 100);
+    public final IntValue scale = new IntValue("Scale", 100, 50, 150);
+    public final FloatValue itemSize = new FloatValue("Item-Size", 0.0F, -0.5F, 0.5F);
+    public final FloatValue blockPosX = new FloatValue("BlockPos-X", 0.0F, -1.0F, 1.0F);
+    public final FloatValue blockPosY = new FloatValue("BlockPos-Y", 0.0F, -1.0F, 1.0F);
+    public final FloatValue blockPosZ = new FloatValue("BlockPos-Z", 0.0F, -1.0F, 1.0F);
+    public final IntValue swingSpeed = new IntValue("SwingSpeed", 0, 0, 100);
 
     public Animations() {
         super("Animations", true, false);

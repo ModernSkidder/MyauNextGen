@@ -1,19 +1,19 @@
 package laoqi123.module.modules.combat.risevelocity.impl;
 
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.modules.combat.risevelocity.RiseVelocityMode;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 
 public class GroundVelocity extends RiseVelocityMode {
-    public final BooleanProperty holding = new BooleanProperty("Holding", false);
-    public final ModeProperty moveStrafe = new ModeProperty("Move Strafe", 0, new String[]{"Off", "Random"});
-    public final IntProperty maxTicks = new IntProperty("Max Ticks", 4, 1, 6);
-    public final IntProperty minTicks = new IntProperty("Min Ticks", 2, 1, 5);
+    public final BooleanValue holding = new BooleanValue("Holding", false);
+    public final ModeValue moveStrafe = new ModeValue("Move Strafe", 0, new String[]{"Off", "Random"});
+    public final IntValue maxTicks = new IntValue("Max Ticks", 4, 1, 6);
+    public final IntValue minTicks = new IntValue("Min Ticks", 2, 1, 5);
 
     private int lastsTicks;
 

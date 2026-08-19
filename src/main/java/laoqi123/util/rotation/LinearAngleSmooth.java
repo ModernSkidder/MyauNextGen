@@ -1,10 +1,10 @@
 package laoqi123.util.rotation;
 
-import laoqi123.property.properties.FloatRangeProperty;
+import laoqi123.value.properties.FloatRangeValue;
 
 public class LinearAngleSmooth extends FactorAngleSmooth {
-    private final FloatRangeProperty horizontalTurnSpeed;
-    private final FloatRangeProperty verticalTurnSpeed;
+    private final FloatRangeValue horizontalTurnSpeed;
+    private final FloatRangeValue verticalTurnSpeed;
 
     public LinearAngleSmooth() {
         this(180.0f, 180.0f, 180.0f, 180.0f);
@@ -12,8 +12,8 @@ public class LinearAngleSmooth extends FactorAngleSmooth {
 
     public LinearAngleSmooth(float hMin, float hMax, float vMin, float vMax) {
         super("Linear");
-        this.horizontalTurnSpeed = this.register(new FloatRangeProperty("HorizontalTurnSpeed", hMin, hMax, 0.0f, 180.0f));
-        this.verticalTurnSpeed = this.register(new FloatRangeProperty("VerticalTurnSpeed", vMin, vMax, 0.0f, 180.0f));
+        this.horizontalTurnSpeed = this.register(new FloatRangeValue("HorizontalTurnSpeed", hMin, hMax, 0.0f, 180.0f));
+        this.verticalTurnSpeed = this.register(new FloatRangeValue("VerticalTurnSpeed", vMin, vMax, 0.0f, 180.0f));
     }
 
     @Override

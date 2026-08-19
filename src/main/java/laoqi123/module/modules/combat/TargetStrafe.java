@@ -4,18 +4,18 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.Render3DEvent;
-import laoqi123.events.StrafeEvent;
-import laoqi123.events.UpdateEvent;
+import laoqi123.event.impl.Render3DEvent;
+import laoqi123.event.impl.StrafeEvent;
+import laoqi123.event.impl.UpdateEvent;
 import laoqi123.module.Module;
 import laoqi123.module.modules.movement.Fly;
 import laoqi123.module.modules.render.HUD;
 import laoqi123.module.modules.movement.LongJump;
 import laoqi123.module.modules.movement.Speed;
 import laoqi123.util.*;
-import laoqi123.property.properties.*;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.ModeProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,11 +29,11 @@ public class TargetStrafe extends Module {
     private LivingEntity target = null;
     private float targetYaw = Float.NaN;
     private int direction = 1;
-    public final FloatProperty radius = new FloatProperty("radius", 1.0F, 0.0F, 6.0F);
-    public final IntProperty points = new IntProperty("points", 6, 3, 24);
-    public final BooleanProperty requirePress = new BooleanProperty("require-press", true);
-    public final BooleanProperty speedOnly = new BooleanProperty("speed-only", true);
-    public final ModeProperty showTarget = new ModeProperty("show-target", 1, new String[]{"NONE", "DEFAULT", "HUD"});
+    public final FloatValue radius = new FloatValue("radius", 1.0F, 0.0F, 6.0F);
+    public final IntValue points = new IntValue("points", 6, 3, 24);
+    public final BooleanValue requirePress = new BooleanValue("require-press", true);
+    public final BooleanValue speedOnly = new BooleanValue("speed-only", true);
+    public final ModeValue showTarget = new ModeValue("show-target", 1, new String[]{"NONE", "DEFAULT", "HUD"});
 
     private boolean canStrafe() {
         if (this.speedOnly.getValue()) {

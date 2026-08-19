@@ -1,14 +1,13 @@
 package laoqi123.ui.dataset.impl;
 
 import laoqi123.enums.ChatColors;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.IntValue;
 import laoqi123.ui.dataset.Slider;
 
 public class IntSlider extends Slider {
-    private final IntProperty property;
+    private final IntValue property;
 
-    public IntSlider(IntProperty property) {
+    public IntSlider(IntValue property) {
         this.property = property;
     }
 

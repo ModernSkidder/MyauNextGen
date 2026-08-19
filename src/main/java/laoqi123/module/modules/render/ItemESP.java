@@ -3,10 +3,10 @@ package laoqi123.module.modules.render;
 import com.mojang.blaze3d.systems.RenderSystem;
 import laoqi123.enums.ChatColors;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render3DEvent;
+import laoqi123.event.impl.Render3DEvent;
 import laoqi123.module.Module;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.PercentValue;
 import laoqi123.util.RenderUtil;
 import laoqi123.util.TeamUtil;
 import net.minecraft.block.Block;
@@ -30,14 +30,14 @@ import java.util.stream.Collectors;
 
 public class ItemESP extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
-    public final PercentProperty opacity = new PercentProperty("opacity", 25);
-    public final BooleanProperty outline = new BooleanProperty("outline", false);
-    public final BooleanProperty itemCount = new BooleanProperty("item-count", true);
-    public final BooleanProperty autoScale = new BooleanProperty("auto-scale", true);
-    public final BooleanProperty emeralds = new BooleanProperty("emeralds", true);
-    public final BooleanProperty diamonds = new BooleanProperty("diamonds", true);
-    public final BooleanProperty goldd = new BooleanProperty("gold", true);
-    public final BooleanProperty iron = new BooleanProperty("iron", true);
+    public final PercentValue opacity = new PercentValue("opacity", 25);
+    public final BooleanValue outline = new BooleanValue("outline", false);
+    public final BooleanValue itemCount = new BooleanValue("item-count", true);
+    public final BooleanValue autoScale = new BooleanValue("auto-scale", true);
+    public final BooleanValue emeralds = new BooleanValue("emeralds", true);
+    public final BooleanValue diamonds = new BooleanValue("diamonds", true);
+    public final BooleanValue goldd = new BooleanValue("gold", true);
+    public final BooleanValue iron = new BooleanValue("iron", true);
 
     private boolean shouldHighlightItem(Item item) {
         return this.emeralds.getValue() && this.isEmeraldItem(item)

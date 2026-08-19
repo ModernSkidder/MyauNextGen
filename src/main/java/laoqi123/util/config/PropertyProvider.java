@@ -1,9 +1,9 @@
 package laoqi123.util.config;
 
-import laoqi123.property.Property;
+import laoqi123.value.Value;
 
 import java.util.List;
 
 public interface PropertyProvider {
-    List<Property<?>> getAdditionalProperties();
+    List<Value<?>> getAdditionalProperties();
 }

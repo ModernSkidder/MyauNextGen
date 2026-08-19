@@ -3,17 +3,17 @@ package laoqi123.module.modules.combat;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.LeftClickMouseEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.LeftClickMouseEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.Module;
-import laoqi123.property.Property;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.FloatProperty;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.Value;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.FloatValue;
 import laoqi123.util.*;
 import laoqi123.util.clicking.Clicker;
 import laoqi123.util.config.Configurable;
 import laoqi123.util.config.PropertyProvider;
+import laoqi123.value.properties.IntValue;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
@@ -31,17 +31,17 @@ public class AutoClicker extends Module implements PropertyProvider {
     private boolean clickPending = false;
     private boolean blockHitPending = false;
     private long blockHitDelay = 0L;
-    public final IntProperty minCPS = new IntProperty("min-cps", 8, 1, 20);
-    public final IntProperty maxCPS = new IntProperty("max-cps", 12, 1, 20);
+    public final IntValue minCPS = new IntValue("min-cps", 8, 1, 20);
+    public final IntValue maxCPS = new IntValue("max-cps", 12, 1, 20);
     public final Clicker clicker;
-    public final BooleanProperty blockHit = new BooleanProperty("block-hit", false);
-    public final FloatProperty blockHitTicks = new FloatProperty("block-hit-ticks", 1.5F, 1.0F, 20.0F, this.blockHit::getValue);
-    public final BooleanProperty weaponsOnly = new BooleanProperty("weapons-only", true);
-    public final BooleanProperty allowTools = new BooleanProperty("allow-tools", false, this.weaponsOnly::getValue);
-    public final BooleanProperty breakBlocks = new BooleanProperty("break-blocks", true);
-    public final FloatProperty range = new FloatProperty("range", 3.0F, 3.0F, 8.0F, this.breakBlocks::getValue);
-    public final FloatProperty hitBoxVertical = new FloatProperty("hit-box-vertical", 0.1F, 0.0F, 1.0F, this.breakBlocks::getValue);
-    public final FloatProperty hitBoxHorizontal = new FloatProperty("hit-box-horizontal", 0.2F, 0.0F, 1.0F, this.breakBlocks::getValue);
+    public final BooleanValue blockHit = new BooleanValue("block-hit", false);
+    public final FloatValue blockHitTicks = new FloatValue("block-hit-ticks", 1.5F, 1.0F, 20.0F, this.blockHit::getValue);
+    public final BooleanValue weaponsOnly = new BooleanValue("weapons-only", true);
+    public final BooleanValue allowTools = new BooleanValue("allow-tools", false, this.weaponsOnly::getValue);
+    public final BooleanValue breakBlocks = new BooleanValue("break-blocks", true);
+    public final FloatValue range = new FloatValue("range", 3.0F, 3.0F, 8.0F, this.breakBlocks::getValue);
+    public final FloatValue hitBoxVertical = new FloatValue("hit-box-vertical", 0.1F, 0.0F, 1.0F, this.breakBlocks::getValue);
+    public final FloatValue hitBoxHorizontal = new FloatValue("hit-box-horizontal", 0.2F, 0.0F, 1.0F, this.breakBlocks::getValue);
 
     public AutoClicker() {
         super("AutoClicker", false);
@@ -187,7 +187,7 @@ public class AutoClicker extends Module implements PropertyProvider {
     }
 
     @Override
-    public List<Property<?>> getAdditionalProperties() {
+    public List<Value<?>> getAdditionalProperties() {
         return this.rootConfig.collectProperties();
     }
 }

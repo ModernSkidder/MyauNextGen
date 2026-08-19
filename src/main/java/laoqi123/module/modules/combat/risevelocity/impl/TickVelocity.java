@@ -1,10 +1,10 @@
 package laoqi123.module.modules.combat.risevelocity.impl;
 
 import laoqi123.event.types.EventType;
-import laoqi123.events.PacketEvent;
-import laoqi123.events.TickEvent;
+import laoqi123.event.impl.PacketEvent;
+import laoqi123.event.impl.TickEvent;
 import laoqi123.module.modules.combat.risevelocity.RiseVelocityMode;
-import laoqi123.property.properties.IntProperty;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.PacketUtil;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -17,7 +17,7 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class TickVelocity extends RiseVelocityMode {
-    public final IntProperty tickDelay = new IntProperty("Tick Delay", 3, 0, 8);
+    public final IntValue tickDelay = new IntValue("Tick Delay", 3, 0, 8);
 
     private final Queue<Packet<ClientPlayPacketListener>> queue = new ConcurrentLinkedQueue<>();
     private int queueTicks;

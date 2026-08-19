@@ -5,16 +5,15 @@ import laoqi123.event.EventManager;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.events.*;
+import laoqi123.event.impl.*;
 import laoqi123.mixin.EntityAccessor;
 import laoqi123.module.Module;
 import laoqi123.module.modules.movement.LongJump;
 import laoqi123.module.modules.player.Scaffold;
 import laoqi123.module.modules.player.Timer;
-import laoqi123.property.properties.BooleanProperty;
-import laoqi123.property.properties.IntProperty;
-import laoqi123.property.properties.ModeProperty;
-import laoqi123.property.properties.PercentProperty;
+import laoqi123.value.properties.*;
+import laoqi123.value.properties.BooleanValue;
+import laoqi123.value.properties.IntValue;
 import laoqi123.util.ChatUtil;
 import laoqi123.util.KeyBindUtil;
 import laoqi123.util.MoveUtil;
@@ -116,50 +115,50 @@ public class Velocity extends Module {
     private boolean isInstantAttacking = false;
     private boolean shouldFlushMotion = false;
 
-    public final ModeProperty mode = new ModeProperty("mode", 0, new String[]{"Vanilla", "Jump", "Hypixel", "Slap_Attack", "NoXZ", "GrimReduce", "Polar", "Delay"});
-    public final ModeProperty polarMode = new ModeProperty("Polar Mode", 0, new String[]{"Reduce", "Cancel10%"}, () -> mode.getValue() == 6);
+    public final ModeValue mode = new ModeValue("mode", 0, new String[]{"Vanilla", "Jump", "Hypixel", "Slap_Attack", "NoXZ", "GrimReduce", "Polar", "Delay"});
+    public final ModeValue polarMode = new ModeValue("Polar Mode", 0, new String[]{"Reduce", "Cancel10%"}, () -> mode.getValue() == 6);
 
-    public final IntProperty delayTicks = new IntProperty("delay-ticks", 3, 1, 20, () -> mode.getValue() == 7);
-    public final PercentProperty delayChance = new PercentProperty("delay-chance", 100, () -> mode.getValue() == 7);
+    public final IntValue delayTicks = new IntValue("delay-ticks", 3, 1, 20, () -> mode.getValue() == 7);
+    public final PercentValue delayChance = new PercentValue("delay-chance", 100, () -> mode.getValue() == 7);
 
-    public final IntProperty attackAmount = new IntProperty("Attack amount", 5, 1, 20, () -> mode.getValue() == 4);
-    public final BooleanProperty instantAttack = new BooleanProperty("Instant Attack", false, () -> mode.getValue() == 4);
-    public final BooleanProperty sprintStateCheck = new BooleanProperty("Sprint state check", true, () -> mode.getValue() == 4);
+    public final IntValue attackAmount = new IntValue("Attack amount", 5, 1, 20, () -> mode.getValue() == 4);
+    public final BooleanValue instantAttack = new BooleanValue("Instant Attack", false, () -> mode.getValue() == 4);
+    public final BooleanValue sprintStateCheck = new BooleanValue("Sprint state check", true, () -> mode.getValue() == 4);
 
-    public final PercentProperty chance = new PercentProperty("chance", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
-    public final PercentProperty horizontal = new PercentProperty("horizontal", 0, () -> mode.getValue() <= 1 || mode.getValue() == 7);
-    public final PercentProperty vertical = new PercentProperty("vertical", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
-    public final PercentProperty explosionHorizontal = new PercentProperty("explosions-horizontal", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
-    public final PercentProperty explosionVertical = new PercentProperty("explosions-vertical", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
+    public final PercentValue chance = new PercentValue("chance", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
+    public final PercentValue horizontal = new PercentValue("horizontal", 0, () -> mode.getValue() <= 1 || mode.getValue() == 7);
+    public final PercentValue vertical = new PercentValue("vertical", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
+    public final PercentValue explosionHorizontal = new PercentValue("explosions-horizontal", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
+    public final PercentValue explosionVertical = new PercentValue("explosions-vertical", 100, () -> mode.getValue() <= 1 || mode.getValue() == 7);
 
-    public final BooleanProperty reduce = new BooleanProperty("reduce", true, () -> mode.getValue() == 2);
-    public final IntProperty attackTimes = new IntProperty("attack-times", 1, 1, 5, () -> mode.getValue() == 2 && reduce.getValue());
-    private final BooleanProperty onlySprinting = new BooleanProperty("only-sprinting", true, () -> mode.getValue() == 2 && reduce.getValue());
-    private final BooleanProperty reduceWhenCanAttack = new BooleanProperty("reduce-when-can-attack", true, () -> mode.getValue() == 2 && reduce.getValue());
-    public final BooleanProperty hypixelJump = new BooleanProperty("jump", true, () -> mode.getValue() == 2);
-    public final BooleanProperty rotate = new BooleanProperty("rotate", false, () -> mode.getValue() == 2);
-    public final IntProperty rotateTick = new IntProperty("rotate-ticks", 3, 1, 12, () -> mode.getValue() == 2 && rotate.getValue());
+    public final BooleanValue reduce = new BooleanValue("reduce", true, () -> mode.getValue() == 2);
+    public final IntValue attackTimes = new IntValue("attack-times", 1, 1, 5, () -> mode.getValue() == 2 && reduce.getValue());
+    private final BooleanValue onlySprinting = new BooleanValue("only-sprinting", true, () -> mode.getValue() == 2 && reduce.getValue());
+    private final BooleanValue reduceWhenCanAttack = new BooleanValue("reduce-when-can-attack", true, () -> mode.getValue() == 2 && reduce.getValue());
+    public final BooleanValue hypixelJump = new BooleanValue("jump", true, () -> mode.getValue() == 2);
+    public final BooleanValue rotate = new BooleanValue("rotate", false, () -> mode.getValue() == 2);
+    public final IntValue rotateTick = new IntValue("rotate-ticks", 3, 1, 12, () -> mode.getValue() == 2 && rotate.getValue());
 
-    public final BooleanProperty slapReduce = new BooleanProperty("reduce", true, () -> mode.getValue() == 3);
-    public final BooleanProperty tickExactEnable = new BooleanProperty("tickExact", true, () -> mode.getValue() == 3);
-    public final IntProperty tick500 = new IntProperty("500", 3, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick1000 = new IntProperty("1000", 4, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick2000 = new IntProperty("2000", 4, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick3000 = new IntProperty("3000", 5, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick4000 = new IntProperty("4000", 6, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick5000 = new IntProperty("5000", 6, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick6000 = new IntProperty("6000", 7, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick7000 = new IntProperty("7000", 7, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick8000 = new IntProperty("8000", 8, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick9000 = new IntProperty("9000", 8, 0, 20, () -> mode.getValue() == 3);
-    public final IntProperty tick10000 = new IntProperty("10000", 9, 0, 20, () -> mode.getValue() == 3);
+    public final BooleanValue slapReduce = new BooleanValue("reduce", true, () -> mode.getValue() == 3);
+    public final BooleanValue tickExactEnable = new BooleanValue("tickExact", true, () -> mode.getValue() == 3);
+    public final IntValue tick500 = new IntValue("500", 3, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick1000 = new IntValue("1000", 4, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick2000 = new IntValue("2000", 4, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick3000 = new IntValue("3000", 5, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick4000 = new IntValue("4000", 6, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick5000 = new IntValue("5000", 6, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick6000 = new IntValue("6000", 7, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick7000 = new IntValue("7000", 7, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick8000 = new IntValue("8000", 8, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick9000 = new IntValue("9000", 8, 0, 20, () -> mode.getValue() == 3);
+    public final IntValue tick10000 = new IntValue("10000", 9, 0, 20, () -> mode.getValue() == 3);
 
-    public final BooleanProperty fakeCheck = new BooleanProperty("fake-check", true);
-    public final BooleanProperty debugLog = new BooleanProperty("debug-log", false);
-    public final BooleanProperty timer = new BooleanProperty("Timer", false);
+    public final BooleanValue fakeCheck = new BooleanValue("fake-check", true);
+    public final BooleanValue debugLog = new BooleanValue("debug-log", false);
+    public final BooleanValue timer = new BooleanValue("Timer", false);
 
-    public final IntProperty maxAirTicks = new IntProperty("Max Air Ticks", 12, 4, 20, () -> mode.getValue() == 5);
-    public final IntProperty reach = new IntProperty("Reach", 3, 2, 4, () -> mode.getValue() == 5);
+    public final IntValue maxAirTicks = new IntValue("Max Air Ticks", 12, 4, 20, () -> mode.getValue() == 5);
+    public final IntValue reach = new IntValue("Reach", 3, 2, 4, () -> mode.getValue() == 5);
 
     private long lastTimerAttackTime = -1L;
     private long timerEnableAt = -1L;

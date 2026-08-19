@@ -2,15 +2,15 @@ package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;
-import laoqi123.events.Render2DEvent;
+import laoqi123.event.impl.Render2DEvent;
 import laoqi123.font.UFontRenderer;
 import laoqi123.module.Module;
 import laoqi123.module.modules.combat.*;
 import laoqi123.module.modules.misc.*;
 import laoqi123.module.modules.movement.*;
 import laoqi123.module.modules.player.*;
-import laoqi123.property.Property;
-import laoqi123.property.properties.*;
+import laoqi123.value.Value;
+import laoqi123.value.properties.*;
 import laoqi123.util.ColorUtil;
 import laoqi123.util.KeyBindUtil;
 import laoqi123.util.RenderUtil;
@@ -59,7 +59,7 @@ public class TabGui extends Module {
 
     private UFontRenderer modernFont;
 
-    public final ModeProperty fontMode = new ModeProperty("font-mode", 0, new String[]{"Minecraft", "Modern"});
+    public final ModeValue fontMode = new ModeValue("font-mode", 0, new String[]{"Minecraft", "Modern"});
 
     public TabGui() {
         super("TabGui", false, false);
@@ -218,15 +218,15 @@ public class TabGui extends Module {
         boolean enterPressed = KeyBindUtil.isKeyDown(GLFW.GLFW_KEY_ENTER) || KeyBindUtil.isKeyDown(GLFW.GLFW_KEY_KP_ENTER);
 
         if (editingSlider) {
-            Property<?> property = getSelectedProperty();
-            if (!isSliderProperty(property)) {
+            Value<?> value = getSelectedProperty();
+            if (!isSliderProperty(value)) {
                 editingSlider = false;
             } else {
                 if (leftPressed && !leftWasDown) {
-                    adjustProperty(property, -1);
+                    adjustProperty(value, -1);
                 }
                 if (rightPressed && !rightWasDown) {
-                    adjustProperty(property, 1);
+                    adjustProperty(value, 1);
                 }
                 if (enterPressed && !enterWasDown) {
                     editingSlider = false;
@@ -281,7 +281,7 @@ public class TabGui extends Module {
             settingIndex = wrap(settingIndex + direction, getSettingsForSelectedModule().size());
             syncSubIndex();
         } else {
-            ModeProperty mode = getSelectedModeProperty();
+            ModeValue mode = getSelectedModeProperty();
             subIndex = wrap(subIndex + direction, mode == null ? 0 : mode.getModes().length);
         }
     }
@@ -302,13 +302,13 @@ public class TabGui extends Module {
             return;
         }
         if (level == 2) {
-            Property<?> property = getSelectedProperty();
-            if (property instanceof ModeProperty) {
+            Value<?> value = getSelectedProperty();
+            if (value instanceof ModeValue) {
                 editingSlider = false;
                 level = 3;
                 syncSubIndex();
-            } else if (!isSliderProperty(property)) {
-                adjustProperty(property, direction);
+            } else if (!isSliderProperty(value)) {
+                adjustProperty(value, direction);
             }
         }
     }
@@ -326,44 +326,44 @@ public class TabGui extends Module {
             return;
         }
         if (level == 2) {
-            Property<?> property = getSelectedProperty();
-            if (property instanceof ModeProperty) {
+            Value<?> value = getSelectedProperty();
+            if (value instanceof ModeValue) {
                 editingSlider = false;
                 level = 3;
                 syncSubIndex();
-            } else if (isSliderProperty(property)) {
+            } else if (isSliderProperty(value)) {
                 editingSlider = !editingSlider;
             } else {
-                adjustProperty(property, 1);
+                adjustProperty(value, 1);
             }
             return;
         }
         if (level == 3) {
-            ModeProperty mode = getSelectedModeProperty();
+            ModeValue mode = getSelectedModeProperty();
             if (mode != null) {
                 mode.setValue(subIndex);
             }
         }
     }
 
-    private boolean isSliderProperty(Property<?> property) {
-        return property instanceof IntProperty || property instanceof PercentProperty || property instanceof FloatProperty;
+    private boolean isSliderProperty(Value<?> value) {
+        return value instanceof IntValue || value instanceof PercentValue || value instanceof FloatValue;
     }
 
-    private void adjustProperty(Property<?> property, int direction) {
-        if (property == null || !property.isVisible()) {
+    private void adjustProperty(Value<?> value, int direction) {
+        if (value == null || !value.isVisible()) {
             return;
         }
-        if (property instanceof BooleanProperty) {
-            property.setValue(!((BooleanProperty) property).getValue());
-        } else if (property instanceof IntProperty) {
-            IntProperty intProperty = (IntProperty) property;
+        if (value instanceof BooleanValue) {
+            value.setValue(!((BooleanValue) value).getValue());
+        } else if (value instanceof IntValue) {
+            IntValue intProperty = (IntValue) value;
             intProperty.setValue(clamp(intProperty.getValue() + direction, intProperty.getMinimum(), intProperty.getMaximum()));
-        } else if (property instanceof PercentProperty) {
-            PercentProperty percentProperty = (PercentProperty) property;
+        } else if (value instanceof PercentValue) {
+            PercentValue percentProperty = (PercentValue) value;
             percentProperty.setValue(clamp(percentProperty.getValue() + direction, percentProperty.getMinimum(), percentProperty.getMaximum()));
-        } else if (property instanceof FloatProperty) {
-            FloatProperty floatProperty = (FloatProperty) property;
+        } else if (value instanceof FloatValue) {
+            FloatValue floatProperty = (FloatValue) value;
             float next = clamp(floatProperty.getValue() + 0.1F * direction, floatProperty.getMinimum(), floatProperty.getMaximum());
             floatProperty.setValue(Math.round(next * 10.0F) / 10.0F);
         }
@@ -393,17 +393,17 @@ public class TabGui extends Module {
         }
 
         rows.add(new Row("Keybind", KeyBindUtil.getKeyName(module.getKey()), false, new Color(145, 145, 145).getRGB()));
-        for (Property<?> property : getSettingsForSelectedModule()) {
-            boolean hasSub = property instanceof ModeProperty;
-            String name = formatLabel(property.getName()) + (hasSub ? "..." : "");
-            rows.add(new Row(name, hasSub ? "" : formatValue(property), hasSub, propertyTextColor(property)));
+        for (Value<?> value : getSettingsForSelectedModule()) {
+            boolean hasSub = value instanceof ModeValue;
+            String name = formatLabel(value.getName()) + (hasSub ? "..." : "");
+            rows.add(new Row(name, hasSub ? "" : formatValue(value), hasSub, propertyTextColor(value)));
         }
         return rows;
     }
 
     private List<Row> getSubRows() {
         List<Row> rows = new ArrayList<>();
-        ModeProperty mode = getSelectedModeProperty();
+        ModeValue mode = getSelectedModeProperty();
         if (mode == null) {
             return rows;
         }
@@ -537,22 +537,22 @@ public class TabGui extends Module {
         return modules.get(moduleIndex);
     }
 
-    private List<Property<?>> getSettingsForSelectedModule() {
+    private List<Value<?>> getSettingsForSelectedModule() {
         Module module = getSelectedModule();
-        List<Property<?>> settings = new ArrayList<>();
-        if (module == null || Myau.propertyManager == null || Myau.propertyManager.properties.get(module.getClass()) == null) {
+        List<Value<?>> settings = new ArrayList<>();
+        if (module == null || Myau.valueManager == null || Myau.valueManager.properties.get(module.getClass()) == null) {
             return settings;
         }
-        for (Property<?> property : Myau.propertyManager.properties.get(module.getClass())) {
-            if (property.isVisible()) {
-                settings.add(property);
+        for (Value<?> value : Myau.valueManager.properties.get(module.getClass())) {
+            if (value.isVisible()) {
+                settings.add(value);
             }
         }
         return settings;
     }
 
-    private Property<?> getSelectedProperty() {
-        List<Property<?>> settings = getSettingsForSelectedModule();
+    private Value<?> getSelectedProperty() {
+        List<Value<?>> settings = getSettingsForSelectedModule();
         if (settings.isEmpty()) {
             return null;
         }
@@ -560,9 +560,9 @@ public class TabGui extends Module {
         return settings.get(settingIndex);
     }
 
-    private ModeProperty getSelectedModeProperty() {
-        Property<?> property = getSelectedProperty();
-        return property instanceof ModeProperty ? (ModeProperty) property : null;
+    private ModeValue getSelectedModeProperty() {
+        Value<?> value = getSelectedProperty();
+        return value instanceof ModeValue ? (ModeValue) value : null;
     }
 
     private int getSettingsSelectedRow() {
@@ -570,7 +570,7 @@ public class TabGui extends Module {
     }
 
     private void syncSubIndex() {
-        ModeProperty mode = getSelectedModeProperty();
+        ModeValue mode = getSelectedModeProperty();
         subIndex = mode == null ? 0 : mode.getValue();
     }
 
@@ -578,7 +578,7 @@ public class TabGui extends Module {
         categoryIndex = clamp(categoryIndex, 0, Math.max(0, categories.size() - 1));
         moduleIndex = clamp(moduleIndex, 0, Math.max(0, getModulesForSelectedCategory().size() - 1));
         settingIndex = clamp(settingIndex, 0, Math.max(0, getSettingsForSelectedModule().size() - 1));
-        ModeProperty mode = getSelectedModeProperty();
+        ModeValue mode = getSelectedModeProperty();
         subIndex = clamp(subIndex, 0, mode == null ? 0 : Math.max(0, mode.getModes().length - 1));
         if (level > 1 && getSettingsForSelectedModule().isEmpty()) {
             level = 1;
@@ -588,33 +588,33 @@ public class TabGui extends Module {
         }
     }
 
-    private int propertyTextColor(Property<?> property) {
-        if (property instanceof BooleanProperty) {
-            return ((BooleanProperty) property).getValue() ? Color.WHITE.getRGB() : new Color(150, 150, 150).getRGB();
+    private int propertyTextColor(Value<?> value) {
+        if (value instanceof BooleanValue) {
+            return ((BooleanValue) value).getValue() ? Color.WHITE.getRGB() : new Color(150, 150, 150).getRGB();
         }
         return new Color(205, 205, 205).getRGB();
     }
 
-    private String formatValue(Property<?> property) {
-        if (property instanceof BooleanProperty) {
-            return ((BooleanProperty) property).getValue() ? "On" : "Off";
+    private String formatValue(Value<?> value) {
+        if (value instanceof BooleanValue) {
+            return ((BooleanValue) value).getValue() ? "On" : "Off";
         }
-        if (property instanceof PercentProperty) {
-            return ((PercentProperty) property).getValue() + "%";
+        if (value instanceof PercentValue) {
+            return ((PercentValue) value).getValue() + "%";
         }
-        if (property instanceof IntProperty) {
-            return String.valueOf(((IntProperty) property).getValue());
+        if (value instanceof IntValue) {
+            return String.valueOf(((IntValue) value).getValue());
         }
-        if (property instanceof FloatProperty) {
-            return formatFloat(((FloatProperty) property).getValue());
+        if (value instanceof FloatValue) {
+            return formatFloat(((FloatValue) value).getValue());
         }
-        if (property instanceof ColorProperty) {
-            return String.format("#%06X", ((ColorProperty) property).getValue() & 0xFFFFFF);
+        if (value instanceof ColorValue) {
+            return String.format("#%06X", ((ColorValue) value).getValue() & 0xFFFFFF);
         }
-        if (property instanceof TextProperty) {
-            return String.valueOf(((TextProperty) property).getValue());
+        if (value instanceof TextValue) {
+            return String.valueOf(((TextValue) value).getValue());
         }
-        return String.valueOf(property.getValue());
+        return String.valueOf(value.getValue());
     }
 
     private String formatFloat(float value) {
