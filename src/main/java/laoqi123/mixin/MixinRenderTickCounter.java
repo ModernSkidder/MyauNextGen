@@ -23,6 +23,10 @@ public abstract class MixinRenderTickCounter {
         if (speed <= 0.0F) {
             speed = 1.0F;
         }
-        return operator.apply(tickTime) / speed;
+        float serverTickRate = Myau.serverTickRate;
+        if (serverTickRate <= 0.0F) {
+            serverTickRate = 1.0F;
+        }
+        return operator.apply(tickTime) / (speed * serverTickRate);
     }
 }

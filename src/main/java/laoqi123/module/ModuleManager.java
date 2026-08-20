@@ -74,7 +74,7 @@ public class ModuleManager {
         register(new MoreKB());
         register(new Indicators());
         register(new InventoryClicker());
-        register(new KnockbackDelay());
+        //register(new KnockbackDelay());
         register(new PotionEffects());
         register(new BedPlates());
         register(new InvManager());
@@ -116,6 +116,7 @@ public class ModuleManager {
         register(new Teams());
         register(new Tracers());
         register(new Trajectories());
+        register(new Velocity());
         register(new ViewClip());
         register(new Wtap());
         register(new WaterMark());

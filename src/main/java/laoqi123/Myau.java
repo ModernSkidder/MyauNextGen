@@ -24,6 +24,13 @@ import java.util.Objects;
 public class Myau {
     public static String clientName = "&7[&0M&8y&8a&7u&7]&r ";
     public static String version;
+
+    /**
+     * Global tick-rate override (1.0 = vanilla). Consumed by
+     * {@link laoqi123.mixin.MixinRenderTickCounter}. Modules like Velocity
+     * (anti-knockback) temporarily slow / speed the game to land combos.
+     */
+    public static volatile float serverTickRate = 1.0F;
     public static RotationManager rotationManager;
     public static FloatManager floatManager;
     public static BlinkManager blinkManager;
