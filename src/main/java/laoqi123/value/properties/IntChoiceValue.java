@@ -15,6 +15,10 @@ public class IntChoiceValue extends Value<Integer> {
         this.configurable = configurable;
     }
 
+    public ChoiceConfigurable getConfigurable() {
+        return this.configurable;
+    }
+
     @Override
     public Integer getValue() {
         return this.configurable.getActiveIndex();

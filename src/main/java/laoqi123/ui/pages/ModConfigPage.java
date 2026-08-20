@@ -15,7 +15,9 @@ import laoqi123.ui.dataset.impl.PercentageSlider;
 import laoqi123.ui.elements.config.ConfigColorElement;
 import laoqi123.ui.elements.config.ConfigDropdown;
 import laoqi123.ui.elements.config.ConfigKeyBind;
+import laoqi123.ui.elements.config.ConfigMultiChoice;
 import laoqi123.ui.elements.config.ConfigOption;
+import laoqi123.ui.elements.config.ConfigRangeSlider;
 import laoqi123.ui.elements.config.ConfigSlider;
 import laoqi123.ui.elements.config.ConfigSwitch;
 import laoqi123.ui.elements.config.ConfigTextBox;
@@ -43,9 +45,16 @@ public class ModConfigPage extends Page {
                 else if (value instanceof ModeValue) option = new ConfigDropdown((ModeValue) value, 2);
                 else if (value instanceof ColorValue) option = new ConfigColorElement((ColorValue) value, 2);
                 else if (value instanceof TextValue) option = new ConfigTextBox((TextValue) value, 2);
+                else if (value instanceof IntRangeValue) option = new ConfigRangeSlider((IntRangeValue) value, 2);
+                else if (value instanceof FloatRangeValue) option = new ConfigRangeSlider((FloatRangeValue) value, 2);
+                else if (value instanceof EnumChoiceValue) option = new ConfigDropdown((EnumChoiceValue<?>) value, 2);
+                else if (value instanceof IntChoiceValue) option = new ConfigDropdown((IntChoiceValue) value, 2);
+                else if (value instanceof MultiEnumChoiceValue) option = new ConfigMultiChoice((MultiEnumChoiceValue<?>) value, 2);
                 if (option != null) options.add(option);
             }
         }
+        // 按名称字母排序(KeyBind 值为空,自然排最前),方便查找
+        options.sort(java.util.Comparator.comparing(o -> o.value == null ? "" : o.value.getName().toLowerCase()));
     }
 
     @Override

@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 public class ClickGui extends Screen {
     public static ClickGui INSTANCE;
+    // 记住上次关闭时的页面,重新打开时回到原位置(例如 Combat/KillAura)
+    private static Page lastPage;
 
     private static final int PAGE_ANIM_START = 224;
     private static final int PAGE_ANIM_END = 1280;
@@ -41,9 +43,14 @@ public class ClickGui extends Screen {
     public ClickGui() {
         super(Text.empty());
         INSTANCE = this;
-        currentPage = new ModsPage(Category.COMBAT);
-        currentPage.parents.add(currentPage);
+        if (lastPage != null && !lastPage.parents.isEmpty()) {
+            currentPage = lastPage;
+        } else {
+            currentPage = new ModsPage(Category.COMBAT);
+            currentPage.parents.add(currentPage);
+        }
         sideBar.setCategoryCallback(category -> openPage(new ModsPage(category)));
+        sideBar.pageOpened(currentPage.parents.get(0).getTitle());
     }
 
     @Override
@@ -170,6 +177,8 @@ public class ClickGui extends Screen {
 
     @Override
     public void removed() {
+        // 记住当前页面,下次打开 ClickGUI 时回到这里
+        lastPage = currentPage;
         if (INSTANCE == this) INSTANCE = null;
     }
 

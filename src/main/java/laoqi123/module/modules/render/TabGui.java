@@ -72,7 +72,6 @@ public class TabGui extends Module {
                 AutoClicker.class,
                 KillAura.class,
                 Wtap.class,
-                Velocity.class,
                 Reach.class,
                 TargetStrafe.class,
                 NoHitDelay.class,

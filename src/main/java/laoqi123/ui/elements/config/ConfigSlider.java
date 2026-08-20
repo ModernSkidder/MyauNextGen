@@ -42,9 +42,9 @@ public class ConfigSlider extends ConfigOption implements IFocusable {
         this.slider = slider;
         this.min = (float) slider.getMin();
         this.max = (float) slider.getMax();
-        this.step = (int) slider.getIncrement() == 0 ? 0 : Math.max(1, (int) Math.round((max - min) / slider.getIncrement()));
         this.increment = (float) slider.getIncrement();
-        this.inputField = new NumberInputField(84, 32, 0, min, max, (float) slider.getIncrement());
+        this.step = (this.increment >= 1f && this.increment == (int) this.increment) ? (int) this.increment : 0;
+        this.inputField = new NumberInputField(84, 32, 0, min, max, this.increment);
         this.stepsAnimation = new DummyAnimation(0);
         this.targetAnimation = new DummyAnimation(0);
         this.stepSlideAnimation = new DummyAnimation(1);
@@ -71,7 +71,7 @@ public class ConfigSlider extends ConfigOption implements IFocusable {
             value = inputField.getCurrentValue();
             xCoordinate = (int) GuiUtils.clamp(GuiUtils.map(value, min, max, x + 352, x + 864), x + 352, x + 864);
         }
-        if ((dragging && inputHandler.isClicked()) || inputField.isToggled() || inputField.arrowsClicked()) {
+        if ((dragging && !isMouseDown) || inputField.isToggled() || inputField.arrowsClicked()) {
             dragging = false;
             if (step > 0) {
                 xCoordinate = getStepCoordinate(xCoordinate, x);

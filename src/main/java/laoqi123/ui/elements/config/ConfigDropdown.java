@@ -1,6 +1,9 @@
 package laoqi123.ui.elements.config;
 
+import laoqi123.value.properties.EnumChoiceValue;
+import laoqi123.value.properties.IntChoiceValue;
 import laoqi123.value.properties.ModeValue;
+import laoqi123.util.config.Choice;
 import laoqi123.ui.ColorPalette;
 import laoqi123.ui.Colors;
 import laoqi123.ui.InputHandler;
@@ -10,8 +13,14 @@ import laoqi123.ui.animations.EaseOutQuad;
 import laoqi123.ui.renderer.Icons;
 import laoqi123.ui.renderer.NanoVGRenderUtil;
 
+import java.util.List;
+import java.util.function.IntConsumer;
+import java.util.function.Supplier;
+
 public class ConfigDropdown extends ConfigOption {
-    private final ModeValue modeProperty;
+    private final Supplier<String[]> modesSupplier;
+    private final Supplier<String> selectedSupplier;
+    private final IntConsumer onSelect;
     private final ColorAnimation backgroundColor = new ColorAnimation(ColorPalette.SECONDARY);
     private final ColorAnimation atomColor = new ColorAnimation(new ColorPalette(Colors.PRIMARY_600, Colors.PRIMARY_500, Colors.PRIMARY_500));
     private boolean opened = false;
@@ -24,7 +33,48 @@ public class ConfigDropdown extends ConfigOption {
 
     public ConfigDropdown(ModeValue property, int size) {
         super(property, size);
-        this.modeProperty = property;
+        this.modesSupplier = property::getModes;
+        this.selectedSupplier = property::getModeString;
+        this.onSelect = index -> property.setValue(index);
+    }
+
+    public ConfigDropdown(EnumChoiceValue<?> property, int size) {
+        super(property, size);
+        this.modesSupplier = () -> {
+            Object[] values = property.getValues();
+            String[] names = new String[values.length];
+            for (int i = 0; i < values.length; i++) {
+                names[i] = ((laoqi123.util.config.NamedChoice) values[i]).getChoiceName();
+            }
+            return names;
+        };
+        this.selectedSupplier = () -> {
+            Object value = property.getValue();
+            return value == null ? "" : ((laoqi123.util.config.NamedChoice) value).getChoiceName();
+        };
+        this.onSelect = index -> {
+            Object[] values = property.getValues();
+            if (index >= 0 && index < values.length) {
+                property.setValue(values[index]);
+            }
+        };
+    }
+
+    public ConfigDropdown(IntChoiceValue property, int size) {
+        super(property, size);
+        this.modesSupplier = () -> {
+            List<Choice> choices = property.getConfigurable().getChoices();
+            String[] names = new String[choices.size()];
+            for (int i = 0; i < choices.size(); i++) {
+                names[i] = choices.get(i).getChoiceName();
+            }
+            return names;
+        };
+        this.selectedSupplier = () -> {
+            Choice active = property.getConfigurable().getActiveChoice();
+            return active == null ? "" : active.getChoiceName();
+        };
+        this.onSelect = index -> property.getConfigurable().setActiveIndex(index);
     }
 
     @Override
@@ -43,7 +93,7 @@ public class ConfigDropdown extends ConfigOption {
 
         if (hovered && inputHandler.isButtonDown(0)) NanoVGRenderUtil.setAlpha(vg, 0.8f);
         NanoVGRenderUtil.drawRoundedRect(vg, x + 352, y, 640, 32, backgroundColor.getColor(hovered, hovered && inputHandler.isButtonDown(0)), 12);
-        String selected = modeProperty.getModeString();
+        String selected = selectedSupplier.get();
         NanoVGRenderUtil.drawText(vg, selected, x + 364, y + 16, Colors.WHITE_80, 14f);
         NanoVGRenderUtil.drawRoundedRect(vg, x + 964, y + 4, 24, 24, atomColor.getColor(hovered, false), 8);
         Icons.chevronDown(vg, x + 966, y + 6, 20, Colors.WHITE_80);
@@ -56,7 +106,7 @@ public class ConfigDropdown extends ConfigOption {
             finishUpAndClose();
             return;
         }
-        String[] modes = modeProperty.getModes();
+        String[] modes = modesSupplier.get();
         int visible = Math.min(modes.length, 10);
         float panelH = visible * 32 + 8;
 
@@ -97,7 +147,7 @@ public class ConfigDropdown extends ConfigOption {
                 color = Colors.WHITE;
             }
             if (optionHovered && inputHandler.isClicked(true)) {
-                modeProperty.setValue(java.util.Arrays.asList(modes).indexOf(option));
+                onSelect.accept(java.util.Arrays.asList(modes).indexOf(option));
                 opened = false;
                 backgroundColor.setPalette(ColorPalette.SECONDARY);
             }

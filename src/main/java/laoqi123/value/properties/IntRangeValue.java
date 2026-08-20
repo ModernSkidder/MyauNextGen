@@ -7,6 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BooleanSupplier;
 
 public class IntRangeValue extends Value<int[]> {
+    private final int boundMin;
+    private final int boundMax;
 
     public IntRangeValue(String name, int min, int max, int boundMin, int boundMax) {
         this(name, min, max, boundMin, boundMax, null);
@@ -14,6 +16,16 @@ public class IntRangeValue extends Value<int[]> {
 
     public IntRangeValue(String name, int min, int max, int boundMin, int boundMax, BooleanSupplier check) {
         super(name, new int[]{min, max}, v -> v[0] >= boundMin && v[0] <= boundMax && v[1] >= boundMin && v[1] <= boundMax && v[0] <= v[1], check);
+        this.boundMin = boundMin;
+        this.boundMax = boundMax;
+    }
+
+    public int getBoundMin() {
+        return this.boundMin;
+    }
+
+    public int getBoundMax() {
+        return this.boundMax;
     }
 
     public int getMin() {

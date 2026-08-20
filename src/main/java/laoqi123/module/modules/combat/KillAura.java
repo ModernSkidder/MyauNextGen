@@ -19,6 +19,7 @@ import laoqi123.module.modules.combat.killaura.KillAuraFailSwing;
 import laoqi123.module.modules.combat.killaura.KillAuraRotation;
 import laoqi123.module.modules.combat.killaura.KillAuraTargetSelect;
 import laoqi123.module.modules.misc.BedNuker;
+import laoqi123.module.modules.misc.Teams;
 import laoqi123.module.modules.player.AutoBlockIn;
 import laoqi123.module.modules.player.AutoHeal;
 import laoqi123.module.modules.player.Scaffold;

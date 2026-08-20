@@ -1,4 +1,4 @@
-package laoqi123.module.modules.misc;
+package laoqi123.module.modules.combat;
 
 import laoqi123.Myau;
 import laoqi123.event.EventTarget;

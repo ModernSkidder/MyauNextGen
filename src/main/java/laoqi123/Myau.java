@@ -12,6 +12,7 @@ import laoqi123.management.*;
 import laoqi123.module.Module;
 import laoqi123.module.ModuleManager;
 import laoqi123.value.ValueManager;
+import laoqi123.util.MovementUtils;
 import laoqi123.util.player.PlayerUtils;
 
 import java.io.InputStreamReader;
@@ -55,6 +56,7 @@ public class Myau {
         playerUtils = new PlayerUtils();
         EventManager.register(rotationManager);
         EventManager.register(playerUtils);
+        EventManager.register(MovementUtils.INSTANCE);
         EventManager.register(floatManager);
         EventManager.register(blinkManager);
         EventManager.register(delayManager);

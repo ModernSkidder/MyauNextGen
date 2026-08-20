@@ -60,7 +60,6 @@ public class ModuleManager {
         register(new ChestESP());
         register(new ChestStealer());
         register(new Eagle());
-        register(new Telly());
         register(new ESP());
         register(new FastPlace());
         register(new Fly());
@@ -100,9 +99,7 @@ public class ModuleManager {
         register(new NoRotate());
         register(new NoSlow());
         register(new Reach());
-        register(new RiseVelocity());
         register(new Scaffold());
-        register(new Scaffold2());
         register(new AutoBlockIn());
         register(new ClientSpoofer());
         register(new FlagDetector());
@@ -119,7 +116,6 @@ public class ModuleManager {
         register(new Teams());
         register(new Tracers());
         register(new Trajectories());
-        register(new Velocity());
         register(new ViewClip());
         register(new Wtap());
         register(new WaterMark());

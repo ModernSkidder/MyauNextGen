@@ -5,7 +5,7 @@ package laoqi123.mixin;
 import laoqi123.Myau;
 import laoqi123.config.AnimationConfig;
 import laoqi123.config.AnimationMode;
-import laoqi123.module.modules.combat.OldHitting;
+import laoqi123.module.modules.render.OldHitting;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -99,13 +99,14 @@ public abstract class MixinItemRendererAnimations {
             return;
         }
 
-        matrices.translate(
-                AnimationConfig.getBlockPosX(),
-                AnimationConfig.getBlockPosY(),
-                AnimationConfig.getBlockPosZ()
-        );
-
         AnimationConfig.sync();
+        if (AnimationConfig.isEnabled()) {
+            matrices.translate(
+                    AnimationConfig.getBlockPosX(),
+                    AnimationConfig.getBlockPosY(),
+                    AnimationConfig.getBlockPosZ()
+            );
+        }
         if (AnimationConfig.isEnabled() && this.shouldApplyNormalAnimations()) {
             this._customTransform = true;
             try {
@@ -599,7 +600,11 @@ public abstract class MixinItemRendererAnimations {
     }
 
     private boolean shouldApplyNormalAnimations() {
-        return AnimationConfig.getRenderMode() == 1
+        OldHitting oldHitting = (OldHitting) Myau.moduleManager.modules.get(OldHitting.class);
+        boolean oldHittingActive = oldHitting != null && oldHitting.isEnabled() && oldHitting.isKillAuraAttacking();
+        // 只有 Animations 模块开启(renderMode 1)或 OldHitting 正在生效时才取消原版挥剑/装备位移,
+        // 否则两个模块都关掉时原版位移也被取消、替换动画又不生效 → 手持剑渲染异常
+        return (AnimationConfig.isEnabled() && AnimationConfig.getRenderMode() == 1 || oldHittingActive)
                 && mc.player != null
                 && mc.player.getMainHandStack() != null
                 && mc.player.getMainHandStack().getItem() instanceof SwordItem

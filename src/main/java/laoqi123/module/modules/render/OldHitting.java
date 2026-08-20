@@ -1,7 +1,8 @@
-package laoqi123.module.modules.combat;
+package laoqi123.module.modules.render;
 
 import laoqi123.Myau;
 import laoqi123.module.Module;
+import laoqi123.module.modules.combat.KillAura;
 import laoqi123.value.properties.FloatValue;
 import laoqi123.value.properties.ModeValue;
 import net.minecraft.client.util.math.MatrixStack;
