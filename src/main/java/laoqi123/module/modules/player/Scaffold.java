@@ -1,5 +1,6 @@
 package laoqi123.module.modules.player;
 
+import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.impl.MoveInputEvent;
@@ -55,6 +56,11 @@ public class Scaffold extends Module {
     private static final MinecraftClient mc = MinecraftClient.getInstance();
 
     public final ModeValue mode = new ModeValue("Mode", 0, new String[]{"Telly", "Snap", "Normal"});
+    /**
+     * 视觉修复: 开启后 mixin 不再把 renderPitch/renderYaw 往服务器旋转上收敛/外推,
+     * 手部模型完全跟随自然视角(不抽搐)。逻辑(服务器旋转、lastYaw/lastPitch 跟踪)完全不变。
+     */
+    public final BooleanValue moduleFix = new BooleanValue("Module Fix", true);
     public final BooleanValue alwaysUpdateRot = new BooleanValue("Always Update Rotation", false);
     public final IntValue placeTick = new IntValue("PlaceTick", 1, 1, 5, () -> mode.getValue() == 0);
     public final IntValue rotTick = new IntValue("RotationTick", 1, 1, 5);
@@ -118,6 +124,19 @@ public class Scaffold extends Module {
 
     public Scaffold() {
         super("Scaffold", false);
+    }
+
+    /**
+     * 当前是否应让旋转 mixin 跳过对渲染态字段(renderPitch/renderYaw)的干预。
+     * 仅当 Scaffold 开启且 "Module Fix" 选项打开时为 true;此时 mixin 只保留逻辑
+     * (lastYaw/lastPitch 跟踪服务器旋转),渲染完全跟随自然视角,手部不抽搐。
+     */
+    public static boolean isModuleFixActive() {
+        if (Myau.moduleManager == null) {
+            return false;
+        }
+        Scaffold scaffold = (Scaffold) Myau.moduleManager.modules.get(Scaffold.class);
+        return scaffold != null && scaffold.isEnabled() && scaffold.moduleFix.getValue();
     }
 
     @Override

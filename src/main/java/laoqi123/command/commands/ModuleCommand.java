@@ -19,11 +19,27 @@ public class ModuleCommand extends Command {
     @Override
     public void runCommand(ArrayList<String> args) {
         Module module = Myau.moduleManager.getModule(args.get(0));
+        if (module == null) {
+            ChatUtil.sendFormatted(String.format("%sUnknown module &o%s&r", Myau.clientName, args.get(0)));
+            return;
+        }
         if (args.size() >= 2) {
-            Value<?> value = Myau.valueManager.getProperty(module, args.get(1));
+            // Value names may contain spaces (e.g. "Max Delay Ticks"). Progressively
+            // join args[1..i] until a full name matches, so both "maxdelayticks" and
+            // "max delay ticks" resolve; the first (shortest) match wins.
+            Value<?> value = null;
+            int nameEnd = -1;
+            for (int i = 1; i < args.size(); i++) {
+                Value<?> candidate = Myau.valueManager.getProperty(module, String.join(" ", args.subList(1, i + 1)));
+                if (candidate != null) {
+                    value = candidate;
+                    nameEnd = i;
+                    break;
+                }
+            }
             if (value == null) {
                 ChatUtil.sendFormatted(String.format("%s%s has no value &o%s&r", Myau.clientName, module.getName(), args.get(1)));
-            } else if (args.size() < 3 && !(value instanceof BooleanValue)) {
+            } else if (nameEnd == args.size() - 1 && !(value instanceof BooleanValue)) {
                 ChatUtil.sendFormatted(
                         String.format(
                                 "%s%s: &o%s&r is set to %s&r (%s)&r",
@@ -35,7 +51,7 @@ public class ModuleCommand extends Command {
                         )
                 );
             } else {
-                String newValue = args.size() < 3 ? null : String.join(" ", args.subList(2, args.size()));
+                String newValue = nameEnd == args.size() - 1 ? null : String.join(" ", args.subList(nameEnd + 1, args.size()));
                 try {
                     if (value.parseString(newValue)) {
                         ChatUtil.sendFormatted(

@@ -123,7 +123,7 @@ public class TabGui extends Module {
                 Timer.class,
                 NoRotate.class,
                 Blink.class,
-                NoFall.class,
+                //NoFall.class,
                 AutoHeal.class,
                 AutoTool.class,
                 AutoSwap.class,

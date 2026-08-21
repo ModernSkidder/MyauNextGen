@@ -9,6 +9,7 @@ import laoqi123.event.impl.PlayerUpdateEvent;
 import laoqi123.event.impl.UpdateEvent;
 import laoqi123.management.RotationState;
 import laoqi123.module.modules.player.AntiDebuff;
+import laoqi123.module.modules.player.Scaffold;
 import laoqi123.module.modules.movement.NoSlow;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -51,6 +52,10 @@ public abstract class MixinEntityPlayerSP {
     public float renderYaw;
     @Shadow
     public float lastRenderYaw;
+    @Shadow
+    public float renderPitch;
+    @Shadow
+    public float lastRenderPitch;
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onUpdate(CallbackInfo callbackInfo) {
@@ -90,8 +95,19 @@ public abstract class MixinEntityPlayerSP {
                 self.setPitch(this.pendingPitch);
                 self.prevYaw = self.getYaw();
                 self.prevPitch = self.getPitch();
-                this.lastRenderYaw = self.getYaw() - (this.renderYaw - this.lastRenderYaw) * 2.0F;
-                this.renderYaw = self.getYaw();
+                if (Scaffold.isModuleFixActive()) {
+                    // Module Fix: 原版 tickNewAi 已把 renderPitch/renderYaw 朝"服务器旋转"平滑了一步
+                    // (tick 中间 yaw/pitch 已被本 mixin 覆盖为服务器值)。这里把已平滑的部分修正为朝自然视角:
+                    // renderPitch += (自然 - 服务器) * 0.5,恰好抵消服务器分量,得到与原版无模块时相同的
+                    // renderPitch = 上一值 + (自然 - 上一值) * 0.5。lastRenderPitch/lastRenderYaw 仍由原版
+                    // 维护(上一 tick 的 render* 值),作为帧间插值起点 → 手部平滑跟随视角、不抖动。
+                    // lastYaw/lastPitch 仍跟踪服务器旋转(sendMovementPackets 的旋转变化检测),逻辑不变。
+                    this.renderPitch += (self.getPitch() - this.overridePitch) * 0.5F;
+                    this.renderYaw += (self.getYaw() - this.overrideYaw) * 0.5F;
+                } else {
+                    this.lastRenderYaw = self.getYaw() - (this.renderYaw - this.lastRenderYaw) * 2.0F;
+                    this.renderYaw = self.getYaw();
+                }
             }
             EventManager.call(new UpdateEvent(EventType.POST, this.lastYaw, this.lastPitch, self.getYaw(), self.getPitch()));
         }

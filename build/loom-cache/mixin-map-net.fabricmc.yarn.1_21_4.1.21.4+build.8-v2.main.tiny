@@ -4,6 +4,8 @@ FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	lastPitch	field_3925
 FIELD	laoqi123/mixin/MixinEntityPlayerSP	Lnet/minecraft/client/input/Input;	input	field_3913
 FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	renderYaw	field_3932
 FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	lastRenderYaw	field_3931
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	renderPitch	field_3916
+FIELD	laoqi123/mixin/MixinEntityPlayerSP	F	lastRenderPitch	field_3914
 FIELD	laoqi123/mixin/MixinEntityRenderer	Lnet/minecraft/client/render/BufferBuilderStorage;	buffers	field_20948
 FIELD	laoqi123/mixin/MixinEntityRenderer	Lnet/minecraft/client/MinecraftClient;	client	field_4015
 FIELD	laoqi123/mixin/MixinMinecraft	I	attackCooldown	field_1771
