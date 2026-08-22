@@ -92,7 +92,6 @@ public class ModuleManager {
         register(new MCF());
         register(new NameTags());
         register(new NickHider());
-        //register(new NoFall());
         register(new NoHitDelay());
         register(new NoHurtCam());
         register(new NoJumpDelay());
@@ -116,7 +115,6 @@ public class ModuleManager {
         register(new Teams());
         register(new Tracers());
         register(new Trajectories());
-        register(new Velocity());
         register(new ViewClip());
         register(new Wtap());
         register(new WaterMark());
