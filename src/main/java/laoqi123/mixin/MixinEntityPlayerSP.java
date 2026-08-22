@@ -3,14 +3,14 @@ package laoqi123.mixin;
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
 import laoqi123.event.types.EventType;
-import laoqi123.event.impl.LivingUpdateEvent;
-import laoqi123.event.impl.MoveInputEvent;
-import laoqi123.event.impl.PlayerUpdateEvent;
-import laoqi123.event.impl.UpdateEvent;
+import laoqi123.events.LivingUpdateEvent;
+import laoqi123.events.MoveInputEvent;
+import laoqi123.events.PlayerUpdateEvent;
+import laoqi123.events.UpdateEvent;
 import laoqi123.management.RotationState;
-import laoqi123.module.modules.player.AntiDebuff;
-import laoqi123.module.modules.player.Scaffold;
-import laoqi123.module.modules.movement.NoSlow;
+import laoqi123.module.modules.AntiDebuff;
+import laoqi123.module.modules.NoSlow;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
@@ -52,10 +52,6 @@ public abstract class MixinEntityPlayerSP {
     public float renderYaw;
     @Shadow
     public float lastRenderYaw;
-    @Shadow
-    public float renderPitch;
-    @Shadow
-    public float lastRenderPitch;
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void onUpdate(CallbackInfo callbackInfo) {
@@ -70,10 +66,6 @@ public abstract class MixinEntityPlayerSP {
                 this.pendingPitch = self.getPitch();
                 this.overrideYaw = event.getNewYaw();
                 this.overridePitch = event.getNewPitch();
-                // 在 movement 计算之前就应用旋转(move fix):
-                // 这样本 tick 的移动方向 == 发送给服务器的 yaw,不会触发 Grim 的 Simulation 判定
-                self.setYaw(event.getNewYaw());
-                self.setPitch(event.getNewPitch());
             } else {
                 this.pendingYaw = Float.NaN;
                 this.pendingPitch = Float.NaN;
@@ -95,19 +87,8 @@ public abstract class MixinEntityPlayerSP {
                 self.setPitch(this.pendingPitch);
                 self.prevYaw = self.getYaw();
                 self.prevPitch = self.getPitch();
-                if (Scaffold.isModuleFixActive()) {
-                    // Module Fix: 原版 tickNewAi 已把 renderPitch/renderYaw 朝"服务器旋转"平滑了一步
-                    // (tick 中间 yaw/pitch 已被本 mixin 覆盖为服务器值)。这里把已平滑的部分修正为朝自然视角:
-                    // renderPitch += (自然 - 服务器) * 0.5,恰好抵消服务器分量,得到与原版无模块时相同的
-                    // renderPitch = 上一值 + (自然 - 上一值) * 0.5。lastRenderPitch/lastRenderYaw 仍由原版
-                    // 维护(上一 tick 的 render* 值),作为帧间插值起点 → 手部平滑跟随视角、不抖动。
-                    // lastYaw/lastPitch 仍跟踪服务器旋转(sendMovementPackets 的旋转变化检测),逻辑不变。
-                    this.renderPitch += (self.getPitch() - this.overridePitch) * 0.5F;
-                    this.renderYaw += (self.getYaw() - this.overrideYaw) * 0.5F;
-                } else {
-                    this.lastRenderYaw = self.getYaw() - (this.renderYaw - this.lastRenderYaw) * 2.0F;
-                    this.renderYaw = self.getYaw();
-                }
+                this.lastRenderYaw = self.getYaw() - (this.renderYaw - this.lastRenderYaw) * 2.0F;
+                this.renderYaw = self.getYaw();
             }
             EventManager.call(new UpdateEvent(EventType.POST, this.lastYaw, this.lastPitch, self.getYaw(), self.getPitch()));
         }
@@ -161,25 +142,22 @@ public abstract class MixinEntityPlayerSP {
     private void updateMove(CallbackInfo callbackInfo) {
         MoveInputEvent moveInputEvent = new MoveInputEvent();
         EventManager.call(moveInputEvent);
+        if (moveInputEvent.isJumpModified()) {
+            this.input.playerInput = new PlayerInput(
+                    this.input.playerInput.forward(),
+                    this.input.playerInput.backward(),
+                    this.input.playerInput.left(),
+                    this.input.playerInput.right(),
+                    moveInputEvent.getJump(),
+                    this.input.playerInput.sneak(),
+                    this.input.playerInput.sprint()
+            );
+        }
         if (moveInputEvent.isForwardModified()) {
             this.input.movementForward = moveInputEvent.getForward();
         }
         if (moveInputEvent.isStrafeModified()) {
             this.input.movementSideways = moveInputEvent.getStrafe();
-        }
-        // 输入被改写时,同步重建 PlayerInput 包:让上报的 forward/strafe 与实际的移动输入一致,
-        // 否则 Grim 用包里的输入 + 上报 yaw 预测会和实际移动方向不符
-        if (moveInputEvent.isJumpModified() || moveInputEvent.isForwardModified() || moveInputEvent.isStrafeModified()) {
-            PlayerInput pi = this.input.playerInput;
-            this.input.playerInput = new PlayerInput(
-                    this.input.movementForward > 0.0f,
-                    this.input.movementForward < 0.0f,
-                    this.input.movementSideways > 0.0f,
-                    this.input.movementSideways < 0.0f,
-                    moveInputEvent.isJumpModified() ? moveInputEvent.getJump() : pi.jump(),
-                    pi.sneak(),
-                    pi.sprint()
-            );
         }
     }
 

@@ -1,7 +1,9 @@
 package laoqi123.event;
 
-import laoqi123.event.impl.Event;
-import laoqi123.event.impl.EventStoppable;
+import com.mojang.logging.LogUtils;
+
+import laoqi123.event.events.Event;
+import laoqi123.event.events.EventStoppable;
 import laoqi123.event.types.Priority;
 
 import java.lang.reflect.InvocationTargetException;
@@ -240,7 +242,7 @@ public final class EventManager {
         try {
             data.getTarget().invoke(data.getSource(), argument);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
+            LogUtils.getLogger().error("Failed to invoke event handler", e);
         }
     }
 

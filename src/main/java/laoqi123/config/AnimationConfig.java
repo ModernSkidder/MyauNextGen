@@ -1,7 +1,7 @@
 package laoqi123.config;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.render.Animations;
+import laoqi123.module.modules.Animations;
 
 /**
  * Thin wrapper that holds animation settings

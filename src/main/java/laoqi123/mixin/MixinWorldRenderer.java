@@ -1,6 +1,6 @@
 package laoqi123.mixin;
 
-import laoqi123.module.modules.render.ESP;
+import laoqi123.module.modules.ESP;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.entity.Entity;

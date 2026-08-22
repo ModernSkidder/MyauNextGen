@@ -1,21 +1,21 @@
 package laoqi123.util.rotation;
 
-import laoqi123.value.properties.IntRangeValue;
-import laoqi123.value.properties.IntValue;
+import laoqi123.property.properties.IntProperty;
+import laoqi123.property.properties.IntRangeProperty;
 import laoqi123.util.config.ToggleableConfigurable;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ShortStopRotationProcessor extends ToggleableConfigurable implements RotationProcessor {
-    private final IntValue rate;
-    private final IntRangeValue stopDuration;
+    private final IntProperty rate;
+    private final IntRangeProperty stopDuration;
     private int ticksElapsed;
     private int currentTransitionInDuration;
 
     public ShortStopRotationProcessor() {
         super("ShortStop", false);
-        this.rate = this.register(new IntValue("Rate", 3, 1, 25));
-        this.stopDuration = this.register(new IntRangeValue("Duration", 1, 2, 1, 5));
+        this.rate = this.register(new IntProperty("Rate", 3, 1, 25));
+        this.stopDuration = this.register(new IntRangeProperty("Duration", 1, 2, 1, 5));
         this.currentTransitionInDuration = this.stopDuration.random();
     }
 

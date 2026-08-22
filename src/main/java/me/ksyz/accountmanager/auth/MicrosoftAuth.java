@@ -55,8 +55,8 @@ public final class MicrosoftAuth {
             return HttpClientBuilder.create()
                     .setSSLSocketFactory(sf)
                     .build();
-        } catch (Exception ignored) {
-            //
+        } catch (Exception e) {
+            System.err.println("[MicrosoftAuth] Failed to build trusted HTTP client, falling back to default: " + e.getMessage());
         }
 
         return HttpClients.createDefault();
@@ -131,8 +131,10 @@ public final class MicrosoftAuth {
                     }
 
                     // Send a response informing that the browser may now be closed
-                    InputStream stream = MicrosoftAuth.class.getResourceAsStream("/callback.html");
-                    byte[] response = stream != null ? IOUtils.toByteArray(stream) : new byte[0];
+                    byte[] response;
+                    try (InputStream stream = MicrosoftAuth.class.getResourceAsStream("/callback.html")) {
+                        response = stream != null ? IOUtils.toByteArray(stream) : new byte[0];
+                    }
                     exchange.getResponseHeaders().add("Content-Type", "text/html");
                     exchange.sendResponseHeaders(200, response.length);
                     exchange.getResponseBody().write(response);
@@ -193,7 +195,7 @@ public final class MicrosoftAuth {
                 HttpResponse res = client.execute(request);
 
                 // Attempt to parse the response body as JSON and extract the access and refresh tokens
-                JsonObject json = new JsonParser().parse(EntityUtils.toString(res.getEntity())).getAsJsonObject();
+                JsonObject json = JsonParser.parseString(EntityUtils.toString(res.getEntity())).getAsJsonObject();
                 String accessToken = Optional.ofNullable(json.get("access_token"))
                         .map(JsonElement::getAsString)
                         .filter(token -> !StringUtils.isBlank(token))
@@ -235,9 +237,7 @@ public final class MicrosoftAuth {
                                 new BasicNameValuePair("grant_type", "refresh_token"),
                                 new BasicNameValuePair("refresh_token", msToken),
                                 // We must provide the exact redirect URI that was used to obtain the auth code
-                                CLIENT_ID.equals("00000000402b5328") ? new BasicNameValuePair(
-                                        "scope", SCOPE
-                                ) : new BasicNameValuePair(
+                                new BasicNameValuePair(
                                         "redirect_uri", String.format("http://localhost:%d/callback", PORT)
                                 )
                         ),
@@ -248,7 +248,7 @@ public final class MicrosoftAuth {
                 HttpResponse res = client.execute(request);
 
                 // Attempt to parse the response body as JSON and extract the access and refresh tokens
-                JsonObject json = new JsonParser().parse(EntityUtils.toString(res.getEntity())).getAsJsonObject();
+                JsonObject json = JsonParser.parseString(EntityUtils.toString(res.getEntity())).getAsJsonObject();
                 String accessToken = Optional.ofNullable(json.get("access_token"))
                         .map(JsonElement::getAsString)
                         .filter(token -> !StringUtils.isBlank(token))
@@ -286,7 +286,7 @@ public final class MicrosoftAuth {
                 JsonObject properties = new JsonObject();
                 properties.addProperty("AuthMethod", "RPS");
                 properties.addProperty("SiteName", "user.auth.xboxlive.com");
-                properties.addProperty("RpsTicket", CLIENT_ID.equals("00000000402b5328") ? accessToken : String.format("d=%s", accessToken));
+                properties.addProperty("RpsTicket", String.format("d=%s", accessToken));
                 entity.add("Properties", properties);
                 entity.addProperty("RelyingParty", "http://auth.xboxlive.com");
                 entity.addProperty("TokenType", "JWT");
@@ -299,7 +299,7 @@ public final class MicrosoftAuth {
 
                 // Attempt to parse the response body as JSON and extract the access token
                 JsonObject json = res.getStatusLine().getStatusCode() == 200
-                        ? new JsonParser().parse(EntityUtils.toString(res.getEntity())).getAsJsonObject()
+                        ? JsonParser.parseString(EntityUtils.toString(res.getEntity())).getAsJsonObject()
                         : new JsonObject();
                 // If present, return
                 return Optional.ofNullable(json.get("Token"))
@@ -341,7 +341,7 @@ public final class MicrosoftAuth {
 
                 // Attempt to parse the response body as JSON and extract the access token and user hash
                 JsonObject json = res.getStatusLine().getStatusCode() == 200
-                        ? new JsonParser().parse(EntityUtils.toString(res.getEntity())).getAsJsonObject()
+                        ? JsonParser.parseString(EntityUtils.toString(res.getEntity())).getAsJsonObject()
                         : new JsonObject();
                 return Optional.ofNullable(json.get("Token"))
                         .map(JsonElement::getAsString)
@@ -388,7 +388,7 @@ public final class MicrosoftAuth {
                 HttpResponse res = client.execute(request);
 
                 // Attempt to parse the response body as JSON and extract the access token
-                JsonObject json = new JsonParser().parse(EntityUtils.toString(res.getEntity())).getAsJsonObject();
+                JsonObject json = JsonParser.parseString(EntityUtils.toString(res.getEntity())).getAsJsonObject();
 
                 // If present, return
                 return Optional.ofNullable(json.get("access_token"))
@@ -419,7 +419,7 @@ public final class MicrosoftAuth {
                 HttpResponse res = client.execute(request);
 
                 // Attempt to parse the response body as JSON and extract the profile
-                JsonObject json = new JsonParser().parse(EntityUtils.toString(res.getEntity())).getAsJsonObject();
+                JsonObject json = JsonParser.parseString(EntityUtils.toString(res.getEntity())).getAsJsonObject();
                 return Optional.ofNullable(json.get("id"))
                         .map(JsonElement::getAsString)
                         .filter(uuid -> !StringUtils.isBlank(uuid))

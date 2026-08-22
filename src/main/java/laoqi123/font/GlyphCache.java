@@ -1,5 +1,7 @@
 package laoqi123.font;
 
+import com.mojang.logging.LogUtils;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import org.lwjgl.opengl.GL11;
 
@@ -16,6 +18,11 @@ import java.util.List;
 
 public class GlyphCache {
     public static GlyphCache debugLast;
+    // Kept at 256. Enlarging to 1024 made allocateGlyphCacheTexture() issue a 4MB
+    // glTexImage2D that crashed the NVIDIA driver with EXCEPTION_ACCESS_VIOLATION
+    // when run off the render thread (ClickGui construction). CJK / MiSans still
+    // works because glyphs are cached on demand and the atlas is reallocated when
+    // it fills, so the larger size was only a throughput optimization, not required.
     private static final int TEXTURE_WIDTH = 256;
     private static final int TEXTURE_HEIGHT = 256;
     private static final int STRING_WIDTH = 256;
@@ -331,7 +338,7 @@ public class GlyphCache {
             file.getParentFile().mkdirs();
             javax.imageio.ImageIO.write(image, "png", file);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.getLogger().error("Failed to save PNG", e);
         }
     }
 
@@ -406,7 +413,7 @@ public class GlyphCache {
             }
             savePng(bi, path);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.getLogger().error("Failed to dump GPU texture", e);
         }
     }
 }

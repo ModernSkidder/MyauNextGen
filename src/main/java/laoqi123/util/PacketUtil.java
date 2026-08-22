@@ -1,5 +1,7 @@
 package laoqi123.util;
 
+import com.mojang.logging.LogUtils;
+
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -50,7 +52,7 @@ public class PacketUtil {
                     packet.apply(mc.getNetworkHandler());
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LogUtils.getLogger().error("Failed to replay packet", e);
             }
         }
     }

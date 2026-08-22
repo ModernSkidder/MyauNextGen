@@ -1,8 +1,8 @@
 package laoqi123.util.rotation;
 
-import laoqi123.value.properties.BooleanValue;
-import laoqi123.value.properties.FloatRangeValue;
-import laoqi123.value.properties.FloatValue;
+import laoqi123.property.properties.BooleanProperty;
+import laoqi123.property.properties.FloatProperty;
+import laoqi123.property.properties.FloatRangeProperty;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
@@ -11,42 +11,42 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
 public class AccelerationAngleSmooth extends AngleSmooth {
-    private final FloatRangeValue yawAcceleration;
-    private final FloatRangeValue pitchAcceleration;
-    private final BooleanValue dynamicAccel;
-    private final FloatValue coefDistance;
-    private final FloatRangeValue yawCrosshairAccel;
-    private final FloatRangeValue pitchCrosshairAccel;
-    private final BooleanValue accelerationError;
-    private final FloatValue yawAccelerationError;
-    private final FloatValue pitchAccelerationError;
-    private final BooleanValue constantError;
-    private final FloatValue yawConstantError;
-    private final FloatValue pitchConstantError;
-    private final BooleanValue sigmoidDeceleration;
-    private final FloatValue decelerationSteepness;
-    private final FloatValue decelerationMidpoint;
+    private final FloatRangeProperty yawAcceleration;
+    private final FloatRangeProperty pitchAcceleration;
+    private final BooleanProperty dynamicAccel;
+    private final FloatProperty coefDistance;
+    private final FloatRangeProperty yawCrosshairAccel;
+    private final FloatRangeProperty pitchCrosshairAccel;
+    private final BooleanProperty accelerationError;
+    private final FloatProperty yawAccelerationError;
+    private final FloatProperty pitchAccelerationError;
+    private final BooleanProperty constantError;
+    private final FloatProperty yawConstantError;
+    private final FloatProperty pitchConstantError;
+    private final BooleanProperty sigmoidDeceleration;
+    private final FloatProperty decelerationSteepness;
+    private final FloatProperty decelerationMidpoint;
 
     private final Supplier<Rotation> previousRotationSupplier;
 
     public AccelerationAngleSmooth(Supplier<Rotation> previousRotationSupplier) {
         super("Acceleration");
         this.previousRotationSupplier = previousRotationSupplier;
-        this.yawAcceleration = this.register(new FloatRangeValue("YawAcceleration", 20.0f, 25.0f, 1.0f, 180.0f));
-        this.pitchAcceleration = this.register(new FloatRangeValue("PitchAcceleration", 20.0f, 25.0f, 1.0f, 180.0f));
-        this.dynamicAccel = this.register(new BooleanValue("DynamicAccel", false));
-        this.coefDistance = this.register(new FloatValue("CoefDistance", -1.393f, -2.0f, 2.0f));
-        this.yawCrosshairAccel = this.register(new FloatRangeValue("YawCrosshairAccel", 17.0f, 20.0f, 5.0f, 180.0f));
-        this.pitchCrosshairAccel = this.register(new FloatRangeValue("PitchCrosshairAccel", 17.0f, 20.0f, 5.0f, 180.0f));
-        this.accelerationError = this.register(new BooleanValue("AccelerationError", true));
-        this.yawAccelerationError = this.register(new FloatValue("YawAccelerationError", 0.1f, 0.01f, 2.0f));
-        this.pitchAccelerationError = this.register(new FloatValue("PitchAccelerationError", 0.1f, 0.01f, 2.0f));
-        this.constantError = this.register(new BooleanValue("ConstantError", true));
-        this.yawConstantError = this.register(new FloatValue("YawConstantError", 0.1f, 0.01f, 2.0f));
-        this.pitchConstantError = this.register(new FloatValue("PitchConstantError", 0.1f, 0.01f, 2.0f));
-        this.sigmoidDeceleration = this.register(new BooleanValue("SigmoidDeceleration", false));
-        this.decelerationSteepness = this.register(new FloatValue("Steepness", 10.0f, 0.0f, 20.0f));
-        this.decelerationMidpoint = this.register(new FloatValue("Midpoint", 0.3f, 0.0f, 1.0f));
+        this.yawAcceleration = this.register(new FloatRangeProperty("YawAcceleration", 20.0f, 25.0f, 1.0f, 180.0f));
+        this.pitchAcceleration = this.register(new FloatRangeProperty("PitchAcceleration", 20.0f, 25.0f, 1.0f, 180.0f));
+        this.dynamicAccel = this.register(new BooleanProperty("DynamicAccel", false));
+        this.coefDistance = this.register(new FloatProperty("CoefDistance", -1.393f, -2.0f, 2.0f));
+        this.yawCrosshairAccel = this.register(new FloatRangeProperty("YawCrosshairAccel", 17.0f, 20.0f, 5.0f, 180.0f));
+        this.pitchCrosshairAccel = this.register(new FloatRangeProperty("PitchCrosshairAccel", 17.0f, 20.0f, 5.0f, 180.0f));
+        this.accelerationError = this.register(new BooleanProperty("AccelerationError", true));
+        this.yawAccelerationError = this.register(new FloatProperty("YawAccelerationError", 0.1f, 0.01f, 2.0f));
+        this.pitchAccelerationError = this.register(new FloatProperty("PitchAccelerationError", 0.1f, 0.01f, 2.0f));
+        this.constantError = this.register(new BooleanProperty("ConstantError", true));
+        this.yawConstantError = this.register(new FloatProperty("YawConstantError", 0.1f, 0.01f, 2.0f));
+        this.pitchConstantError = this.register(new FloatProperty("PitchConstantError", 0.1f, 0.01f, 2.0f));
+        this.sigmoidDeceleration = this.register(new BooleanProperty("SigmoidDeceleration", false));
+        this.decelerationSteepness = this.register(new FloatProperty("Steepness", 10.0f, 0.0f, 20.0f));
+        this.decelerationMidpoint = this.register(new FloatProperty("Midpoint", 0.3f, 0.0f, 1.0f));
     }
 
     @Override

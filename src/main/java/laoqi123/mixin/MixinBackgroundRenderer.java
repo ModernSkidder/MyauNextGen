@@ -1,7 +1,7 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.player.AntiDebuff;
+import laoqi123.module.modules.AntiDebuff;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

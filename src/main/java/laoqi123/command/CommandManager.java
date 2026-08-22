@@ -4,7 +4,7 @@ import laoqi123.Myau;
 import laoqi123.event.EventTarget;
 import laoqi123.event.types.EventType;
 import laoqi123.event.types.Priority;
-import laoqi123.event.impl.PacketEvent;
+import laoqi123.events.PacketEvent;
 import laoqi123.util.ChatUtil;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 

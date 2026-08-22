@@ -2,18 +2,21 @@ package laoqi123.mixin;
 
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
-import laoqi123.event.impl.HitBlockEvent;
-import laoqi123.event.impl.LeftClickMouseEvent;
-import laoqi123.event.impl.LoadWorldEvent;
-import laoqi123.event.impl.ResizeEvent;
-import laoqi123.event.impl.RightClickMouseEvent;
-import laoqi123.event.impl.SwapItemEvent;
-import laoqi123.module.modules.combat.NoHitDelay;
+import laoqi123.events.HitBlockEvent;
+import laoqi123.events.LeftClickMouseEvent;
+import laoqi123.events.LoadWorldEvent;
+import laoqi123.events.ResizeEvent;
+import laoqi123.events.RightClickMouseEvent;
+import laoqi123.events.SwapItemEvent;
+import laoqi123.module.modules.NoHitDelay;
+import laoqi123.web.SplashLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
+import net.minecraft.client.util.Window;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerInventory;
+import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,6 +31,29 @@ public abstract class MixinMinecraft {
     public int attackCooldown;
     @Shadow
     public ClientPlayerInteractionManager interactionManager;
+
+    private static boolean splashClosed;
+
+    @Inject(
+            method = {"render"},
+            at = {@At("HEAD")}
+    )
+    private void onFirstRender(boolean tick, CallbackInfo callbackInfo) {
+        // Once the game has rendered its first frame, all mods and the browser
+        // engine are loaded: close the standalone splash and re-show the game window.
+        if (!splashClosed) {
+            splashClosed = true;
+            SplashLoader.finish();
+            if (SplashLoader.wasShown()) {
+                MinecraftClient mc = MinecraftClient.getInstance();
+                try {
+                    Window win = mc.getWindow();
+                    GLFW.glfwShowWindow(win.getHandle());
+                } catch (Throwable ignored) {
+                }
+            }
+        }
+    }
 
     @Inject(
             method = {"tick"},

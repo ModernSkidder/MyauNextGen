@@ -51,6 +51,7 @@
 		"MixinRendererLivingEntity",
 		"MixinRenderManager",
 		"MixinRenderTickCounter",
+		"MixinOneConfigAccordionGrid",
 		"MixinVisGraph",
 		"MixinWorld",
 		"MixinWorldRenderer"

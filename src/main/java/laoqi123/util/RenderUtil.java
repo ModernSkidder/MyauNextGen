@@ -620,6 +620,10 @@ public class RenderUtil {
         } else {
             RenderUtil.drawQuadNoState(x, y + height - radius, x + radius, y + height);
         }
+        // setColor() leaves a global shader tint behind. Without restoring it every later
+        // draw (text, item icons, the whole inventory screen) is multiplied by this
+        // colour, which turned everything black.
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderUtil.disableRenderState();
     }
 

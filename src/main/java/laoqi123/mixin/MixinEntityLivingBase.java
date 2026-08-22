@@ -2,9 +2,9 @@ package laoqi123.mixin;
 
 import laoqi123.Myau;
 import laoqi123.event.EventManager;
-import laoqi123.event.impl.StrafeEvent;
+import laoqi123.events.StrafeEvent;
 import laoqi123.management.RotationState;
-import laoqi123.module.modules.movement.Jesus;
+import laoqi123.module.modules.Jesus;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

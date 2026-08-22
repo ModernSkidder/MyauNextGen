@@ -1,4 +1,9 @@
-/run/
-/build/
-/.idea/
-/.gradle/
+run/
+.gradle/
+.idea/
+build/
+build-log.txt
+.workbuddy/
+analyze_modules.py
+find_shells.py
+find_shells2.py

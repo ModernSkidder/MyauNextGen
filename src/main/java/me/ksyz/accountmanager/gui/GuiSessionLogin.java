@@ -1,5 +1,7 @@
 package me.ksyz.accountmanager.gui;
 
+import com.mojang.logging.LogUtils;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.util.UndashedUuid;
@@ -102,11 +104,11 @@ public class GuiSessionLogin extends Screen {
                 if (IOException.getMessage().contains("401")) {
                     status = "§cError: Invalid session.";
                 } else {
-                    IOException.printStackTrace();
+                    LogUtils.getLogger().error("Login failed", IOException);
                 }
             } catch (Exception e) {
                 status = "§cError: Couldn't set session (check mc logs)";
-                e.printStackTrace();
+                LogUtils.getLogger().error("Failed to set session", e);
             }
         }
     }

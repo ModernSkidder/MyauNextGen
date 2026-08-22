@@ -1,16 +1,16 @@
 package laoqi123.util.rotation;
 
-import laoqi123.value.properties.FloatValue;
-import laoqi123.value.properties.IntRangeValue;
+import laoqi123.property.properties.FloatProperty;
+import laoqi123.property.properties.IntRangeProperty;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.function.Supplier;
 
 public class InterpolationAngleSmooth extends FactorAngleSmooth {
-    private final IntRangeValue horizontalSpeed;
-    private final IntRangeValue verticalSpeed;
-    private final IntRangeValue directionChangeFactor;
-    private final FloatValue midpoint;
+    private final IntRangeProperty horizontalSpeed;
+    private final IntRangeProperty verticalSpeed;
+    private final IntRangeProperty directionChangeFactor;
+    private final FloatProperty midpoint;
     private final Supplier<RotationTarget> previousTargetSupplier;
 
     public InterpolationAngleSmooth(Supplier<RotationTarget> previousTargetSupplier) {
@@ -22,10 +22,10 @@ public class InterpolationAngleSmooth extends FactorAngleSmooth {
                                     int dcMin, int dcMax) {
         super("Interpolation");
         this.previousTargetSupplier = previousTargetSupplier;
-        this.horizontalSpeed = this.register(new IntRangeValue("HorizontalSpeed", hMin, hMax, 1, 100));
-        this.verticalSpeed = this.register(new IntRangeValue("VerticalSpeed", vMin, vMax, 1, 100));
-        this.directionChangeFactor = this.register(new IntRangeValue("DirectionChangeFactor", dcMin, dcMax, 0, 100));
-        this.midpoint = this.register(new FloatValue("Midpoint", 0.35f, 0.0f, 1.0f));
+        this.horizontalSpeed = this.register(new IntRangeProperty("HorizontalSpeed", hMin, hMax, 1, 100));
+        this.verticalSpeed = this.register(new IntRangeProperty("VerticalSpeed", vMin, vMax, 1, 100));
+        this.directionChangeFactor = this.register(new IntRangeProperty("DirectionChangeFactor", dcMin, dcMax, 0, 100));
+        this.midpoint = this.register(new FloatProperty("Midpoint", 0.35f, 0.0f, 1.0f));
     }
 
     @Override

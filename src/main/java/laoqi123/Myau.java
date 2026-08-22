@@ -2,7 +2,6 @@ package laoqi123;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import laoqi123.value.Value;
 import me.ksyz.accountmanager.AccountManager;
 import laoqi123.command.CommandManager;
 import laoqi123.command.commands.*;
@@ -11,10 +10,9 @@ import laoqi123.event.EventManager;
 import laoqi123.management.*;
 import laoqi123.module.Module;
 import laoqi123.module.ModuleManager;
-import laoqi123.value.ValueManager;
-import laoqi123.util.MovementUtils;
-import laoqi123.util.player.PlayerUtils;
-
+import laoqi123.module.modules.*;
+import laoqi123.property.Property;
+import laoqi123.property.PropertyManager;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
@@ -24,13 +22,6 @@ import java.util.Objects;
 public class Myau {
     public static String clientName = "&7[&0M&8y&8a&7u&7]&r ";
     public static String version;
-
-    /**
-     * Global tick-rate override (1.0 = vanilla). Consumed by
-     * {@link laoqi123.mixin.MixinRenderTickCounter}. Modules like Velocity
-     * (anti-knockback) temporarily slow / speed the game to land combos.
-     */
-    public static volatile float serverTickRate = 1.0F;
     public static RotationManager rotationManager;
     public static FloatManager floatManager;
     public static BlinkManager blinkManager;
@@ -39,9 +30,8 @@ public class Myau {
     public static PlayerStateManager playerStateManager;
     public static FriendManager friendManager;
     public static TargetManager targetManager;
-    public static ValueManager valueManager;
+    public static PropertyManager propertyManager;
     public static ModuleManager moduleManager;
-    public static PlayerUtils playerUtils;
     public static CommandManager commandManager;
 
     public Myau() {
@@ -57,19 +47,107 @@ public class Myau {
         playerStateManager = new PlayerStateManager();
         friendManager = new FriendManager();
         targetManager = new TargetManager();
-        valueManager = new ValueManager();
+        propertyManager = new PropertyManager();
         moduleManager = new ModuleManager();
         commandManager = new CommandManager();
-        playerUtils = new PlayerUtils();
         EventManager.register(rotationManager);
-        EventManager.register(playerUtils);
-        EventManager.register(MovementUtils.INSTANCE);
         EventManager.register(floatManager);
         EventManager.register(blinkManager);
         EventManager.register(delayManager);
         EventManager.register(lagManager);
         EventManager.register(moduleManager);
         EventManager.register(commandManager);
+        moduleManager.modules.put(AimAssist.class, new AimAssist());
+        moduleManager.modules.put(Animations.class, new Animations());
+        moduleManager.modules.put(OldHitting.class, new OldHitting());
+        moduleManager.modules.put(AntiAFK.class, new AntiAFK());
+        moduleManager.modules.put(AntiDebuff.class, new AntiDebuff());
+        moduleManager.modules.put(AntiFireball.class, new AntiFireball());
+        moduleManager.modules.put(AntiStaff.class, new AntiStaff());
+        moduleManager.modules.put(AntiObbyTrap.class, new AntiObbyTrap());
+        moduleManager.modules.put(AntiObfuscate.class, new AntiObfuscate());
+        moduleManager.modules.put(Notifications.class, new Notifications());
+        moduleManager.modules.put(AntiVoid.class, new AntiVoid());
+        moduleManager.modules.put(AutoClicker.class, new AutoClicker());
+        moduleManager.modules.put(AutoAnduril.class, new AutoAnduril());
+        moduleManager.modules.put(AutoHeal.class, new AutoHeal());
+        moduleManager.modules.put(AutoMLG.class, new AutoMLG());
+        moduleManager.modules.put(AutoTool.class, new AutoTool());
+        moduleManager.modules.put(AutoSwap.class, new AutoSwap());
+        moduleManager.modules.put(BedNuker.class, new BedNuker());
+        moduleManager.modules.put(Timer.class, new Timer());
+        moduleManager.modules.put(BedESP.class, new BedESP());
+        moduleManager.modules.put(BedTracker.class, new BedTracker());
+        moduleManager.modules.put(BackTrack.class, new BackTrack());
+        moduleManager.modules.put(Blink.class, new Blink());
+        moduleManager.modules.put(Chams.class, new Chams());
+        moduleManager.modules.put(ChestESP.class, new ChestESP());
+        moduleManager.modules.put(ChestStealer.class, new ChestStealer());
+        moduleManager.modules.put(Eagle.class, new Eagle());
+        moduleManager.modules.put(Telly.class, new Telly());
+        moduleManager.modules.put(ESP.class, new ESP());
+        moduleManager.modules.put(FastPlace.class, new FastPlace());
+        moduleManager.modules.put(Fly.class, new Fly());
+        moduleManager.modules.put(Freeze.class, new Freeze());
+        moduleManager.modules.put(FakeLag.class, new FakeLag());
+        moduleManager.modules.put(FullBright.class, new FullBright());
+        moduleManager.modules.put(GhostHand.class, new GhostHand());
+        moduleManager.modules.put(GuiModule.class, new GuiModule());
+        moduleManager.modules.put(HitSelect.class, new HitSelect());
+        moduleManager.modules.put(HUD.class, new HUD());
+        moduleManager.modules.put(BlockHit.class, new BlockHit());
+        moduleManager.modules.put(MoreKB.class, new MoreKB());
+        moduleManager.modules.put(Indicators.class, new Indicators());
+        moduleManager.modules.put(InventoryClicker.class, new InventoryClicker());
+        moduleManager.modules.put(KnockbackDelay.class, new KnockbackDelay());
+        moduleManager.modules.put(PotionEffects.class, new PotionEffects());
+        moduleManager.modules.put(BedPlates.class, new BedPlates());
+        moduleManager.modules.put(InvManager.class, new InvManager());
+        moduleManager.modules.put(InvWalk.class, new InvWalk());
+        moduleManager.modules.put(ItemESP.class, new ItemESP());
+        moduleManager.modules.put(Jesus.class, new Jesus());
+        moduleManager.modules.put(KeepSprint.class, new KeepSprint());
+        moduleManager.modules.put(TabGui.class, new TabGui());
+        moduleManager.modules.put(AutoProjectiles.class, new AutoProjectiles());
+        moduleManager.modules.put(HitBox.class, new HitBox());
+        moduleManager.modules.put(KillAura.class, new KillAura());
+        moduleManager.modules.put(LagRange.class, new LagRange());
+        moduleManager.modules.put(LightningTracker.class, new LightningTracker());
+        moduleManager.modules.put(LongJump.class, new LongJump());
+        moduleManager.modules.put(MCF.class, new MCF());
+        moduleManager.modules.put(NameTags.class, new NameTags());
+        moduleManager.modules.put(NickHider.class, new NickHider());
+        moduleManager.modules.put(NoFall.class, new NoFall());
+        moduleManager.modules.put(NoHitDelay.class, new NoHitDelay());
+        moduleManager.modules.put(NoHurtCam.class, new NoHurtCam());
+        moduleManager.modules.put(NoJumpDelay.class, new NoJumpDelay());
+        moduleManager.modules.put(NoRotate.class, new NoRotate());
+        moduleManager.modules.put(NoSlow.class, new NoSlow());
+        moduleManager.modules.put(Reach.class, new Reach());
+        moduleManager.modules.put(RiseVelocity.class, new RiseVelocity());
+        moduleManager.modules.put(Scaffold.class, new Scaffold());
+        moduleManager.modules.put(Scaffold2.class, new Scaffold2());
+        moduleManager.modules.put(AutoBlockIn.class, new AutoBlockIn());
+        moduleManager.modules.put(ClientSpoofer.class, new ClientSpoofer());
+        moduleManager.modules.put(FlagDetector.class, new FlagDetector());
+        moduleManager.modules.put(Stasis.class, new Stasis());
+        moduleManager.modules.put(ChestAura.class, new ChestAura());
+        moduleManager.modules.put(Spammer.class, new Spammer());
+        moduleManager.modules.put(Speed.class, new Speed());
+        moduleManager.modules.put(SpeedMine.class, new SpeedMine());
+        moduleManager.modules.put(Sprint.class, new Sprint());
+        moduleManager.modules.put(Stuck.class, new Stuck());
+        moduleManager.modules.put(TargetHUD.class, new TargetHUD());
+        moduleManager.modules.put(TargetHud2.class, new TargetHud2());
+        moduleManager.modules.put(TargetStrafe.class, new TargetStrafe());
+        moduleManager.modules.put(Teams.class, new Teams());
+        moduleManager.modules.put(Tracers.class, new Tracers());
+        moduleManager.modules.put(Trajectories.class, new Trajectories());
+        moduleManager.modules.put(Velocity.class, new Velocity());
+        moduleManager.modules.put(ViewClip.class, new ViewClip());
+        moduleManager.modules.put(Wtap.class, new Wtap());
+        moduleManager.modules.put(WaterMark.class, new WaterMark());
+        moduleManager.modules.put(Xray.class, new Xray());
         commandManager.commands.add(new BindCommand());
         commandManager.commands.add(new ConfigCommand());
         commandManager.commands.add(new DenickCommand());
@@ -86,7 +164,7 @@ public class Myau {
         commandManager.commands.add(new ToggleCommand());
         commandManager.commands.add(new VclipCommand());
         for (Module module : moduleManager.modules.values()) {
-            ArrayList<Value<?>> properties = new ArrayList<>();
+            ArrayList<Property<?>> properties = new ArrayList<>();
             for (final Field field : module.getClass().getDeclaredFields()) {
                 field.setAccessible(true);
                 final Object obj;
@@ -95,18 +173,18 @@ public class Myau {
                 } catch (IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
-                if (obj instanceof Value<?>) {
-                    ((Value<?>) obj).setOwner(module);
-                    properties.add((Value<?>) obj);
+                if (obj instanceof Property<?>) {
+                    ((Property<?>) obj).setOwner(module);
+                    properties.add((Property<?>) obj);
                 }
             }
             if (module instanceof laoqi123.util.config.PropertyProvider) {
-                for (Value<?> value : ((laoqi123.util.config.PropertyProvider) module).getAdditionalProperties()) {
-                    value.setOwner(module);
-                    properties.add(value);
+                for (laoqi123.property.Property<?> property : ((laoqi123.util.config.PropertyProvider) module).getAdditionalProperties()) {
+                    property.setOwner(module);
+                    properties.add(property);
                 }
             }
-            valueManager.properties.put(module.getClass(), properties);
+            propertyManager.properties.put(module.getClass(), properties);
             EventManager.register(module);
         }
         Config config = new Config("default", true);

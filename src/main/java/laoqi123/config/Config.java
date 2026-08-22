@@ -5,7 +5,7 @@ import com.mojang.logging.LogUtils;
 import laoqi123.Myau;
 import laoqi123.module.Module;
 import laoqi123.util.ChatUtil;
-import laoqi123.value.Value;
+import laoqi123.property.Property;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import org.slf4j.Logger;
@@ -61,17 +61,17 @@ public class Config {
                 if (moduleObj != null && moduleObj.isJsonObject()) {
                     JsonObject object = moduleObj.getAsJsonObject();
 
-                    ArrayList<Value<?>> list = Myau.valueManager.properties.get(module.getClass());
+                    ArrayList<Property<?>> list = Myau.propertyManager.properties.get(module.getClass());
                     if (list != null) {
-                        for (Value<?> value : list) {
-                            if (value.isDoNotIncludeAlways()) {
+                        for (Property<?> property : list) {
+                            if (property.isDoNotIncludeAlways()) {
                                 continue;
                             }
-                            if (object.has(value.getName())) {
+                            if (object.has(property.getName())) {
                                 try {
-                                    value.read(object);
+                                    property.read(object);
                                 } catch (Exception e) {
-                                    LOGGER.warn(String.format("Failed to load value %s for module %s", value.getName(), module.getName()));
+                                    LOGGER.warn(String.format("Failed to load property %s for module %s", property.getName(), module.getName()));
                                 }
                             }
                         }
@@ -124,16 +124,16 @@ public class Config {
                 moduleObject.addProperty("key", module.getKey());
                 moduleObject.addProperty("hidden", module.isHidden());
 
-                ArrayList<Value<?>> list = Myau.valueManager.properties.get(module.getClass());
+                ArrayList<Property<?>> list = Myau.propertyManager.properties.get(module.getClass());
                 if (list != null) {
-                    for (Value<?> value : list) {
-                        if (value.isDoNotIncludeAlways()) {
+                    for (Property<?> property : list) {
+                        if (property.isDoNotIncludeAlways()) {
                             continue;
                         }
                         try {
-                            value.write(moduleObject);
+                            property.write(moduleObject);
                         } catch (Exception e) {
-                            LOGGER.warn(String.format("Failed to save value %s for module %s", value.getName(), module.getName()));
+                            LOGGER.warn(String.format("Failed to save property %s for module %s", property.getName(), module.getName()));
                         }
                     }
                 }

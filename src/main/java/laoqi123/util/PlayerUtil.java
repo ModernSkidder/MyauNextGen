@@ -133,4 +133,19 @@ public class PlayerUtil {
             mc.player.swingHand(net.minecraft.util.Hand.MAIN_HAND);
         }
     }
+
+    public static boolean isMoving() {
+        return mc.player != null
+                && (mc.player.input.movementForward != 0.0F || mc.player.input.movementSideways != 0.0F);
+    }
+
+    public static int getMoveSpeedEffectAmplifier() {
+        if (mc.player == null) {
+            return 0;
+        }
+        if (mc.player.hasStatusEffect(StatusEffects.SPEED)) {
+            return mc.player.getStatusEffect(StatusEffects.SPEED).getAmplifier();
+        }
+        return 0;
+    }
 }

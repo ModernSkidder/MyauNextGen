@@ -6,20 +6,35 @@ import java.io.InputStream;
 public class UFontRenderer {
     public int FONT_HEIGHT = 9;
     private StringCache stringCache;
-    private final int size;
+    private int size;
 
     public UFontRenderer(String name, int size) {
         this.size = size;
         boolean antiAlias = true;
         Font font;
         try {
-            InputStream is = getClass().getResourceAsStream("/assets/myaunextgen/font/" + name + ".ttf");
+            InputStream is = getClass().getResourceAsStream("/fonts/" + name + ".ttf");
             font = Font.createFont(Font.TRUETYPE_FONT, is);
             font = font.deriveFont(Font.PLAIN, size);
         } catch (Exception ex) {
             font = new Font("Arial", Font.PLAIN, size);
         }
+        init(font, size);
+    }
 
+    /** Factory for callers that already loaded the Font (e.g. via the Minecraft resource manager). */
+    public static UFontRenderer fromFont(Font font, int size) {
+        UFontRenderer r = new UFontRenderer();
+        r.size = size;
+        r.init(font, size);
+        return r;
+    }
+
+    private UFontRenderer() {
+    }
+
+    private void init(Font font, int size) {
+        boolean antiAlias = true;
         int[] colorCode = new int[32];
         for (int i = 0; i <= 31; i++) {
             int j = (i >> 3 & 1) * 85;

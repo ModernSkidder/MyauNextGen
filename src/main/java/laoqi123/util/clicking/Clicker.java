@@ -1,9 +1,9 @@
 package laoqi123.util.clicking;
 
 import laoqi123.mixin.MinecraftClientAccessor;
-import laoqi123.value.properties.BooleanValue;
-import laoqi123.value.properties.IntValue;
-import laoqi123.value.properties.ModeValue;
+import laoqi123.property.properties.BooleanProperty;
+import laoqi123.property.properties.IntProperty;
+import laoqi123.property.properties.ModeProperty;
 import laoqi123.util.config.Configurable;
 import net.minecraft.client.MinecraftClient;
 
@@ -17,24 +17,24 @@ public class Clicker extends Configurable {
     private static final int DEFAULT_CYCLE_LENGTH = 20;
     private static long lastClickTime = 0L;
 
-    public final ModeValue technique;
-    public final BooleanValue attackCooldown;
+    public final ModeProperty technique;
+    public final BooleanProperty attackCooldown;
     public final ItemCooldown itemCooldown;
 
-    private final IntValue minCps;
-    private final IntValue maxCps;
+    private final IntProperty minCps;
+    private final IntProperty maxCps;
     private final RollingClickArray clickArray = new RollingClickArray(DEFAULT_CYCLE_LENGTH, 2);
 
     private Integer clickAmount = null;
 
-    public Clicker(String name, IntValue minCps, IntValue maxCps) {
+    public Clicker(String name, IntProperty minCps, IntProperty maxCps) {
         super(name);
         this.minCps = minCps;
         this.maxCps = maxCps;
-        this.technique = this.register(new ModeValue("Technique", 0, new String[]{
+        this.technique = this.register(new ModeProperty("Technique", 0, new String[]{
                 "Stabilized", "Efficient", "Spamming", "DoubleClick", "Drag", "Butterfly", "NormalDistribution"
         }));
-        this.attackCooldown = this.register(new BooleanValue("AttackCooldown", true));
+        this.attackCooldown = this.register(new BooleanProperty("AttackCooldown", true));
         this.itemCooldown = new ItemCooldown();
         this.tree(this.itemCooldown);
         this.fill();

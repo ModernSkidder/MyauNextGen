@@ -1,13 +1,13 @@
 package laoqi123.util.config;
 
-import laoqi123.value.properties.IntChoiceValue;
+import laoqi123.property.properties.IntChoiceProperty;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ChoiceConfigurable extends Configurable {
     private final List<Choice> choices;
-    private final IntChoiceValue activeChoiceProperty;
+    private final IntChoiceProperty activeChoiceProperty;
     private int activeIndex;
 
     public ChoiceConfigurable(String name, int activeIndex, Choice... choices) {
@@ -17,7 +17,7 @@ public class ChoiceConfigurable extends Configurable {
             choice.setParentChoice(this);
         }
         this.activeIndex = Math.max(0, Math.min(activeIndex, choices.length - 1));
-        this.activeChoiceProperty = new IntChoiceValue(this);
+        this.activeChoiceProperty = new IntChoiceProperty(this);
         this.register(this.activeChoiceProperty);
     }
 

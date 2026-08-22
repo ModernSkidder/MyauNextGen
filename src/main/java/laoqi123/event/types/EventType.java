@@ -1,7 +1,7 @@
 package laoqi123.event.types;
 
 /**
- * Types that can be used for typed impl.
+ * Types that can be used for typed events.
  *
  * @author DarkMagician6
  * @since August 27, 2013

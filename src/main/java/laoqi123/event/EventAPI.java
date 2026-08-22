@@ -1,5 +1,5 @@
 /**
- * This is an API used for handling impl across your java based projects.
+ * This is an API used for handling events across your java based projects.
  * It's meant to be simple to use without sacrificing performance and extensibility.
  * <p>
  * Currently the API is in beta phase but it's stable and ready to be used.

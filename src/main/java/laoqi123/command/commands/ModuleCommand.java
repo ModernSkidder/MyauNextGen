@@ -4,8 +4,8 @@ import laoqi123.Myau;
 import laoqi123.command.Command;
 import laoqi123.module.Module;
 import laoqi123.util.ChatUtil;
-import laoqi123.value.Value;
-import laoqi123.value.properties.BooleanValue;
+import laoqi123.property.Property;
+import laoqi123.property.properties.BooleanProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,60 +19,44 @@ public class ModuleCommand extends Command {
     @Override
     public void runCommand(ArrayList<String> args) {
         Module module = Myau.moduleManager.getModule(args.get(0));
-        if (module == null) {
-            ChatUtil.sendFormatted(String.format("%sUnknown module &o%s&r", Myau.clientName, args.get(0)));
-            return;
-        }
         if (args.size() >= 2) {
-            // Value names may contain spaces (e.g. "Max Delay Ticks"). Progressively
-            // join args[1..i] until a full name matches, so both "maxdelayticks" and
-            // "max delay ticks" resolve; the first (shortest) match wins.
-            Value<?> value = null;
-            int nameEnd = -1;
-            for (int i = 1; i < args.size(); i++) {
-                Value<?> candidate = Myau.valueManager.getProperty(module, String.join(" ", args.subList(1, i + 1)));
-                if (candidate != null) {
-                    value = candidate;
-                    nameEnd = i;
-                    break;
-                }
-            }
-            if (value == null) {
-                ChatUtil.sendFormatted(String.format("%s%s has no value &o%s&r", Myau.clientName, module.getName(), args.get(1)));
-            } else if (nameEnd == args.size() - 1 && !(value instanceof BooleanValue)) {
+            Property<?> property = Myau.propertyManager.getProperty(module, args.get(1));
+            if (property == null) {
+                ChatUtil.sendFormatted(String.format("%s%s has no property &o%s&r", Myau.clientName, module.getName(), args.get(1)));
+            } else if (args.size() < 3 && !(property instanceof BooleanProperty)) {
                 ChatUtil.sendFormatted(
                         String.format(
                                 "%s%s: &o%s&r is set to %s&r (%s)&r",
                                 Myau.clientName,
                                 module.getName(),
-                                value.getName(),
-                                value.formatValue(),
-                                value.getValuePrompt()
+                                property.getName(),
+                                property.formatValue(),
+                                property.getValuePrompt()
                         )
                 );
             } else {
-                String newValue = nameEnd == args.size() - 1 ? null : String.join(" ", args.subList(nameEnd + 1, args.size()));
+                String newValue = args.size() < 3 ? null : String.join(" ", args.subList(2, args.size()));
                 try {
-                    if (value.parseString(newValue)) {
+                    if (property.parseString(newValue)) {
                         ChatUtil.sendFormatted(
-                                String.format("%s%s: &o%s&r has been set to %s&r", Myau.clientName, module.getName(), value.getName(), value.formatValue())
+                                String.format("%s%s: &o%s&r has been set to %s&r", Myau.clientName, module.getName(), property.getName(), property.formatValue())
                         );
                         return;
                     }
                 } catch (Exception e) {
                 }
                 ChatUtil.sendFormatted(
-                        String.format("%sInvalid value for value &o%s&r (%s)&r", Myau.clientName, value.getName(), value.getValuePrompt())
+                        String.format("%sInvalid value for property &o%s&r (%s)&r", Myau.clientName, property.getName(), property.getValuePrompt())
                 );
             }
         } else {
-            List<Value<?>> properties = Myau.valueManager.properties.get(module.getClass());
+            List<Property<?>> properties = Myau.propertyManager.properties.get(module.getClass());
             if (properties != null) {
-                List<Value<?>> visible = properties.stream().filter(Value::isVisible).collect(Collectors.toList());
+                List<Property<?>> visible = properties.stream().filter(Property::isVisible).collect(Collectors.toList());
                 if (!visible.isEmpty()) {
                     ChatUtil.sendFormatted(String.format("%s%s:&r", Myau.clientName, module.formatModule()));
-                    for (Value<?> value : visible) {
-                        ChatUtil.sendFormatted(String.format("&7»&r %s: %s&r", value.getName(), value.formatValue()));
+                    for (Property<?> property : visible) {
+                        ChatUtil.sendFormatted(String.format("&7»&r %s: %s&r", property.getName(), property.formatValue()));
                     }
                     return;
                 }

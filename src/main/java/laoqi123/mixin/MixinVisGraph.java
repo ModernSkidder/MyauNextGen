@@ -1,9 +1,9 @@
 package laoqi123.mixin;
 
 import laoqi123.Myau;
-import laoqi123.module.modules.render.Chams;
-import laoqi123.module.modules.render.ViewClip;
-import laoqi123.module.modules.render.Xray;
+import laoqi123.module.modules.Chams;
+import laoqi123.module.modules.ViewClip;
+import laoqi123.module.modules.Xray;
 import net.minecraft.client.render.chunk.ChunkOcclusionData;
 import net.minecraft.client.render.chunk.ChunkOcclusionDataBuilder;
 import net.minecraft.util.math.BlockPos;

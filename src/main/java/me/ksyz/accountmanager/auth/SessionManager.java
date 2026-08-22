@@ -39,10 +39,15 @@ public class SessionManager {
     }
 
     public static void set(Session session) {
+        Field field = getField();
+        if (field == null) {
+            System.err.println("[SessionManager] Unable to set session: session field not found.");
+            return;
+        }
         try {
-            getField().set(mc, session);
+            field.set(mc, session);
         } catch (Exception e) {
-            //
+            System.err.println("[SessionManager] Unable to set session: " + e.getMessage());
         }
     }
 }
